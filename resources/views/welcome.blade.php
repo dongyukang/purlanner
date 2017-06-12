@@ -49,6 +49,10 @@
                 font-size: 84px;
             }
 
+            .description {
+                font-size: 30px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -69,7 +73,8 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('planner') }}">Planner</a>
+                        <a href="#">Community</a>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
@@ -79,15 +84,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Pulanner
+                </div>
+
+                <div class="description m-b-md">
+                  Great Study Tools For Purdue University
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    {{-- <a href="https://laravel.com/docs">Documentation</a> --}}
                 </div>
             </div>
         </div>

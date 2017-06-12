@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
 </head>
 <body>
     <div id="app">
@@ -28,7 +30,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('planner') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -53,6 +55,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                      <a href="{{ route('settings') }}">Settings</a>
+                                    </li>
+                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -76,5 +81,12 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script>
+      $('.selectpicker_subjects').selectpicker({
+        style: 'btn-info',
+        size: 4
+      });
+    </script>
 </body>
 </html>

@@ -24,17 +24,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'first_access'
+        'password', 'remember_token'
     ];
 
     /**
-     * If current user is accessed to the application for the first time,
-     * return 'true'.
+     * If courses for current term is empty.
      *
      * @return Boolean
      */
-    public function firstAccess()
+    public function isCurrentCourseEmpty()
     {
-      return $this->first_access;
+      return true;
     }
 }

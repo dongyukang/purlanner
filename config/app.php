@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        DongyuKang\PurdueCourse\PurdueCourseServiceProvider::class,
 
         /*
          * Application Service Providers...

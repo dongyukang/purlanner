@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+Route::get('/planner', 'PlannerController@index')->name('planner');
+Route::get('/planner/settings', 'PlannerController@showSettings')->name('settings');
 
 Auth::routes();
