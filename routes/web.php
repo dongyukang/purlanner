@@ -10,9 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use DongyuKang\PurdueCourse\Facades\Purdue;
 
 Route::get('/', 'HomeController@index');
 Route::get('/planner', 'PlannerController@index')->name('planner');
 Route::get('/planner/settings', 'PlannerController@showSettings')->name('settings');
+Route::get('/test', function () {
+  dd(Purdue::subjects());
+});
 
 Auth::routes();

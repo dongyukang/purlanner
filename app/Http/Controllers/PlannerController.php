@@ -22,9 +22,14 @@ class PlannerController extends Controller
    */
   public function index()
   {
+    $subjects = array();
+    foreach (Purdue::subjects() as $subject) {
+      array_push($subjects, $subject['Abbreviation']);
+    }
+
     return view('home', [
       'name'     => auth()->user()->name,
-      'subjects' => Purdue::subjects(),
+      'subjects' => $subjects,
       'termName' => Purdue::currentTerm()->termName
     ]);
   }
