@@ -12,9 +12,10 @@
           </select>
 
           <select class="selectpicker_number" v-model="number" data-live-search="true" @change="loadSections()" title="Course Number">
+            <option v-for="course_number in course_numbers">{{ course_number }}</option>
           </select>
 
-          <select class="selectpicker_section" v-model="section" data-live-search="true" title="Section">
+          <select class="selectpicker_section" v-model="section" title="Section">
           </select>
 
           <button type="submit" class="btn btn-primary">Add Course ( + )</button>
@@ -57,7 +58,14 @@ export default {
       number: '',
       section: '',
       termname: '',
+      course_numbers: [],
       subjects_array: []
+    }
+  },
+
+  watch: {
+    subject() {
+      $('.selectpicker_number').selectpicker('refresh');
     }
   },
 
@@ -65,6 +73,11 @@ export default {
     loadCourseNumbers() {
       this.number = undefined;
       this.section = undefined;
+      axios.get('/api/getCourseNumbers/' + this.subject)
+      .then(res => {
+        this.course_numbers = res.data;
+        return true;
+      });
     },
 
     loadSections() {

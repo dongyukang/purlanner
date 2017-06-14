@@ -28,4 +28,17 @@ class PurdueCourseController extends Controller
     return $subjects;
   }
 
+  public function getCourseNumbers($subject)
+  {
+    $course_numbers = array();
+
+    if ($subject != null) {
+      foreach (Purdue::subject($subject)->getSubjectDetails() as $number) {
+        array_push($course_numbers, $number['Number']);
+      }
+    }
+
+    return json_encode($course_numbers);
+  }
+
 }
