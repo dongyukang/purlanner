@@ -19,4 +19,10 @@ Route::get('/test', function () {
   dd(Purdue::subjects());
 });
 
+Route::post('/submittest', 'PlannerController@submitTest')->name('test');
+
+Route::get('/home', function () {
+  return redirect('/planner');
+});
+
 Auth::routes();
