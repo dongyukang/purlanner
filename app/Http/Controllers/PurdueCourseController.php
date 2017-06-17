@@ -34,11 +34,46 @@ class PurdueCourseController extends Controller
 
     if ($subject != null) {
       foreach (Purdue::subject($subject)->getSubjectDetails() as $number) {
-        array_push($course_numbers, $number['Number']);
+        array_push($course_numbers, [
+          'Number' => $number['Number'],
+          'Title'  => $number['Title']
+        ]);
       }
     }
 
     return json_encode($course_numbers);
+  }
+
+  public function getSections($course, $title)
+  {
+    $cnt = 0;
+
+    // if there are more than one course, there are several arrays.
+    if (Purdue::course($course)->countCourses() > 1) {
+      $courseIds = Purdue::course($course)->courseId;
+      $sections = array();
+
+      foreach (Purdue::course($course)->title as $t) {
+        $cnt++;
+        if ($t == $title) {
+          break;
+        }
+      }
+
+      $sections = Purdue::course($course)
+      ->classesByCourseId($courseIds[$cnt])
+      ->sections()
+      ->type('Recitation')
+      ->getSections();
+    } else {
+      $sections = Purdue::course($course)
+      ->classes()
+      ->sections()
+      ->type('Recitation')
+      ->getSections();
+    }
+
+    return json_encode($sections);
   }
 
 }

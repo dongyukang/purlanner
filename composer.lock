@@ -108,16 +108,16 @@
         },
         {
             "name": "dongyukang/purduecourse",
-            "version": "v1.0.4",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dongyukang/purduecourse.git",
-                "reference": "56bb6e92b98a7fe36ae6cd6ef160be15e6ffe396"
+                "reference": "485272e9abfde5f605930a844f3943fb78094ed8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dongyukang/purduecourse/zipball/56bb6e92b98a7fe36ae6cd6ef160be15e6ffe396",
-                "reference": "56bb6e92b98a7fe36ae6cd6ef160be15e6ffe396",
+                "url": "https://api.github.com/repos/dongyukang/purduecourse/zipball/485272e9abfde5f605930a844f3943fb78094ed8",
+                "reference": "485272e9abfde5f605930a844f3943fb78094ed8",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 }
             ],
             "description": "Laravel Purdue Univeristy Course API Package",
-            "time": "2017-06-10T03:09:18+00:00"
+            "time": "2017-06-16T21:55:12+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -494,16 +494,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.26",
+            "version": "v5.4.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a7ebbfab64111e24f8e584db64e2be9279ded357"
+                "reference": "66f5e1b37cbd66e730ea18850ded6dc0ad570404"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a7ebbfab64111e24f8e584db64e2be9279ded357",
-                "reference": "a7ebbfab64111e24f8e584db64e2be9279ded357",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/66f5e1b37cbd66e730ea18850ded6dc0ad570404",
+                "reference": "66f5e1b37cbd66e730ea18850ded6dc0ad570404",
                 "shasum": ""
             },
             "require": {
@@ -619,20 +619,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-06-13T18:58:49+00:00"
+            "time": "2017-06-15T19:08:25+00:00"
         },
         {
             "name": "laravel/passport",
-            "version": "v2.0.10",
+            "version": "v2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "cd908e73505f7d3aad101d3177280db952ffc190"
+                "reference": "1e6f56ccf42255e8479d0dcd695619dab6613313"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/cd908e73505f7d3aad101d3177280db952ffc190",
-                "reference": "cd908e73505f7d3aad101d3177280db952ffc190",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/1e6f56ccf42255e8479d0dcd695619dab6613313",
+                "reference": "1e6f56ccf42255e8479d0dcd695619dab6613313",
                 "shasum": ""
             },
             "require": {
@@ -660,6 +660,11 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Passport\\PassportServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -683,7 +688,7 @@
                 "oauth",
                 "passport"
             ],
-            "time": "2017-06-02T21:51:18+00:00"
+            "time": "2017-06-14T21:58:27+00:00"
         },
         {
             "name": "laravel/tinker",

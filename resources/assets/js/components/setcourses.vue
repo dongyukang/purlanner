@@ -7,15 +7,16 @@
 
       <div class="panel-body" style="text-align: center;">
         <form method="post" @submit.prevent>
-          <select class="selectpicker_subject" v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
+          <!-- class="selectpicker_subject show-tick" -->
+          <select v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
             <option v-for="subject in subjects_array" :value=subject>{{ subject }}</option>
           </select>
 
-          <select class="selectpicker_number" v-model="number" data-live-search="true" @change="loadSections()" title="Course Number">
-            <option v-for="course_number in course_numbers">{{ course_number }}</option>
+          <select v-model="number" data-live-search="true" @change="loadSections()" title="Course Number">
+            <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <select class="selectpicker_section" v-model="section" title="Section">
+          <select v-model="section" title="Section">
           </select>
 
           <button type="submit" class="btn btn-primary">Add Course ( + )</button>
@@ -31,6 +32,7 @@
               <td>Subject</td>
               <td>Course Number</td>
               <td>Section Number</td>
+              <td>Title</td>
               <td>Action</td>
             </tr>
           </thead>
@@ -39,6 +41,7 @@
               <td>CS</td>
               <td>18000</td>
               <td>181</td>
+              <td>Introduction to Programming</td>
               <td><a class="btn btn-danger">Delete</a></td>
             </tr>
           </tbody>
@@ -76,12 +79,30 @@ export default {
       axios.get('/api/getCourseNumbers/' + this.subject)
       .then(res => {
         this.course_numbers = res.data;
-        return true;
       });
     },
 
     loadSections() {
       this.section = undefined;
+      if (this.number != undefined) {
+        var title = ''
+        var course = '';
+        var courseInfo = this.number.split(" ");
+        var courseNum = courseInfo[0];
+        for (var i = 1; i < courseInfo.length; i++) {
+          title += courseInfo[i] + ' ';
+        }
+        title = title.trim();
+        courseNum = courseNum.trim();
+        course = this.subject + ' ' + courseNum;
+
+        axios.get('/api/getSections/' + course + '/' + title)
+        .then(res => {
+          this.sections = res.data;
+        });
+
+        console.log(this.sections);
+      }
     }
   },
 

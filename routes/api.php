@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::get('/currentTermName', 'PurdueCourseController@getCurrentTermName');
 Route::get('/getCourseNumbers/{subject}', 'PurdueCourseController@getCourseNumbers');
-// Route::get('/currentTermSubjetcs', 'PurdueCourseController@getCurrentTermSubjects');
+Route::get('/getSections/{course}/{title}', 'PurdueCourseController@getSections');

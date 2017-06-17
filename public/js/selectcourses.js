@@ -1,5 +1,7 @@
 $('.selectpicker_subject').selectpicker();
-$('.selectpicker_number').selectpicker();
+$('.selectpicker_number').selectpicker({
+  size: 7
+});
 $('.selectpicker_section').selectpicker();
 
 
