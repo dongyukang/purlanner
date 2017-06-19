@@ -69,7 +69,7 @@ class PurdueCourseController extends Controller
       $sections = Purdue::course($course)
       ->classes()
       ->sections()
-      ->type('Recitation')
+      ->excludeType('Lecuture')
       ->getSections();
     }
 

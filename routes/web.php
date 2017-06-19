@@ -21,6 +21,12 @@ Route::get('/home', function () {
 
 Auth::routes();
 
+Route::get('/test2', function () {
+  $data = Purdue::course('cs 182')
+  ->all();
+  dd($data);
+});
+
 
 Route::get('/test', function () {
   $title = 'Modern Mechanics-Honors';

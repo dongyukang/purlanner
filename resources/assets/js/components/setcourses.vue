@@ -8,18 +8,15 @@
       <div class="panel-body" style="text-align: center;">
         <form method="post" @submit.prevent>
           <!-- class="selectpicker_subject show-tick" -->
-          <select v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
+          <select class="selectpicker_subject show-tick" v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
             <option v-for="subject in subjects_array" :value=subject>{{ subject }}</option>
           </select>
 
-          <select v-model="number" data-live-search="true" @change="loadSections()" title="Course Number">
+          <select class="selectpicker_number show-tick col-xs-5" v-model="number" data-live-search="true" title="Course Number">
             <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <select v-model="section" title="Section">
-          </select>
-
-          <button type="submit" class="btn btn-primary">Add Course ( + )</button>
+          <button type="submit" class="btn btn-primary">I Take This Course !</button>
         </form>
       </div>
     </div>
@@ -59,7 +56,6 @@ export default {
     return {
       subject: '',
       number: '',
-      section: '',
       termname: '',
       course_numbers: [],
       subjects_array: []
@@ -81,29 +77,6 @@ export default {
         this.course_numbers = res.data;
       });
     },
-
-    loadSections() {
-      this.section = undefined;
-      if (this.number != undefined) {
-        var title = ''
-        var course = '';
-        var courseInfo = this.number.split(" ");
-        var courseNum = courseInfo[0];
-        for (var i = 1; i < courseInfo.length; i++) {
-          title += courseInfo[i] + ' ';
-        }
-        title = title.trim();
-        courseNum = courseNum.trim();
-        course = this.subject + ' ' + courseNum;
-
-        axios.get('/api/getSections/' + course + '/' + title)
-        .then(res => {
-          this.sections = res.data;
-        });
-
-        console.log(this.sections);
-      }
-    }
   },
 
   mounted() {

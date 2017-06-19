@@ -13142,9 +13142,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['subjects'],
@@ -13153,7 +13150,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       subject: '',
       number: '',
-      section: '',
       termname: '',
       course_numbers: [],
       subjects_array: []
@@ -13176,38 +13172,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/getCourseNumbers/' + this.subject).then(function (res) {
         _this.course_numbers = res.data;
       });
-    },
-    loadSections: function loadSections() {
-      var _this2 = this;
-
-      this.section = undefined;
-      if (this.number != undefined) {
-        var title = '';
-        var course = '';
-        var courseInfo = this.number.split(" ");
-        var courseNum = courseInfo[0];
-        for (var i = 1; i < courseInfo.length; i++) {
-          title += courseInfo[i] + ' ';
-        }
-        title = title.trim();
-        courseNum = courseNum.trim();
-        course = this.subject + ' ' + courseNum;
-
-        axios.get('/api/getSections/' + course + '/' + title).then(function (res) {
-          _this2.sections = res.data;
-        });
-
-        console.log(this.sections);
-      }
     }
   },
 
   mounted: function mounted() {
-    var _this3 = this;
+    var _this2 = this;
 
     this.subjects_array = JSON.parse(this.subjects);
     axios.get('/api/currentTermName').then(function (res) {
-      _this3.termname = res.data;
+      _this2.termname = res.data;
     });
   }
 });
@@ -17563,7 +17536,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 41 */
@@ -35084,6 +35057,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.subject),
       expression: "subject"
     }],
+    staticClass: "selectpicker_subject show-tick",
     attrs: {
       "data-live-search": "true",
       "title": "Subject"
@@ -35114,34 +35088,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.number),
       expression: "number"
     }],
+    staticClass: "selectpicker_number show-tick col-xs-5",
     attrs: {
       "data-live-search": "true",
       "title": "Course Number"
-    },
-    on: {
-      "change": [function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.number = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }, function($event) {
-        _vm.loadSections()
-      }]
-    }
-  }, _vm._l((_vm.course_numbers), function(course_number) {
-    return _c('option', [_vm._v(_vm._s(course_number.Number) + " " + _vm._s(course_number.Title))])
-  })), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.section),
-      expression: "section"
-    }],
-    attrs: {
-      "title": "Section"
     },
     on: {
       "change": function($event) {
@@ -35151,15 +35101,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           var val = "_value" in o ? o._value : o.value;
           return val
         });
-        _vm.section = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+        _vm.number = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }), _vm._v(" "), _c('button', {
+  }, _vm._l((_vm.course_numbers), function(course_number) {
+    return _c('option', [_vm._v(_vm._s(course_number.Number) + " " + _vm._s(course_number.Title))])
+  })), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Add Course ( + )")])])])]), _vm._v(" "), _vm._m(0)])
+  }, [_vm._v("I Take This Course !")])])])]), _vm._v(" "), _vm._m(0)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel panel-default"
