@@ -16,7 +16,7 @@
             <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <button type="submit" class="btn btn-primary">I Take This Course !</button>
+          <button type="submit" class="btn btn-primary">I Take This Course</button>
         </form>
       </div>
     </div>

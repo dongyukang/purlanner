@@ -14,7 +14,7 @@ use DongyuKang\PurdueCourse\Facades\Purdue;
 
 Route::get('/', 'HomeController@index');
 Route::get('/planner', 'PlannerController@index')->name('planner');
-Route::get('/planner/settings', 'PlannerController@showSettings')->name('settings');
+Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 Route::get('/home', function () {
   return redirect('/planner');
 });

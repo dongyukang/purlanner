@@ -15,4 +15,3 @@ use Illuminate\Http\Request;
 
 Route::get('/currentTermName', 'PurdueCourseController@getCurrentTermName');
 Route::get('/getCourseNumbers/{subject}', 'PurdueCourseController@getCourseNumbers');
-Route::get('/getSections/{course}/{title}', 'PurdueCourseController@getSections');

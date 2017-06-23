@@ -22,16 +22,11 @@ class PlannerController extends Controller
    */
   public function index()
   {
-    $subjects = array();
-
-    foreach (Purdue::subjects() as $subject) {
-      array_push($subjects, $subject['Abbreviation']);
+    if (auth()->user()->isCurrentCourseEmpty()) {
+      return redirect('/settings');
+    } else {
+      return view('home');
     }
-
-    return view('home', [
-      'termName' => Purdue::currentTerm()->termName,
-      'subjects' => $subjects
-    ]);
   }
 
   /**
@@ -41,6 +36,15 @@ class PlannerController extends Controller
    */
   public function showSettings()
   {
-    return view('settings');
+    $subjects = array();
+
+    foreach (Purdue::subjects() as $subject) {
+      array_push($subjects, $subject['Abbreviation']);
+    }
+
+    return view('settings', [
+      'termName' => Purdue::currentTerm()->termName,
+      'subjects' => $subjects
+    ]);
   }
 }
