@@ -23,7 +23,7 @@ class PlannerController extends Controller
   public function index()
   {
     if (auth()->user()->isCurrentCourseEmpty()) {
-      return redirect('/settings');
+      return redirect('settings');
     } else {
       return view('home');
     }

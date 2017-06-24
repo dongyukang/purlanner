@@ -63,7 +63,7 @@ class PurdueCourseController extends Controller
       $sections = Purdue::course($course)
       ->classesByCourseId($courseIds[$cnt])
       ->sections()
-      ->type('Recitation')
+      ->excludeType('Lecture')
       ->getSections();
     } else {
       $sections = Purdue::course($course)

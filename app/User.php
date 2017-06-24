@@ -4,6 +4,7 @@ namespace App;
 
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use DongyuKang\PurdueCourse\Facades\Purdue;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

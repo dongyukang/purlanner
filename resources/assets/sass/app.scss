@@ -7,3 +7,17 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.side-menu ul {
+  font-size: 15px;
+  list-style-type: none;
+}
+
+.side-menu ul li {
+  margin-bottom: 25px;
+}
+
+a {
+  color: #000;
+  text-decoration-style: none;
+}
