@@ -1,27 +1,27 @@
 <template>
   <div>
     <div class="panel panel-default col-xs-3">
-      <div class="panel-heading" style="text-align: center">
+      <div class="panel-heading">
         <h4> Settings </h4>
       </div>
       <div class="panel-body">
         <div class="side-menu">
           <ul>
             <li>
-              <a href="#"> Course Settings </a>
+              <a @click="activateCourseSettings()" href="#"> Course Settings </a>
             </li>
             <li>
-              <a href="#"> Personal Settings </a>
+              <a @click="activatePersonalSettings()" href="#"> Personal Settings </a>
             </li>
             <li>
-              <a href="#"> Security </a>
+              <a @click="activateSecuritySettings()" href="#"> Security </a>
             </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="col-xs-9">
-      <setupcourses :subjects=this.subjects></setupcourses>
+      <setupcourses v-if="course_settings" :subjects=this.subjects></setupcourses>
     </div>
   </div>
 </template>
@@ -34,11 +34,28 @@
       return {
         course_settings: true,
         personal_settings: false,
-        security: false
+        security_settings: false
       }
     },
 
     methods: {
+      activateCourseSettings() {
+        this.course_settings = true;
+        this.personal_settings = false;
+        this.security_settings = false;
+      },
+
+      activatePersonalSettings() {
+        this.course_settings = false;
+        this.personal_settings = true;
+        this.security_settings = false;
+      },
+
+      activateSecuritySettings() {
+        this.course_settings = false;
+        this.personal_settings = false;
+        this.security_settings = true;
+      }
     }
   }
 </script>

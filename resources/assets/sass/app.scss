@@ -19,5 +19,13 @@
 
 a {
   color: #000;
-  text-decoration-style: none;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
 }

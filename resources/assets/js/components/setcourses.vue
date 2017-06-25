@@ -8,15 +8,15 @@
       <div class="panel-body" style="text-align: center;">
         <form method="post" @submit.prevent>
           <!-- class="selectpicker_subject show-tick" -->
-          <select class="selectpicker_subject show-tick" v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
+          <select v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
             <option v-for="subject in subjects_array" :value=subject>{{ subject }}</option>
           </select>
-
-          <select class="selectpicker_number show-tick col-xs-5" v-model="number" data-live-search="true" title="Course Number">
+           <!-- class="selectpicker_number show-tick col-xs-5" -->
+          <select v-model="number" data-live-search="true" title="Course Number">
             <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <button type="submit" class="btn btn-primary">I Take This Course</button>
+          <button type="submit">I Take This Course</button>
         </form>
       </div>
     </div>
@@ -35,10 +35,10 @@
           </thead>
           <tbody>
             <tr>
-              <td>CS</td>
-              <td>18000</td>
-              <td>181</td>
-              <td>Introduction to Programming</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
               <td><a class="btn btn-danger">Delete</a></td>
             </tr>
           </tbody>
@@ -59,12 +59,6 @@ export default {
       termname: '',
       course_numbers: [],
       subjects_array: []
-    }
-  },
-
-  watch: {
-    subject() {
-      $('.selectpicker_number').selectpicker('refresh');
     }
   },
 
