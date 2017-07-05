@@ -14,7 +14,7 @@
               <a @click="activatePersonalSettings()" href="#"> Personal Settings </a>
             </li>
             <li>
-              <a @click="activateSecuritySettings()" href="#"> Security </a>
+              <a @click="activateSecuritySettings()" href="#"> Security Settings </a>
             </li>
           </ul>
         </div>

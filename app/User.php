@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Term;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use DongyuKang\PurdueCourse\Facades\Purdue;
@@ -28,6 +29,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
+
+    public function __construct()
+    {
+      
+    }
+
+    public function terms()
+    {
+      return $this->belongsToMany('App\Term', 'term_user', 'user_id');
+    }
+
+    protected function isCurrentTermSet()
+    {
+    }
 
     /**
      * If courses for current term is empty.

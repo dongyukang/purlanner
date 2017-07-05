@@ -28,14 +28,12 @@
             <tr>
               <td>Subject</td>
               <td>Course Number</td>
-              <td>Section Number</td>
               <td>Title</td>
               <td>Action</td>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td></td>
               <td></td>
               <td></td>
               <td></td>
