@@ -21,6 +21,9 @@ class Term extends Model
     }
   }
 
+  /**
+   * Term has many users.
+   */
   public function users()
   {
     return $this->belongsToMany('App\User', 'term_user', 'term_id');

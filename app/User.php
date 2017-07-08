@@ -30,18 +30,44 @@ class User extends Authenticatable
         'password', 'remember_token'
     ];
 
-    public function __construct()
-    {
-      
-    }
-
+    /**
+     * User belongs to many terms.
+     */
     public function terms()
     {
       return $this->belongsToMany('App\Term', 'term_user', 'user_id');
     }
 
-    protected function isCurrentTermSet()
+    /**
+     * User belongs to many courses.
+     */
+    public function courses()
     {
+      return $this->belongsToMany('App\Course', 'course_user', 'user_id');
+    }
+
+    /**
+     * Make sure that user belongs to term.
+     *
+     * @return boolean
+     */
+    public function isCurrentTermSet()
+    {
+      if ($this->terms()->count() > 0 && $this->terms()->get()->last()->id == Term::all()->last()->id) return true;
+      
+      return false;
+    }
+
+    /**
+     * Check if user takes course(s).
+     *
+     * @return boolean
+     */
+    public function isCourseSet()
+    {
+      if ($this->courses()->count() > 0 && $this->isCurrentTermSet()) return true;
+
+      return false;
     }
 
     /**
@@ -51,6 +77,6 @@ class User extends Authenticatable
      */
     public function isCurrentCourseEmpty()
     {
-      return true;
+      return !$this->isCourseSet();
     }
 }

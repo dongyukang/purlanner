@@ -2901,10 +2901,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.number = undefined;
-      this.section = undefined;
       axios.get('/api/getCourseNumbers/' + this.subject).then(function (res) {
         _this.course_numbers = res.data;
       });
+    },
+    registerCourse: function registerCourse() {
+      if (this.subject != undefined && this.number != undefined) {
+        console.log(this.subject + ' ' + this.number);
+      }
     }
   },
 
@@ -5432,7 +5436,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 40 */
@@ -33259,7 +33263,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "subject"
     }],
     attrs: {
-      "data-live-search": "true",
       "title": "Subject"
     },
     on: {
@@ -33289,7 +33292,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "number"
     }],
     attrs: {
-      "data-live-search": "true",
       "title": "Course Number"
     },
     on: {
@@ -33308,6 +33310,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })), _vm._v(" "), _c('button', {
     attrs: {
       "type": "submit"
+    },
+    on: {
+      "click": function($event) {
+        _vm.registerCourse()
+      }
     }
   }, [_vm._v("I Take This Course")])])])]), _vm._v(" "), _vm._m(0)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -33789,7 +33796,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "justify-content": "space-between",
       "align-items": "center"
     }
-  }, [_c('span', [_vm._v("\n                        Personal Access Tokens\n                    ")]), _vm._v(" "), _c('a', {
+  }, [_vm._m(0), _vm._v(" "), _c('a', {
     staticClass: "action-link",
     on: {
       "click": _vm.showCreateTokenForm
@@ -33798,9 +33805,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [(_vm.tokens.length === 0) ? _c('p', {
     staticClass: "m-b-none"
-  }, [_vm._v("\n                    You have not created any personal access tokens.\n                ")]) : _vm._e(), _vm._v(" "), (_vm.tokens.length > 0) ? _c('table', {
+  }, [_vm._v("\n                    You have not created any tokens.\n                ")]) : _vm._e(), _vm._v(" "), (_vm.tokens.length > 0) ? _c('table', {
     staticClass: "table table-borderless m-b-none"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.tokens), function(token) {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.tokens), function(token) {
     return _c('tr', [_c('td', {
       staticStyle: {
         "vertical-align": "middle"
@@ -33828,11 +33835,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(1), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
   }, [(_vm.form.errors.length > 0) ? _c('div', {
     staticClass: "alert alert-danger"
-  }, [_vm._m(2), _vm._v(" "), _c('br'), _vm._v(" "), _c('ul', _vm._l((_vm.form.errors), function(error) {
+  }, [_vm._m(3), _vm._v(" "), _c('br'), _vm._v(" "), _c('ul', _vm._l((_vm.form.errors), function(error) {
     return _c('li', [_vm._v("\n                                " + _vm._s(error) + "\n                            ")])
   }))]) : _vm._e(), _vm._v(" "), _c('form', {
     staticClass: "form-horizontal",
@@ -33849,7 +33856,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('label', {
     staticClass: "col-md-4 control-label"
-  }, [_vm._v("Name")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Token Name")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
     directives: [{
@@ -33922,11 +33929,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-dialog"
   }, [_c('div', {
     staticClass: "modal-content"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "modal-body"
-  }, [_c('p', [_vm._v("\n                        Here is your new personal access token. This is the only time it will be shown so don't lose it!\n                        You may now use this token to make API requests.\n                    ")]), _vm._v(" "), _c('pre', [_c('code', [_vm._v(_vm._s(_vm.accessToken))])])]), _vm._v(" "), _vm._m(4)])])])])
+  }, [_c('p', [_vm._v("\n                        Here is your new Purlanner API token. This is the only time it will be shown so don't lose it!\n                        You may now use this token to make API requests.\n                    ")]), _vm._v(" "), _c('pre', [_c('code', [_vm._v(_vm._s(_vm.accessToken))])])]), _vm._v(" "), _vm._m(5)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Name")]), _vm._v(" "), _c('th')])])
+  return _c('span', [_c('h4', [_vm._v(" Purlanner API Tokens ")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Token Name")]), _vm._v(" "), _c('th')])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"
@@ -33954,7 +33963,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("×")]), _vm._v(" "), _c('h4', {
     staticClass: "modal-title"
-  }, [_vm._v("\n                        Personal Access Token\n                    ")])])
+  }, [_vm._v("\n                        API Token\n                    ")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-footer"

@@ -8,15 +8,15 @@
       <div class="panel-body" style="text-align: center;">
         <form method="post" @submit.prevent>
           <!-- class="selectpicker_subject show-tick" -->
-          <select v-model="subject" data-live-search="true" @change="loadCourseNumbers()" title="Subject">
+          <select v-model="subject" @change="loadCourseNumbers()" title="Subject">
             <option v-for="subject in subjects_array" :value=subject>{{ subject }}</option>
           </select>
            <!-- class="selectpicker_number show-tick col-xs-5" -->
-          <select v-model="number" data-live-search="true" title="Course Number">
+          <select v-model="number" title="Course Number">
             <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <button type="submit">I Take This Course</button>
+          <button type="submit" @click="registerCourse()">I Take This Course</button>
         </form>
       </div>
     </div>
@@ -63,12 +63,17 @@ export default {
   methods: {
     loadCourseNumbers() {
       this.number = undefined;
-      this.section = undefined;
       axios.get('/api/getCourseNumbers/' + this.subject)
       .then(res => {
         this.course_numbers = res.data;
       });
     },
+
+    registerCourse() {
+      if (this.subject != undefined && this.number != undefined) {
+        console.log(this.subject + ' ' + this.number);        
+      }
+    }
   },
 
   mounted() {

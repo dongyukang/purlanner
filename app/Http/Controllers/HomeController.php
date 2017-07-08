@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DongyuKang\PurdueCourse\Facades\Purdue;
+// use DongyuKang\PurdueCourse\Facades\Purdue;
 
 class HomeController extends Controller
 {
@@ -16,5 +16,12 @@ class HomeController extends Controller
       return view('welcome');
     }
 
-  
+    /**
+     * Show api
+     */
+    public function showApi()
+    {
+      return view('api');
+    }
+
 }

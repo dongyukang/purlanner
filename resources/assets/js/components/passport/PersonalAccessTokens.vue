@@ -15,7 +15,7 @@
                 <div class="panel-heading">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span>
-                            Personal Access Tokens
+                            <h4> Purlanner API Tokens </h4>
                         </span>
 
                         <a class="action-link" @click="showCreateTokenForm">
@@ -27,14 +27,14 @@
                 <div class="panel-body">
                     <!-- No Tokens Notice -->
                     <p class="m-b-none" v-if="tokens.length === 0">
-                        You have not created any personal access tokens.
+                        You have not created any tokens.
                     </p>
 
                     <!-- Personal Access Tokens -->
                     <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Token Name</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -87,7 +87,7 @@
                         <form class="form-horizontal" role="form" @submit.prevent="store">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-4 control-label">Token Name</label>
 
                                 <div class="col-md-6">
                                     <input id="create-token-name" type="text" class="form-control" name="name" v-model="form.name">
@@ -135,13 +135,13 @@
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                         <h4 class="modal-title">
-                            Personal Access Token
+                            API Token
                         </h4>
                     </div>
 
                     <div class="modal-body">
                         <p>
-                            Here is your new personal access token. This is the only time it will be shown so don't lose it!
+                            Here is your new Purlanner API token. This is the only time it will be shown so don't lose it!
                             You may now use this token to make API requests.
                         </p>
 

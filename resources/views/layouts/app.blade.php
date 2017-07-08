@@ -54,6 +54,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                      <a href="{{ route('api') }}">API</a>
+                                    </li>
+                                    <li>
                                       <a href="{{ route('settings') }}">Settings</a>
                                     </li>
                                     <li>
