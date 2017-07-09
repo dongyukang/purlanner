@@ -10,7 +10,7 @@ class Course extends Model
 
     /**
      * Fillable Attributes.
-     * 
+     *
      * @var array
      */
     protected $fillable = [
@@ -22,6 +22,6 @@ class Course extends Model
      */
     public function users()
     {
-      return $this->belongsToMany('App\User', 'course_user', 'user_id');
+      return $this->belongsToMany('App\User');
     }
 }
