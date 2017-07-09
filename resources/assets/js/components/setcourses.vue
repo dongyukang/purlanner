@@ -7,16 +7,16 @@
 
       <div class="panel-body" style="text-align: center;">
         <form method="post" @submit.prevent>
-          <!-- class="selectpicker_subject show-tick" -->
+
           <select v-model="subject" @change="loadCourseNumbers()" title="Subject">
             <option v-for="subject in subjects_array" :value=subject>{{ subject }}</option>
           </select>
-           <!-- class="selectpicker_number show-tick col-xs-5" -->
+
           <select v-model="number" title="Course Number">
             <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <button type="submit" @click="registerCourse()">I Take This Course</button>
+          <button type="submit" @click="saveCourse()">I Take This Course</button>
         </form>
       </div>
     </div>
@@ -69,9 +69,23 @@ export default {
       });
     },
 
-    registerCourse() {
+    saveCourse() {
       if (this.subject != undefined && this.number != undefined) {
-        console.log(this.subject + ' ' + this.number);        
+        var number = '';
+        var title = '';
+
+        number = this.number.split(' ');
+        for (var i = 1; i < number.length; i++) {
+          title += number[i] + ' ';
+        }
+
+        title = title.trim();
+
+        axios.post('/api/saveCourse', {
+          subject: this.subject,
+          number: this.number.split(" ")[0],
+          title: title
+        });
       }
     }
   },

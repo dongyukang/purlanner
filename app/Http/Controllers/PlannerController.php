@@ -47,14 +47,4 @@ class PlannerController extends Controller
       'subjects' => $subjects
     ]);
   }
-
-  /**
-   * Register Course.
-   *
-   * @return Boolean 
-   */
-  public function registerCourse()
-  {
-
-  }
 }

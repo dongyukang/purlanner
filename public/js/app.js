@@ -2905,9 +2905,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.course_numbers = res.data;
       });
     },
-    registerCourse: function registerCourse() {
+    saveCourse: function saveCourse() {
       if (this.subject != undefined && this.number != undefined) {
-        console.log(this.subject + ' ' + this.number);
+        var number = '';
+        var title = '';
+
+        number = this.number.split(' ');
+        for (var i = 1; i < number.length; i++) {
+          title += number[i] + ' ';
+        }
+
+        title = title.trim();
+
+        axios.post('/api/saveCourse', {
+          subject: this.subject,
+          number: this.number.split(" ")[0],
+          title: title
+        });
       }
     }
   },
@@ -5436,7 +5450,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 40 */
@@ -33313,7 +33327,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "click": function($event) {
-        _vm.registerCourse()
+        _vm.saveCourse()
       }
     }
   }, [_vm._v("I Take This Course")])])])]), _vm._v(" "), _vm._m(0)])

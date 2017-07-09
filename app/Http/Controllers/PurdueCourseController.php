@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use Illuminate\Http\Request;
 use DongyuKang\PurdueCourse\Facades\Purdue;
 
@@ -74,6 +75,32 @@ class PurdueCourseController extends Controller
     }
 
     return json_encode($sections);
+  }
+
+  /**
+   * Register Course.
+   *
+   * @param Request
+   * @return Boolean
+   */
+  public function saveCourse(Request $request)
+  {
+    $data = $request->all();
+    $course = Course::where('subject', $data['subject'])->where('course_number', $data['number'])->first();
+
+    if ($course == null) {
+      Course::create([
+        'subject'       => $data['subject'],
+        'course_number' => $data['number'],
+        'course_title'  => $data['title']
+      ]);
+
+      $course = Course::where('subject', $data['subject'])->where('course_number', $data['number'])->first();
+    }
+
+    if (auth()->user()->courses()->find($course->id) == null) {
+      auth()->user()->courses()->toggle($course->id);
+    }
   }
 
 }

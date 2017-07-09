@@ -47,6 +47,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User has many tasks.
+     */
+    public function tasks()
+    {
+      return $this->hasMany('App\Task', 'user_id');
+    }
+
+    /**
      * Make sure that user belongs to term.
      *
      * @return boolean
@@ -54,7 +62,7 @@ class User extends Authenticatable
     public function isCurrentTermSet()
     {
       if ($this->terms()->count() > 0 && $this->terms()->get()->last()->id == Term::all()->last()->id) return true;
-      
+
       return false;
     }
 
