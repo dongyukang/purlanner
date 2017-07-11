@@ -2881,9 +2881,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['subjects'],
+  props: ['subjects', 'courses'],
 
   data: function data() {
     return {
@@ -2891,7 +2895,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       number: '',
       termname: '',
       course_numbers: [],
-      subjects_array: []
+      subjects_array: [],
+      courses_array: []
     };
   },
 
@@ -2906,7 +2911,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     saveCourse: function saveCourse() {
-      if (this.subject != undefined && this.number != undefined) {
+      if (this.subject != '' && this.subject != undefined && this.number != '' && this.number != undefined) {
         var number = '';
         var title = '';
 
@@ -2922,6 +2927,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           number: this.number.split(" ")[0],
           title: title
         });
+
+        alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
     }
   },
@@ -2930,6 +2937,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this2 = this;
 
     this.subjects_array = JSON.parse(this.subjects);
+    this.courses_array = JSON.parse(this.courses);
+
     axios.get('/api/currentTermName').then(function (res) {
       _this2.termname = res.data;
     });
@@ -2972,7 +2981,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['subjects'],
+  props: ['subjects', 'courses'],
 
   data: function data() {
     return {
@@ -5450,7 +5459,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 40 */
@@ -33322,6 +33331,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.course_numbers), function(course_number) {
     return _c('option', [_vm._v(_vm._s(course_number.Number) + " " + _vm._s(course_number.Title))])
   })), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-success",
     attrs: {
       "type": "submit"
     },
@@ -33330,17 +33340,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.saveCourse()
       }
     }
-  }, [_vm._v("I Take This Course")])])])]), _vm._v(" "), _vm._m(0)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }, [_vm._v("Add To My Course List (+)")])])])]), _vm._v(" "), _c('div', {
     staticClass: "panel panel-default"
-  }, [_c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('table', {
     staticClass: "table table-striped"
-  }, [_c('thead', [_c('tr', [_c('td', [_vm._v("Subject")]), _vm._v(" "), _c('td', [_vm._v("Course Number")]), _vm._v(" "), _c('td', [_vm._v("Title")]), _vm._v(" "), _c('td', [_vm._v("Action")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((this.courses_array), function(course) {
+    return _c('tr', [_c('td', [_vm._v(_vm._s(course.Subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Title))]), _vm._v(" "), _vm._m(2, true)])
+  }))])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-heading"
+  }, [_c('h4', [_vm._v("My Course List")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('td', [_vm._v("Subject")]), _vm._v(" "), _c('td', [_vm._v("Course Number")]), _vm._v(" "), _c('td', [_vm._v("Title")]), _vm._v(" "), _c('td', [_vm._v("Action")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('a', {
     staticClass: "btn btn-danger"
-  }, [_vm._v("Delete")])])])])])])])
+  }, [_vm._v("Remove Course (-)")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -33779,7 +33797,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-xs-9"
   }, [(_vm.course_settings) ? _c('setupcourses', {
     attrs: {
-      "subjects": this.subjects
+      "subjects": this.subjects,
+      "courses": this.courses
     }
   }) : _vm._e()], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

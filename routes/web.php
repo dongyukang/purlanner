@@ -15,7 +15,7 @@ use DongyuKang\PurdueCourse\Facades\Purdue;
 Route::get('/', 'HomeController@index');
 Route::get('/planner', 'PlannerController@index')->name('planner');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
-Route::middleware('auth')->get('/api', 'HomeController@showApi')->name('api');
+// Route::middleware('auth')->get('/api', 'HomeController@showApi')->name('api');
 
 Route::get('/home', function () {
   return redirect('/planner');

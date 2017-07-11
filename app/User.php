@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'term_id'
     ];
 
     /**
@@ -31,27 +31,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * User belongs to many terms.
-     */
-    public function terms()
-    {
-      return $this->belongsToMany('App\Term', 'term_user', 'user_id');
-    }
-
-    /**
      * User belongs to many courses.
      */
     public function courses()
     {
       return $this->belongsToMany('App\Course');
-    }
-
-    /**
-     * User has many tasks.
-     */
-    public function tasks()
-    {
-      return $this->hasMany('App\Task', 'user_id');
     }
 
     /**
@@ -61,9 +45,31 @@ class User extends Authenticatable
      */
     public function isCurrentTermSet()
     {
-      if ($this->terms()->count() > 0 && $this->terms()->get()->last()->id == Term::all()->last()->id) return true;
+      if ($this->getTermId() != 'null' && $this->getTermId() == Term::all()->last()->term_id) return true;
 
       return false;
+    }
+
+    /**
+     * Return term id.
+     *
+     * @return String TermId
+     */
+    public function getTermId()
+    {
+      return $this->term_id;
+    }
+
+    /**
+     * Set Term Id
+     *
+     * @param String TermId
+     * @return Boolean Saved
+     */
+    public function setTermId($term_id)
+    {
+      $this->term_id = $term_id;
+      return $this->save();
     }
 
     /**
@@ -86,5 +92,23 @@ class User extends Authenticatable
     public function isCurrentCourseEmpty()
     {
       return !$this->isCourseSet();
+    }
+
+    /**
+     * Get My Courses.
+     */
+    public function getCourses()
+    {
+      $courses = array();
+
+      foreach ($this->courses as $course) {
+        array_push($courses, [
+          'Subject' => $course->subject,
+          'Number'  => $course->course_number,
+          'Title'   => $course->course_title
+        ]);
+      }
+
+      return $courses;
     }
 }

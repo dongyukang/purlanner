@@ -16,12 +16,16 @@
             <option v-for="course_number in course_numbers">{{ course_number.Number }} {{ course_number.Title }}</option>
           </select>
 
-          <button type="submit" @click="saveCourse()">I Take This Course</button>
+          <button class="btn btn-success" type="submit" @click="saveCourse()">Add To My Course List (+)</button>
+
         </form>
       </div>
     </div>
 
     <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>My Course List</h4>
+      </div>
       <div class="panel-body">
         <table class="table table-striped">
           <thead>
@@ -33,11 +37,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a class="btn btn-danger">Delete</a></td>
+            <tr v-for="course in this.courses_array">
+              <td>{{ course.Subject }}</td>
+              <td>{{ course.Number }}</td>
+              <td>{{ course.Title }}</td>
+              <td><a class="btn btn-danger">Remove Course (-)</a></td>
             </tr>
           </tbody>
         </table>
@@ -48,7 +52,7 @@
 
 <script>
 export default {
-  props: ['subjects'],
+  props: ['subjects', 'courses'],
 
   data() {
     return {
@@ -56,7 +60,8 @@ export default {
       number: '',
       termname: '',
       course_numbers: [],
-      subjects_array: []
+      subjects_array: [],
+      courses_array:  []
     }
   },
 
@@ -70,7 +75,7 @@ export default {
     },
 
     saveCourse() {
-      if (this.subject != undefined && this.number != undefined) {
+      if ((this.subject != '' && this.subject != undefined) && (this.number != '' && this.number != undefined)) {
         var number = '';
         var title = '';
 
@@ -86,12 +91,16 @@ export default {
           number: this.number.split(" ")[0],
           title: title
         });
+
+         alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
     }
   },
 
   mounted() {
     this.subjects_array = JSON.parse(this.subjects);
+    this.courses_array = JSON.parse(this.courses);
+
     axios.get('/api/currentTermName')
     .then(res => {
       this.termname = res.data;

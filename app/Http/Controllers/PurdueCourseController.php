@@ -98,9 +98,12 @@ class PurdueCourseController extends Controller
       $course = Course::where('subject', $data['subject'])->where('course_number', $data['number'])->first();
     }
 
+    if (!auth()->user()->isCurrentTermSet()) {
+
+    }
+
     if (auth()->user()->courses()->find($course->id) == null) {
       auth()->user()->courses()->toggle($course->id);
     }
   }
-
 }

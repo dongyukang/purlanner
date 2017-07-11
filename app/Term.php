@@ -20,12 +20,4 @@ class Term extends Model
       $this->save();
     }
   }
-
-  /**
-   * Term has many users.
-   */
-  public function users()
-  {
-    return $this->belongsToMany('App\User', 'term_user', 'term_id');
-  }
 }

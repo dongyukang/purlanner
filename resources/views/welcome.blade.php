@@ -84,11 +84,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Pulanner
+                    Purlanner
                 </div>
 
                 <div class="description m-b-md">
-                  Great Study Tools For Purdue University
+                  {{-- Great Study Tools For Purdue University --}}
                 </div>
 
                 <div class="links">

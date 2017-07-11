@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Term;
 use Illuminate\Http\Request;
 use DongyuKang\PurdueCourse\Facades\Purdue;
 
@@ -23,6 +24,7 @@ class PlannerController extends Controller
   public function index()
   {
     if (auth()->user()->isCurrentCourseEmpty()) {
+      auth()->user()->setTermId(Term::all()->last()->term_id);
       return redirect('settings');
     } else {
       return view('home');
@@ -37,6 +39,7 @@ class PlannerController extends Controller
   public function showSettings()
   {
     $subjects = array();
+    $courses = auth()->user()->getCourses();
 
     foreach (Purdue::subjects() as $subject) {
       array_push($subjects, $subject['Abbreviation']);
@@ -44,7 +47,8 @@ class PlannerController extends Controller
 
     return view('settings', [
       'termName' => Purdue::currentTerm()->termName,
-      'subjects' => $subjects
+      'subjects' => $subjects,
+      'courses'  => $courses
     ]);
   }
 }

@@ -21,14 +21,14 @@
       </div>
     </div>
     <div class="col-xs-9">
-      <setupcourses v-if="course_settings" :subjects=this.subjects></setupcourses>
+      <setupcourses v-if="course_settings" :subjects=this.subjects :courses=this.courses></setupcourses>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['subjects'],
+    props: ['subjects', 'courses'],
 
     data() {
       return {
