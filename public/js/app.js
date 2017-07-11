@@ -2930,6 +2930,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
+    },
+    removeCourse: function removeCourse(course_id) {
+      axios.post('/api/removeCourse', {
+        course_id: course_id
+      });
     }
   },
 
@@ -3041,6 +3046,8 @@ try {
 window.axios = __webpack_require__(13);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+window.host = window.location.origin + ':3000';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -5459,7 +5466,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 40 */
@@ -33347,18 +33354,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('table', {
     staticClass: "table table-striped"
   }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((this.courses_array), function(course) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(course.Subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Title))]), _vm._v(" "), _vm._m(2, true)])
+    return _c('tr', [_c('td', [_vm._v(_vm._s(course.Subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Title))]), _vm._v(" "), _c('td', [_c('button', {
+      staticClass: "btn btn-danger",
+      on: {
+        "click": function($event) {
+          _vm.removeCourse(course.Id)
+        }
+      }
+    }, [_vm._v("Remove Course (-)")])])])
   }))])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel-heading"
   }, [_c('h4', [_vm._v("My Course List")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('td', [_vm._v("Subject")]), _vm._v(" "), _c('td', [_vm._v("Course Number")]), _vm._v(" "), _c('td', [_vm._v("Title")]), _vm._v(" "), _c('td', [_vm._v("Action")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('a', {
-    staticClass: "btn btn-danger"
-  }, [_vm._v("Remove Course (-)")])])
+  return _c('thead', [_c('tr', [_c('td', [_vm._v("Subject")]), _vm._v(" "), _c('td', [_vm._v("Number")]), _vm._v(" "), _c('td', [_vm._v("Title")]), _vm._v(" "), _c('td', [_vm._v("Action")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

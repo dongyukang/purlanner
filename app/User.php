@@ -103,6 +103,7 @@ class User extends Authenticatable
 
       foreach ($this->courses as $course) {
         array_push($courses, [
+          'Id'      => $course->id,
           'Subject' => $course->subject,
           'Number'  => $course->course_number,
           'Title'   => $course->course_title

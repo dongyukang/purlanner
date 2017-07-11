@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="//{{ Request::getHost() }}:3000/socket.io/socket.io.js"></script>
 
 </head>
 <body>

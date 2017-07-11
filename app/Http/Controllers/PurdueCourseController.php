@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use DongyuKang\PurdueCourse\Facades\Purdue;
 
 class PurdueCourseController extends Controller
@@ -86,7 +87,10 @@ class PurdueCourseController extends Controller
   public function saveCourse(Request $request)
   {
     $data = $request->all();
-    $course = Course::where('subject', $data['subject'])->where('course_number', $data['number'])->first();
+    $course = Course::where('subject', $data['subject'])
+    ->where('course_number', $data['number'])
+    ->where('course_title', $data['title'])
+    ->first();
 
     if ($course == null) {
       Course::create([
@@ -95,7 +99,10 @@ class PurdueCourseController extends Controller
         'course_title'  => $data['title']
       ]);
 
-      $course = Course::where('subject', $data['subject'])->where('course_number', $data['number'])->first();
+      $course = Course::where('subject', $data['subject'])
+      ->where('course_number', $data['number'])
+      ->where('course_title', $data['title'])
+      ->first();
     }
 
     if (!auth()->user()->isCurrentTermSet()) {
@@ -104,6 +111,18 @@ class PurdueCourseController extends Controller
 
     if (auth()->user()->courses()->find($course->id) == null) {
       auth()->user()->courses()->toggle($course->id);
+      Redis::publish('notify', 'update');
     }
+  }
+
+  /**
+   * Remove course from the list.
+   *
+   * @return Boolean
+   */
+  public function removeCourse(Request $request)
+  {
+    auth()->user()->courses()->detach($request->get('course_id'));
+    Redis::publish('notify', 'update');
   }
 }

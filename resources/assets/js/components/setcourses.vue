@@ -31,7 +31,7 @@
           <thead>
             <tr>
               <td>Subject</td>
-              <td>Course Number</td>
+              <td>Number</td>
               <td>Title</td>
               <td>Action</td>
             </tr>
@@ -41,7 +41,7 @@
               <td>{{ course.Subject }}</td>
               <td>{{ course.Number }}</td>
               <td>{{ course.Title }}</td>
-              <td><a class="btn btn-danger">Remove Course (-)</a></td>
+              <td><button @click="removeCourse(course.Id)" class="btn btn-danger">Remove Course (-)</button></td>
             </tr>
           </tbody>
         </table>
@@ -94,6 +94,12 @@ export default {
 
          alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
+    },
+
+    removeCourse(course_id) {
+      axios.post('/api/removeCourse', {
+        course_id: course_id
+      });
     }
   },
 
