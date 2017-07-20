@@ -98,8 +98,8 @@ class User extends Authenticatable
     /**
      * Save Course into the database.
      *
-     * @param $course_data Consisting of 'subject', 'course number', 'course title'
-     * @return Boolean
+     * @param  array $course_data
+     * @return boolean
      */
     public function saveCourse($course_data)
     {
@@ -127,10 +127,8 @@ class User extends Authenticatable
       // toggle to indicate that user belongs to the course id.
       if (!($this->courses()->find($course->id))) {
         $this->courses()->toggle($course->id);
-        
         return true;
       }
-
       return false;
     }
 
@@ -151,6 +149,25 @@ class User extends Authenticatable
       }
 
       return $courses;
+    }
+
+    /**
+     * Remove course data.
+     *
+     * @param  integer $course_id
+     * @return boolean
+     */
+    public function removeCourse($course_id)
+    {
+      // check if the course data exists in the database 'users' table.
+      $exists = $this->courses()->find($course_id) != null ? true : false;
+
+      // if exists, then detach it.
+      if ($exists) {
+        $this->courses()->toggle($course_id);
+        return true;
+      }
+      return false;
     }
 
     /**

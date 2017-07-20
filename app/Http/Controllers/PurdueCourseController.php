@@ -96,6 +96,6 @@ class PurdueCourseController extends Controller
    */
   public function removeCourse(Request $request)
   {
-    auth()->user()->courses()->detach($request->get('course_id'));
+    auth()->user()->removeCourse($request->get('course_id'));
   }
 }

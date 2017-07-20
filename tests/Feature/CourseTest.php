@@ -91,4 +91,28 @@ class CourseTest extends TestCase
     $this->assertEquals(2, $courseUsers->count());
   }
 
+  /** @test */
+  public function detach_course_data_from_user()
+  {
+    $user = factory(\App\User::class)->create();
+
+    $course_data = [
+      'subject'       => 'some course',
+      'course_number' => '10001',
+      'course_title'  => 'this is a test course'
+    ];
+
+    $user->saveCourse($course_data);
+
+    $course_id = \App\Course::where('subject', 'some course')
+                            ->where('course_number', '10001')
+                            ->where('course_title', 'this is a test course')
+                            ->first()
+                            ->id;
+
+    $response = $user->removeCourse($course_id);
+
+    $this->assertTrue($response);
+  }
+
 }
