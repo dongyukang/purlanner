@@ -127,6 +127,7 @@ class User extends Authenticatable
       // toggle to indicate that user belongs to the course id.
       if (!($this->courses()->find($course->id))) {
         $this->courses()->toggle($course->id);
+        
         return true;
       }
 
@@ -157,12 +158,12 @@ class User extends Authenticatable
      *
      * @return Boolean
      */
-    public function takesCourse($subject, $course_number, $course_title)
+    public function takesCourse($course_data)
     {
       return collect($this->getCourses())
-                     ->where('Subject', $subject)
-                     ->where('Number', $course_number)
-                     ->where('Title', $course_title)
+                     ->where('Subject', $course_data['subject'])
+                     ->where('Number', $course_data['course_number'])
+                     ->where('Title', $course_data['course_title'])
                      ->first() != null ? true : false;
     }
 }

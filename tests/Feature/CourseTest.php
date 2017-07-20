@@ -58,12 +58,37 @@ class CourseTest extends TestCase
 
     $user->saveCourse($data);
 
-    $response = \App\Course::where('subject' ,'ASTR')
-                            ->where('course_number', '26400')
-                            ->where('course_title', 'Descriptive Astronomy: Stars And Galaxies')
-                            ->first() != null ? true : false;
+    $response = $user->takesCourse($data);
 
     $this->assertTrue($response);
+  }
+
+  /** @test */
+  public function another_user_wants_to_save_already_existing_course_into_database()
+  {
+    $james = factory(\App\User::class)->create();
+
+    $sam = factory(\App\User::class)->create();
+
+    $data = [
+      'subject'       => 'ASTRA',
+      'course_number' => '26400',
+      'course_title'  => 'Descriptive Astronomy: Stars And Galaxies'
+    ];
+
+    $jamesSavingCourse = $james->saveCourse($data);
+
+    $samSavingCourse = $sam->saveCourse($data);
+
+    $courseUsers = collect(\App\Course::where('subject', 'ASTRA')
+                ->where('course_number', '26400')
+                ->first()
+                ->users()
+                ->get());
+
+    $this->assertTrue($samSavingCourse);
+
+    $this->assertEquals(2, $courseUsers->count());
   }
 
 }
