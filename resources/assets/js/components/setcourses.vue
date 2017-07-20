@@ -37,7 +37,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="course in this.courses_array">
+            <tr v-for="course in this.table_array">
               <td>{{ course.Subject }}</td>
               <td>{{ course.Number }}</td>
               <td>{{ course.Title }}</td>
@@ -61,7 +61,8 @@ export default {
       termname: '',
       course_numbers: [],
       subjects_array: [],
-      courses_array:  []
+      courses_array:  [],
+      table_array:    []
     }
   },
 
@@ -88,11 +89,11 @@ export default {
 
         axios.post('/api/saveCourse', {
           subject: this.subject,
-          number: this.number.split(" ")[0],
-          title: title
+          course_number: this.number.split(" ")[0],
+          course_title: title
         });
 
-         alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
+        alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
     },
 
@@ -100,12 +101,17 @@ export default {
       axios.post('/api/removeCourse', {
         course_id: course_id
       });
+    },
+
+    fetch() {
+      this.table_array = this.courses_array;
     }
   },
 
   mounted() {
     this.subjects_array = JSON.parse(this.subjects);
     this.courses_array = JSON.parse(this.courses);
+    this.fetch();
 
     axios.get('/api/currentTermName')
     .then(res => {

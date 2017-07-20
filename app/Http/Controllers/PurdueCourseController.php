@@ -86,33 +86,7 @@ class PurdueCourseController extends Controller
    */
   public function saveCourse(Request $request)
   {
-    $data = $request->all();
-    $course = Course::where('subject', $data['subject'])
-    ->where('course_number', $data['number'])
-    ->where('course_title', $data['title'])
-    ->first();
-
-    if ($course == null) {
-      Course::create([
-        'subject'       => $data['subject'],
-        'course_number' => $data['number'],
-        'course_title'  => $data['title']
-      ]);
-
-      $course = Course::where('subject', $data['subject'])
-      ->where('course_number', $data['number'])
-      ->where('course_title', $data['title'])
-      ->first();
-    }
-
-    if (!auth()->user()->isCurrentTermSet()) {
-
-    }
-
-    if (auth()->user()->courses()->find($course->id) == null) {
-      auth()->user()->courses()->toggle($course->id);
-      Redis::publish('notify', 'update');
-    }
+    auth()->user()->saveCourse($request->all());
   }
 
   /**
@@ -123,6 +97,5 @@ class PurdueCourseController extends Controller
   public function removeCourse(Request $request)
   {
     auth()->user()->courses()->detach($request->get('course_id'));
-    Redis::publish('notify', 'update');
   }
 }

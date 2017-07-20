@@ -69,6 +69,7 @@ class User extends Authenticatable
     public function setTermId($term_id)
     {
       $this->term_id = $term_id;
+
       return $this->save();
     }
 
@@ -95,6 +96,44 @@ class User extends Authenticatable
     }
 
     /**
+     * Save Course into the database.
+     *
+     * @param $course_data Consisting of 'subject', 'course number', 'course title'
+     * @return Boolean
+     */
+    public function saveCourse($course_data)
+    {
+      // check if the course given already exists in the Course model.
+      $exists = \App\Course::where('subject', $course_data['subject'])
+                          ->where('course_number', $course_data['course_number'])
+                          ->where('course_title', $course_data['course_title'])
+                          ->first() != null ? true : false;
+
+      // if course does not exist in the Course model, then create it.
+      if (!$exists) {
+        $course = \App\Course::create([
+          'subject'       => $course_data['subject'],
+          'course_number' => $course_data['course_number'],
+          'course_title'  => $course_data['course_title']
+        ]);
+      } else {
+        $course = \App\Course::where('subject', $course_data['subject'])
+                            ->where('course_number', $course_data['course_number'])
+                            ->where('course_title', $course_data['course_title'])
+                            ->first();
+      }
+
+      // check if this user already has the course.
+      // toggle to indicate that user belongs to the course id.
+      if (!($this->courses()->find($course->id))) {
+        $this->courses()->toggle($course->id);
+        return true;
+      }
+
+      return false;
+    }
+
+    /**
      * Get My Courses.
      */
     public function getCourses()
@@ -111,5 +150,19 @@ class User extends Authenticatable
       }
 
       return $courses;
+    }
+
+    /**
+     * Find if user takes certain course.
+     *
+     * @return Boolean
+     */
+    public function takesCourse($subject, $course_number, $course_title)
+    {
+      return collect($this->getCourses())
+                     ->where('Subject', $subject)
+                     ->where('Number', $course_number)
+                     ->where('Title', $course_title)
+                     ->first() != null ? true : false;
     }
 }

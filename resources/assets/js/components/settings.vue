@@ -8,13 +8,13 @@
         <div class="side-menu">
           <ul>
             <li>
-              <a @click="activateCourseSettings()" href="#"> Course Settings </a>
+              <a @click="activateCourseSettings()"> Course Settings </a>
             </li>
             <li>
-              <a @click="activatePersonalSettings()" href="#"> Personal Settings </a>
+              <a @click="activatePersonalSettings()"> Personal Settings </a>
             </li>
             <li>
-              <a @click="activateSecuritySettings()" href="#"> Security Settings </a>
+              <a @click="activateSecuritySettings()"> Security Settings </a>
             </li>
           </ul>
         </div>

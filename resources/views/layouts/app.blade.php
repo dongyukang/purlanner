@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="//{{ Request::getHost() }}:3000/socket.io/socket.io.js"></script>
+    {{-- <script src="//{{ Request::getHost() }}:3000/socket.io/socket.io.js"></script> --}}
 
 </head>
 <body>
@@ -31,7 +31,8 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ route('planner') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{-- {{ config('app.name', 'Laravel') }} --}}
+                        Purlanner
                     </a>
                 </div>
 
@@ -80,6 +81,13 @@
         </nav>
 
         @yield('content')
+    </div>
+    <div class="footer">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          By Dongyu Kang
+        </div>
+      </div>
     </div>
 
     <!-- Scripts -->

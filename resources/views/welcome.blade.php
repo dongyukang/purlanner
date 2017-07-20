@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="description m-b-md">
-                  {{-- Great Study Tools For Purdue University --}}
+                  Purdue Planner Web Application
                 </div>
 
                 <div class="links">
