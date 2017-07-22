@@ -39,6 +39,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User has many tasks.
+     */
+    public function tasks()
+    {
+      return $this->hasMany('App\Task');
+    }
+
+    /**
      * Make sure that user belongs to term.
      *
      * @return boolean
@@ -55,9 +63,9 @@ class User extends Authenticatable
      *
      * @return string current term
      */
-    // public function getCurrentTerm()
-    // {
-    // }
+    public function getCurrentTerm()
+    {
+    }
 
     /**
      * Return term id.

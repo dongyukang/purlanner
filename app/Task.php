@@ -14,7 +14,7 @@ class Task extends Model
    * @var array
    */
   protected $fillable = [
-    'due_date', 'note', 'location', 'title', 'type'
+    'due_date', 'course_id', 'note', 'location', 'title', 'type'
   ];
 
   /**
@@ -23,7 +23,7 @@ class Task extends Model
    * @var array
    */
   protected $defaultTypes = [
-    'Exam', 'Assignment', 'Paper', 'Project', 'Study', 'Other'
+    'Exam', 'Assignment', 'Paper', 'Project', 'Other'
   ];
 
   /**
