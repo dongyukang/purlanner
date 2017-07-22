@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    public function __construct()
+    {
+
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,6 +53,15 @@ class User extends Authenticatable
       if ($this->getTermId() != 'null' && $this->getTermId() == Term::all()->last()->term_id) return true;
 
       return false;
+    }
+
+    /**
+     * Get user's current term.
+     *
+     * @return string current term
+     */
+    public function getCurrentTerm()
+    {
     }
 
     /**

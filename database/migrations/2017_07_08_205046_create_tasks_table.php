@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('title');
-            $table->string('type'); // Default --> Exam, Assignment, Paper, Project, Study, Other
+            $table->string('type'); // Default --> Exam, Assignment, Paper, Project, Other
             $table->date('due_date');
             $table->string('note')->nullable();
             $table->string('location')->nullable();

@@ -13,13 +13,13 @@
 use DongyuKang\PurdueCourse\Facades\Purdue;
 
 Route::get('/', 'HomeController@index');
-Route::get('/planner', 'PlannerController@index')->name('planner');
+Route::get('/task', 'PlannerController@index')->name('planner');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
+
+Route::get('/task/create', 'TaskController@create')->name('create_task');
+
+Auth::routes();
 
 Route::get('/home', function () {
   return redirect('/planner');
 });
-
-Auth::routes();
-
-// Route::middleware('auth')->get('/api', 'HomeController@showApi')->name('api');
