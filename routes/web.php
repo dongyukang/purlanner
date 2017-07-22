@@ -10,15 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use DongyuKang\PurdueCourse\Facades\Purdue;
+// use DongyuKang\PurdueCourse\Facades\Purdue;
+
+Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::get('/task', 'PlannerController@index')->name('planner');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
 Route::get('/task/create', 'TaskController@create')->name('create_task');
-
-Auth::routes();
 
 Route::get('/home', function () {
   return redirect('/planner');

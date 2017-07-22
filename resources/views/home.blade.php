@@ -4,7 +4,26 @@
   <div class="container-fluid">
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
-        <a class="btn btn-success" href="{{ route('create_task') }}">New Task (+)</a>
+        <div class="row">
+          <div class="panel-heading" style="text-align: left">
+            <h4> My Courses </h4>
+          </div>
+          <div class="panel-body">
+            <form role="form" action="/" method="POST">
+              {{ csrf_field() }}
+
+              <button type="submit" class="btn btn-primary">All</button>
+              <button type="submit" class="btn btn-default">MA 16100</button>
+              <button type="submit" class="btn btn-default">CS 24000</button>
+              <button type="submit" class="btn btn-default">CS 18000</button>
+               <button type="submit" class="btn btn-default">MUS 37600</button>
+            </form>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <a class="btn btn-success" href="{{ route('create_task') }}">New Task (+)</a>
+        </div>
       </div>
     </div>
     <div class="row">

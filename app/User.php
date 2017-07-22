@@ -12,11 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -60,9 +55,9 @@ class User extends Authenticatable
      *
      * @return string current term
      */
-    public function getCurrentTerm()
-    {
-    }
+    // public function getCurrentTerm()
+    // {
+    // }
 
     /**
      * Return term id.

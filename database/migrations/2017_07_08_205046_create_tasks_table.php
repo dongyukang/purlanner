@@ -16,6 +16,7 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('course_id')->unsigned();
             $table->string('title');
             $table->string('type'); // Default --> Exam, Assignment, Paper, Project, Other
             $table->date('due_date');
@@ -24,6 +25,7 @@ class CreateTasksTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 
