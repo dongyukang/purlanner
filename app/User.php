@@ -88,7 +88,7 @@ class User extends Authenticatable
     /**
      * If courses for current term is empty.
      *
-     * @return Boolean
+     * @return boolean $this->isCourseSet()
      */
     public function isCurrentCourseEmpty()
     {
@@ -134,6 +134,8 @@ class User extends Authenticatable
 
     /**
      * Get My Courses.
+     *
+     * @return array $courses
      */
     public function getCourses()
     {
@@ -173,7 +175,7 @@ class User extends Authenticatable
     /**
      * Find if user takes certain course.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function takesCourse($course_data)
     {

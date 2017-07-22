@@ -82,13 +82,13 @@
 
         @yield('content')
     </div>
-    <div class="footer">
+    {{-- <div class="footer">
       <div class="panel panel-default">
         <div class="panel-heading">
           By Dongyu Kang
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

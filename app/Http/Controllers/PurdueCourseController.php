@@ -14,11 +14,21 @@ class PurdueCourseController extends Controller
     $this->middleware('auth:api');
   }
 
+  /**
+   * Get current term name.
+   *
+   * @return string Purdue::currentTerm()->termName
+   */
   public function getCurrentTermName()
   {
     return Purdue::currentTerm()->termName;
   }
 
+  /**
+   * Get subjects based on current term.
+   *
+   * @return array $subjects
+   */
   public function getCurrentTermSubjects()
   {
     $subjects = array();
@@ -30,6 +40,12 @@ class PurdueCourseController extends Controller
     return $subjects;
   }
 
+  /**
+   * Get course numbers based on $subject.
+   *
+   * @param  string $subject
+   * @return array $course_numbers          
+   */
   public function getCourseNumbers($subject)
   {
     $course_numbers = array();
@@ -46,6 +62,13 @@ class PurdueCourseController extends Controller
     return json_encode($course_numbers);
   }
 
+  /**
+   * Get sections.
+   *
+   * @param string $course
+   * @param string $title
+   * @return array $sections
+   */
   public function getSections($course, $title)
   {
     $cnt = 0;
@@ -81,21 +104,22 @@ class PurdueCourseController extends Controller
   /**
    * Register Course.
    *
-   * @param Request
-   * @return Boolean
+   * @param \Illuminate\Http\Request
+   * @return boolean
    */
   public function saveCourse(Request $request)
   {
-    auth()->user()->saveCourse($request->all());
+    return auth()->user()->saveCourse($request->all());
   }
 
   /**
    * Remove course from the list.
    *
-   * @return Boolean
+   * @param \Illuminate\Http\Request
+   * @return boolean
    */
   public function removeCourse(Request $request)
   {
-    auth()->user()->removeCourse($request->get('course_id'));
+    return auth()->user()->removeCourse($request->get('course_id'));
   }
 }

@@ -86,8 +86,6 @@ class CourseTest extends TestCase
                 ->users()
                 ->get());
 
-    $this->assertTrue($samSavingCourse);
-
     $this->assertEquals(2, $courseUsers->count());
   }
 
@@ -113,6 +111,16 @@ class CourseTest extends TestCase
     $response = $user->removeCourse($course_id);
 
     $this->assertTrue($response);
+  }
+
+  /** @test */
+  public function try_to_remove_none_existing_course_should_return_false()
+  {
+    $user = factory(\App\User::class)->create();
+
+    $response = $user->removeCourse(3);
+
+    $this->assertFalse($response);
   }
 
 }
