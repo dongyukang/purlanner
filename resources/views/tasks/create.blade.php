@@ -11,10 +11,7 @@
           <div class="alert alert-info" role="alert">
             <ul>
               <li>
-                Title, Due Date, Course and Type is <strong> required. </strong>
-              </li>
-              <li>
-                Location and Note is <strong> not required. </strong>
+                Everything is required except Location and Note.
               </li>
             </ul>
           </div>
@@ -68,7 +65,9 @@
                 <label><h5> Due Date </h5></label>
               </div>
               <div class="col-xs-11">
-                <input type="date" class="form-control" name="due_date" required>
+                <div class="input-group date">
+                  <input type="text" name="due_date" class="form-control" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                </div>
               </div>
             </div>
             <div class="row">
