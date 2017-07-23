@@ -5,16 +5,18 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
         <div class="row">
-          <div class="panel-heading" style="text-align: left">
-            <h4> My Courses </h4>
+          <div class="panel-heading" style="margin-top: -20px; text-align: left;">
+            <h3> My Courses </h3>
           </div>
           <div class="panel-body">
             <form role="form" action="/" method="POST">
               {{ csrf_field() }}
               <button type="submit" class="btn btn-primary">All</button>
+
               @foreach(auth()->user()->getCourses() as $course)
                 <button type="submit" class="btn btn-default">{{ $course['Subject'] . ' ' . $course['Number'] }}</button>
               @endforeach
+
             </form>
           </div>
         </div>
@@ -78,7 +80,7 @@
               <thead>
                 <tr>
                   <td style="text-align: center">Course</td>
-                  <td style="text-align: center">Assignment Detail</td>
+                  <td style="text-align: center">Assignment Title</td>
                   <td style="text-align: center">Due Date</td>
                   <td style="text-align: center"></td>
                 </tr>

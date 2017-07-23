@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Term;
+use App\Task;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use DongyuKang\PurdueCourse\Facades\Purdue;
@@ -47,6 +48,87 @@ class User extends Authenticatable
     }
 
     /**
+     * Assign task to user.
+     *
+     * @param  array $data
+     * @return boolean
+     */
+    public function assignTask($data)
+    {
+      $assignTask = $this->tasks()->create([
+        'title' => $data['title'],
+        'type'  => $data['type'],
+        'course_id' => $data['course_id'],
+        'location' => $data['location'],
+        'due_date' => $data['due_date'],
+        'note' => $data['note']
+      ]);
+
+      return $assignTask != null ? true : false;
+    }
+
+    /**
+     * Return exams that user has.
+     *
+     * @return array
+     */
+    public function exams()
+    {
+      return collect($this->tasks()->get())
+            ->where('type', 'exam')
+            ->all();
+    }
+
+    /**
+     * Return assignments that user has.
+     *
+     * @return array
+     */
+    public function assignments()
+    {
+      return collect($this->tasks()->get())
+            ->where('type', 'assignment')
+            ->all();
+    }
+
+    /**
+     * Get user's papers.
+     *
+     * @return array
+     */
+    public function papers()
+    {
+      return collect($this->tasks()->get())
+            ->where('type', 'paper')
+            ->all();
+    }
+
+    /**
+     * Return user's projects.
+     *
+     * @return array
+     */
+    public function projects()
+    {
+      return collect($this->tasks()->get())
+            ->where('type', 'project')
+            ->all();
+    }
+
+    /**
+     * Get tasks of custom types of user.
+     *
+     * @param  string $custom_type
+     * @return array
+     */
+    public function other($custom_type)
+    {
+      return collect($this->tasks()->get())
+            ->where('type', $custom_type)
+            ->all();
+    }
+
+    /**
      * Make sure that user belongs to term.
      *
      * @return boolean
@@ -59,18 +141,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Get user's current term.
-     *
-     * @return string current term
-     */
-    public function getCurrentTerm()
-    {
-    }
-
-    /**
      * Return term id.
      *
-     * @return String TermId
+     * @return string
      */
     public function getTermId()
     {

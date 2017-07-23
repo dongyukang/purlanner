@@ -35,11 +35,4 @@ class Task extends Model
 
   ];
 
-  /**
-   * Tasks belongs to many user.
-   */
-  public function users()
-  {
-    return $this->belongsTo('App\User', 'user_id');
-  }
 }
