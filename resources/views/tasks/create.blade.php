@@ -2,6 +2,8 @@
 
 @section('content')
   <div class="container-fluid">
+    <a class="btn btn-primary" href="{{ route('planner') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to My Tasks</a>
+    <hr />
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>New Task</h4>

@@ -45,11 +45,12 @@ class TaskController extends Controller
   public function saveCustomTypes(Request $request)
   {
     $this->validate($request, [
-      'type_name' => 'required|unique:types'
+      'type_name' => 'required'
     ]);
 
     if (strcasecmp($request->get('type_name'), 'Exam') != 0 && strcasecmp($request->get('type_name'), 'Paper') != 0 &&
-        strcasecmp($request->get('type_name'), 'Project') != 0 && strcasecmp($request->get('type_name'), 'Assignment') != 0) {
+        strcasecmp($request->get('type_name'), 'Project') != 0 && strcasecmp($request->get('type_name'), 'Assignment') != 0 &&
+        collect(auth()->user()->types()->get())->where('type_name', $request->get('type_name'))->first() == null) {
       $saveType = auth()->user()->types()->create([
         'type_name' => $request->get('type_name')
       ]);

@@ -64,9 +64,6 @@
                                       <a href="{{ route('settings') }}">Settings</a>
                                     </li>
                                     <li>
-                                      <a href="{{ route('custom_type') }}">Manage Custom Type</a>
-                                    </li>
-                                    <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

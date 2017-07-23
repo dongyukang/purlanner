@@ -21,7 +21,7 @@
           </div>
         </div>
         <hr />
-          <a class="btn btn-success btn-block" style="padding: 12px" href="{{ route('create_task') }}">New Task (+)</a>
+          <a class="btn btn-success btn-block" style="padding: 12px" href="{{ route('create_task') }}"><span style="font-size: 18px;">New Task <span class="glyphicon glyphicon-plus"></span></span></a>
       </div>
     </div>
     <div class="panel panel-default">
@@ -56,9 +56,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="text-align: center">MA 16100</td>
-                  <td style="text-align: center">Classroom</td>
-                  <td style="text-align: center">07/25/2017</td>
+                  <td style="text-align: center"></td>
+                  <td style="text-align: center"></td>
+                  <td style="text-align: center"></td>
                   <td style="text-align: center"><a class="btn btn-primary">View</a></td>
                 </tr>
               </tbody>
@@ -92,9 +92,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <td style="text-align: center">MA 161</td>
-                  <td style="text-align: center">Solve 12, 25, 33 and read chapter 12, 14, 26</td>
-                  <td style="text-align: center">08/1/2017</td>
+                  <td style="text-align: center"></td>
+                  <td style="text-align: center"></td>
+                  <td style="text-align: center"></td>
                   <td style="text-align: center"><a class="btn btn-primary">View</a></td>
                 </tr>
               </tbody>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container-fluid">
     <a class="btn btn-primary" href="{{ route('create_task') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to Add Task</a>
     <hr />
     <div class="panel panel-default">
