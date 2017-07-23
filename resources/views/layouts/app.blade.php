@@ -31,7 +31,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ route('planner') }}">
+                    <a class="navbar-brand" href="{{ route('intro') }}">
                         {{-- {{ config('app.name', 'Laravel') }} --}}
                         Purlanner
                     </a>
@@ -56,12 +56,15 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-menu" role="menu" style="text-align: center">
                                     {{-- <li>
                                       <a href="{{ route('api') }}">API</a>
                                     </li> --}}
                                     <li>
                                       <a href="{{ route('settings') }}">Settings</a>
+                                    </li>
+                                    <li>
+                                      <a href="{{ route('custom_type') }}">Manage Custom Type</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"

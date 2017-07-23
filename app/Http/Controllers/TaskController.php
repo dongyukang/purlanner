@@ -20,4 +20,54 @@ class TaskController extends Controller
   {
     return view('tasks.create');
   }
+
+  /**
+   * Manage Custom Types.
+   *
+   * @return view
+   */
+  public function showCustomTypes()
+  {
+    return view('tasks.manage_custom_types');
+  }
+
+  /**
+   * Create Custom Types.
+   */
+  public function showCreateCustomTypes()
+  {
+    return view('tasks.add_custom_type');
+  }
+
+  /**
+   * Save custom type to database.
+   */
+  public function saveCustomTypes(Request $request)
+  {
+    $this->validate($request, [
+      'type_name' => 'required|unique:types'
+    ]);
+
+    if (strcasecmp($request->get('type_name'), 'Exam') != 0 && strcasecmp($request->get('type_name'), 'Paper') != 0 &&
+        strcasecmp($request->get('type_name'), 'Project') != 0 && strcasecmp($request->get('type_name'), 'Assignment') != 0) {
+      $saveType = auth()->user()->types()->create([
+        'type_name' => $request->get('type_name')
+      ]);
+
+      if ($saveType != null) {
+        return redirect('/task/type');
+      }
+    }
+
+    return redirect()->back();
+  }
+
+  /**
+   * Delete custom type.
+   */
+  public function deleteCustomType($type_id)
+  {
+    if (auth()->user()->types()->find($type_id)->delete())
+      return redirect()->back();
+  }
 }

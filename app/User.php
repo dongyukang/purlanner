@@ -48,6 +48,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User has many custom types.
+     */
+    public function types()
+    {
+      return $this->hasMany('App\Type');
+    }
+
+    /**
      * Assign task to user.
      *
      * @param  array $data

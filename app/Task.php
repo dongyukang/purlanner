@@ -18,15 +18,6 @@ class Task extends Model
   ];
 
   /**
-   * Default Types.
-   *
-   * @var array
-   */
-  protected $defaultTypes = [
-    'Exam', 'Assignment', 'Paper', 'Project', 'Other'
-  ];
-
-  /**
    * Hidden Attributes.
    *
    * @var array

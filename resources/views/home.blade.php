@@ -5,8 +5,8 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
         <div class="row">
-          <div class="panel-heading" style="margin-top: -20px; text-align: left;">
-            <h3> My Courses </h3>
+          <div class="panel-heading" style="margin-top: -20px; text-align: left; text-align: center;">
+             <h3> My Courses </h3>
           </div>
           <div class="panel-body">
             <form role="form" action="/" method="POST">
@@ -22,6 +22,11 @@
         </div>
         <hr />
           <a class="btn btn-success btn-block" style="padding: 12px" href="{{ route('create_task') }}">New Task (+)</a>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" style="text-align: center">
+        <h4>Today's Date: {{ $today->toFormattedDateString() }}</h4>
       </div>
     </div>
     <div class="row">

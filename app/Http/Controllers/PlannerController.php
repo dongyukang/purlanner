@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Term;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DongyuKang\PurdueCourse\Facades\Purdue;
 
@@ -27,7 +28,9 @@ class PlannerController extends Controller
       auth()->user()->setTermId(Term::all()->last()->term_id);
       return redirect('settings');
     } else {
-      return view('home');
+      return view('home', [
+        'today' => Carbon::now()
+      ]);
     }
   }
 

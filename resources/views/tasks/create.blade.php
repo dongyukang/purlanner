@@ -11,41 +11,37 @@
           <div class="alert alert-info" role="alert">
             <ul>
               <li>
-                Everything is required except Location and Note.
+                Every field is required except Location and Note.
               </li>
             </ul>
           </div>
           <form role="form" class="form-horizontal" action="" method="POST">
             {{ csrf_field() }}
-
+            <div class="row">
+              <div class="col-xs-1">
+                <label><h5> Type </h5></label>
+              </div>
+              <div class="col-xs-5">
+                <select class="form-control">
+                  <option value="exam">Exam</option>
+                  <option value="assignment">Assignment</option>
+                  <option value="paper">Paper</option>
+                  <option value="project">Project</option>
+                  @foreach(auth()->user()->types()->get() as $type)
+                    <option value="{{ $type->type_name }}">{{ $type->type_name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="col-xs-5">
+                <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a>
+              </div>
+            </div>
             <div class="row">
               <div class="col-xs-1">
                 <label><h5> Title </h5></label>
               </div>
               <div class="col-xs-11">
                 <input class="form-control" name="title" placeholder="Task Title" required>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-1">
-                <label><h5> Type </h5></label>
-              </div>
-              <div class="col-xs-11">
-                <select class="form-control">
-                  <option value="exam">Exam</option>
-                  <option value="assignment">Assignment</option>
-                  <option value="paper">Paper</option>
-                  <option value="project">Project</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-1">
-                <label><h5> Other </h5></label>
-              </div>
-              <div class="col-xs-11">
-                <input id="form_other" name="other" class="form-control" disabled placeholder="Other Task Type">
               </div>
             </div>
             <div class="row">
@@ -83,7 +79,7 @@
                 <label><h5> Note </h5></label>
               </div>
               <div class="col-xs-11">
-                <textarea class="form-control" rows="7"></textarea>
+                <textarea class="form-control" rows="7" placeholder="Note"></textarea>
               </div>
             </div>
             <hr />
