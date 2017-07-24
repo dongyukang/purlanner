@@ -26,4 +26,34 @@ class Task extends Model
 
   ];
 
+  /**
+   * Tasks due tomorrow.
+   *
+   * @return array
+   */
+  public function tasksDueTomorrow()
+  {
+
+  }
+
+  /**
+   * Tasks due this week.
+   *
+   * @return array
+   */
+  public function tasksDueThisWeek()
+  {
+
+  }
+
+  /**
+   * Tasks due next week.
+   *
+   * @return array
+   */
+  public function tasksDueNextWeek()
+  {
+
+  }
+
 }

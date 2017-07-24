@@ -17,15 +17,16 @@
               </li>
             </ul>
           </div>
-          <form role="form" class="form-horizontal" action="" method="POST">
+          <form role="form" class="form-horizontal" action="/task/create" method="POST">
             {{ csrf_field() }}
+
             <div class="row">
               <div class="col-xs-1">
                 <label><h5> Type </h5></label>
               </div>
               <div class="col-xs-5">
-                <select class="form-control">
-                  <option value="exam">Exam</option>
+                <select class="form-control" name="type">
+                  <option value="exam" selected>Exam</option>
                   <option value="assignment">Assignment</option>
                   <option value="paper">Paper</option>
                   <option value="project">Project</option>
@@ -51,7 +52,7 @@
                 <label><h5> Course </h5></label>
               </div>
               <div class="col-xs-11">
-                <select class="form-control">
+                <select class="form-control" name="course_id">
                   @foreach(auth()->user()->getCourses() as $course)
                     <option value="{{ $course['Id'] }}">{{ $course['Subject'] . ' ' . $course['Number'] . ' ' . $course['Title'] }}</option>
                   @endforeach
@@ -81,7 +82,7 @@
                 <label><h5> Note </h5></label>
               </div>
               <div class="col-xs-11">
-                <textarea class="form-control" rows="7" placeholder="Note"></textarea>
+                <textarea class="form-control" rows="7" name="note" placeholder="Note"></textarea>
               </div>
             </div>
             <hr />

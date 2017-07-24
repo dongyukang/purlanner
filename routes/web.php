@@ -19,6 +19,7 @@ Route::get('/task', 'PlannerController@index')->name('planner');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
 Route::get('/task/create', 'TaskController@create')->name('create_task');
+Route::post('/task/create', 'TaskController@assignTask');
 Route::get('/task/type', 'TaskController@showCustomTypes')->name('custom_type');
 Route::get('/task/type/create', 'TaskController@showCreateCustomTypes')->name('create_custom_type');
 Route::post('/task/type/create', 'TaskController@saveCustomTypes')->name('save_custom_type');

@@ -98,6 +98,8 @@
     <script>
       $('.input-group.date').datepicker({
       });
+
+      
     </script>
 </body>
 </html>

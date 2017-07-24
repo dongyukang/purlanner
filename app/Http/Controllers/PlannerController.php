@@ -29,7 +29,7 @@ class PlannerController extends Controller
       return redirect('settings');
     } else {
       return view('home', [
-        'today' => Carbon::now()
+        'today' => Carbon::today()
       ]);
     }
   }

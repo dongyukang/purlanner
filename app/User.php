@@ -2,8 +2,9 @@
 
 namespace App;
 
-use App\Term;
 use App\Task;
+use App\Term;
+use Carbon\Carbon;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use DongyuKang\PurdueCourse\Facades\Purdue;
@@ -68,7 +69,7 @@ class User extends Authenticatable
         'type'  => $data['type'],
         'course_id' => $data['course_id'],
         'location' => $data['location'],
-        'due_date' => $data['due_date'],
+        'due_date' => Carbon::parse($data['due_date'])->format('Y-m-d'),
         'note' => $data['note']
       ]);
 
@@ -82,9 +83,7 @@ class User extends Authenticatable
      */
     public function exams()
     {
-      return collect($this->tasks()->get())
-            ->where('type', 'exam')
-            ->all();
+      return $this->tasks()->where('type', 'exam')->get();
     }
 
     /**
@@ -94,9 +93,7 @@ class User extends Authenticatable
      */
     public function assignments()
     {
-      return collect($this->tasks()->get())
-            ->where('type', 'assignment')
-            ->all();
+      return $this->tasks()->where('type', 'assignment')->get();
     }
 
     /**
@@ -106,9 +103,7 @@ class User extends Authenticatable
      */
     public function papers()
     {
-      return collect($this->tasks()->get())
-            ->where('type', 'paper')
-            ->all();
+      return $this->tasks()->where('type', 'paper')->get();
     }
 
     /**
@@ -118,22 +113,17 @@ class User extends Authenticatable
      */
     public function projects()
     {
-      return collect($this->tasks()->get())
-            ->where('type', 'project')
-            ->all();
+      return $this->tasks()->where('type', 'project')->get();
     }
 
     /**
-     * Get tasks of custom types of user.
+     * Get tasks of types that are not exams, assignments, papers and projects.
      *
-     * @param  string $custom_type
      * @return array
      */
-    public function other($custom_type)
+    public function others()
     {
-      return collect($this->tasks()->get())
-            ->where('type', $custom_type)
-            ->all();
+      return collect($this->tasks()->get())->whereNotIn('type', ['exam', 'assignment', 'paper', 'project'])->all();
     }
 
     /**

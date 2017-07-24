@@ -52,7 +52,7 @@ class TaskController extends Controller
         strcasecmp($request->get('type_name'), 'Project') != 0 && strcasecmp($request->get('type_name'), 'Assignment') != 0 &&
         collect(auth()->user()->types()->get())->where('type_name', $request->get('type_name'))->first() == null) {
       $saveType = auth()->user()->types()->create([
-        'type_name' => $request->get('type_name')
+        'type_name' => ucwords(strtolower($request->get('type_name')))
       ]);
 
       if ($saveType != null) {
@@ -61,6 +61,18 @@ class TaskController extends Controller
     }
 
     return redirect()->back();
+  }
+
+  /**
+   * Assign task to user.
+   *
+   * @param  Request $request
+   */
+  public function assignTask(Request $request)
+  {
+    auth()->user()->assignTask($request->all());
+
+    return redirect('/task');
   }
 
   /**
