@@ -6,10 +6,10 @@
       <div class="col-xs-4">
         <div class="panel panel-danger">
           <div class="panel-heading" style="text-align: center">
-            <h4>Tasks Due Tomorrow</h4>
+            <h4>Due Tomorrow</h4>
           </div>
           <div class="panel-body" style="text-align: center">
-            <a href="#" data-toggle="modal" data-target="#taskDueTomorrow"><h2> 3 </h2></a>
+            <a href="#" data-toggle="modal" data-target="#taskDueTomorrow"><h2> {{ auth()->user()->tasksDueTomorrow()->count() }} </h2></a>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
       <div class="col-xs-4">
         <div class="panel panel-warning">
           <div class="panel-heading" style="text-align: center">
-            <h4>Tasks Due This Week</h4>
+            <h4>Due This Week</h4>
           </div>
           <div class="panel-body" style="text-align: center">
             <a href="#" data-toggle="modal" data-target="#taskDueThisWeek"><h2>3</h2></a>
@@ -28,7 +28,7 @@
       <div class="col-xs-4">
         <div class="panel panel-default">
           <div class="panel-heading" style="text-align: center">
-            <h4>Tasks Due Next Week</h4>
+            <h4>Due Next Week</h4>
           </div>
           <div class="panel-body" style="text-align: center">
             <a href="#" data-toggle="modal" data-target="#taskDueNextWeek"><h2>3</h2></a>
@@ -65,7 +65,7 @@
     </div>
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
-        <h4>Today's Date: {{ $today->toFormattedDateString() }}</h4>
+        <h4>Today's Date at Purdue: {{ \Carbon\Carbon::today()->toFormattedDateString() }}</h4>
       </div>
     </div>
     <div class="row">

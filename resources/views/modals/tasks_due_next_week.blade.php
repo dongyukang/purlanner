@@ -3,7 +3,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Tasks Due Next Week</h4>
+            <h4 class="modal-title">Due Next Week</h4>
           </div>
           <div class="modal-body">
             <table class="table table-striped">
@@ -12,7 +12,7 @@
                   <td style="text-align: center">Course</td>
                   <td style="text-align: center">Task Type</td>
                   <td style="text-align: center">Title</td>
-                  <td style="text-align: center">Location</td>
+                  <td style="text-align: center">Due Date</td>
                   <td style="text-align: center"></td>
                 </tr>
               </thead>

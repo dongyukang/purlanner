@@ -40,8 +40,8 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                      <li><a href="{{ route('planner') }}">My Tasks</a></li>
-                      <li><a href="">Calendar</a></li>
+                      <li><a href="{{ route('planner') }}">Tasks</a></li>
+                      <li><a href="">Agenda</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -99,7 +99,7 @@
       $('.input-group.date').datepicker({
       });
 
-      
+
     </script>
 </body>
 </html>

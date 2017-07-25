@@ -273,4 +273,34 @@ class User extends Authenticatable
                      ->where('Title', $course_data['course_title'])
                      ->first() != null ? true : false;
     }
+
+    /**
+     * Tasks due tomorrow.
+     *
+     * @return array
+     */
+    public function tasksDueTomorrow()
+    {
+      return $this->tasks()->whereDate('due_date', Carbon::tomorrow('EST'))->get();
+    }
+
+    /**
+     * Tasks due this week.
+     *
+     * @return array
+     */
+    public function tasksDueThisWeek()
+    {
+
+    }
+
+    /**
+     * Tasks due next week.
+     *
+     * @return array
+     */
+    public function tasksDueNextWeek()
+    {
+
+    }
 }

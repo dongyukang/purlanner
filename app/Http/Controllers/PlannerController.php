@@ -28,9 +28,7 @@ class PlannerController extends Controller
       auth()->user()->setTermId(Term::all()->last()->term_id);
       return redirect('settings');
     } else {
-      return view('home', [
-        'today' => Carbon::today()
-      ]);
+      return view('home');
     }
   }
 
