@@ -54,7 +54,7 @@
                     <td style="text-align: center">{{ \App\Course::find($exam->course_id)->subject . ' ' . \App\Course::find($exam->course_id)->course_number }}</td>
                     <td style="text-align: center">{{ $exam->location }}</td>
                     <td style="text-align: center">{{ $exam->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="/task/{{ $exam->id }}">View</a></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $exam->id }}">View</a></td>
                   </tr>
                 @endforeach
               </tbody>
@@ -83,7 +83,7 @@
                     <td style="text-align: center">{{ \App\Course::find($assignment->course_id)->subject . ' ' . \App\Course::find($assignment->course_id)->course_number }}</td>
                     <td style="text-align: center">{{ $assignment->title }}</td>
                     <td style="text-align: center">{{ $assignment->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="/task/{{ $assignment->id }}">View</a></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $assignment->id }}">View</a></td>
                   </tr>
                 @endforeach
               </tbody>
@@ -114,7 +114,7 @@
                     <td style="text-align: center">{{ \App\Course::find($paper->course_id)->subject . ' ' . \App\Course::find($paper->course_id)->course_number }}</td>
                     <td style="text-align: center">{{ $paper->title }}</td>
                     <td style="text-align: center">{{ $paper->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="/task/{{ $paper->id }}">View</a></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $paper->id }}">View</a></td>
                   </tr>
                 @endforeach
               </tbody>
@@ -143,7 +143,7 @@
                     <td style="text-align: center">{{ \App\Course::find($project->course_id)->subject . ' ' . \App\Course::find($project->course_id)->course_number }}</td>
                     <td style="text-align: center">{{ $project->title }}</td>
                     <td style="text-align: center">{{ $project->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="/task/{{ $project->id }}">View</a></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $project->id }}">View</a></td>
                   </tr>
                 @endforeach
               </tbody>
@@ -176,7 +176,7 @@
                     <td style="text-align: center">{{ $other->title }}</td>
                     <td style="text-align: center">{{ $other->type }}</td>
                     <td style="text-align: center">{{ $other->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="/task/{{ $other->id }}">View</a></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $other->id }}">View</a></td>
                   </tr>
                 @endforeach
               </tbody>
