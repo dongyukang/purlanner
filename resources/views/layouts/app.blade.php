@@ -41,7 +41,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                       <li><a href="{{ route('planner') }}">Tasks</a></li>
-                      <li><a href="">Agenda</a></li>
+                      <li><a href="{{ route('agenda') }}">Agenda</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

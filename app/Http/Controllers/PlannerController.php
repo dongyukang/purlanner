@@ -52,4 +52,14 @@ class PlannerController extends Controller
       'courses'  => $courses
     ]);
   }
+
+  /**
+   * show agenda
+   *
+   * @return view
+   */
+  public function showAgenda()
+  {
+    return 'agenda';
+  }
 }

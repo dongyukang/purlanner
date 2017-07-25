@@ -16,6 +16,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('intro');
 Route::get('/task', 'PlannerController@index')->name('planner');
+Route::get('/agenda', 'PlannerController@showAgenda')->name('agenda');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
 Route::get('/task/create', 'TaskController@create')->name('create_task');

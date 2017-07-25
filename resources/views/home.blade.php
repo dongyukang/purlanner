@@ -20,7 +20,7 @@
             <h4>Due This Week</h4>
           </div>
           <div class="panel-body" style="text-align: center">
-            <a href="#" data-toggle="modal" data-target="#taskDueThisWeek"><h2>3</h2></a>
+            <a href="#" data-toggle="modal" data-target="#taskDueThisWeek"><h2>{{ auth()->user()->tasksDueThisWeek()->count() }}</h2></a>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
             <h4>Due Next Week</h4>
           </div>
           <div class="panel-body" style="text-align: center">
-            <a href="#" data-toggle="modal" data-target="#taskDueNextWeek"><h2>3</h2></a>
+            <a href="#" data-toggle="modal" data-target="#taskDueNextWeek"><h2>{{ auth()->user()->tasksDueNextWeek()->count() }}</h2></a>
           </div>
         </div>
       </div>

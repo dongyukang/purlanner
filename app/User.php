@@ -291,7 +291,10 @@ class User extends Authenticatable
      */
     public function tasksDueThisWeek()
     {
-
+      return $this->tasks()
+                  ->whereDate('due_date', '>=', Carbon::today('EST'))
+                  ->whereDate('due_date', '<=', Carbon::today('EST')->endOfWeek())
+                  ->get();
     }
 
     /**
@@ -301,6 +304,9 @@ class User extends Authenticatable
      */
     public function tasksDueNextWeek()
     {
-
+      return $this->tasks()
+                  ->whereDate('due_date', '>=', Carbon::today('EST')->addWeek(1))
+                  ->whereDate('due_date', '<=', Carbon::today('EST')->addWeek(1)->endOfWeek())
+                  ->get();
     }
 }
