@@ -20,7 +20,7 @@
                 @foreach (auth()->user()->tasksDueThisWeek() as $task)
                   <tr>
                     <td style="text-align: center">{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}</td>
-                    <td style="text-align: center">{{ $task->type }}</td>
+                    <td style="text-align: center">{{ ucwords(strtolower($task->type)) }}</td>
                     <td style="text-align: center">{{ $task->title }}</td>
                     <td style="text-align: center">{{ $task->due_date }}</td>
                     <td style="text-align: center"><a class="btn btn-primary" href="#">View</a></td>

@@ -83,7 +83,7 @@ class User extends Authenticatable
      */
     public function exams()
     {
-      return $this->tasks()->where('type', 'exam')->get();
+      return $this->tasks()->where('type', 'exam')->orderBy('due_date', 'asc')->get();
     }
 
     /**
@@ -93,7 +93,7 @@ class User extends Authenticatable
      */
     public function assignments()
     {
-      return $this->tasks()->where('type', 'assignment')->get();
+      return $this->tasks()->where('type', 'assignment')->orderBy('due_date', 'asc')->get();
     }
 
     /**
@@ -103,7 +103,7 @@ class User extends Authenticatable
      */
     public function papers()
     {
-      return $this->tasks()->where('type', 'paper')->get();
+      return $this->tasks()->where('type', 'paper')->orderBy('due_date', 'asc')->get();
     }
 
     /**
@@ -113,7 +113,7 @@ class User extends Authenticatable
      */
     public function projects()
     {
-      return $this->tasks()->where('type', 'project')->get();
+      return $this->tasks()->where('type', 'project')->orderBy('due_date', 'asc')->get();
     }
 
     /**
@@ -294,6 +294,7 @@ class User extends Authenticatable
       return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::today('EST'))
                   ->whereDate('due_date', '<=', Carbon::today('EST')->endOfWeek())
+                  ->orderBy('due_date', 'asc')
                   ->get();
     }
 
@@ -307,6 +308,7 @@ class User extends Authenticatable
       return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::today('EST')->addWeek(1))
                   ->whereDate('due_date', '<=', Carbon::today('EST')->addWeek(1)->endOfWeek())
+                  ->orderBy('due_date', 'asc')
                   ->get();
     }
 }

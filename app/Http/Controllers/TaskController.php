@@ -40,6 +40,17 @@ class TaskController extends Controller
   }
 
   /**
+   * view task.
+   *
+   * @param  integer $id
+   * @return view
+   */
+  public function showTask($id)
+  {
+    return view('tasks.view');
+  }
+
+  /**
    * Save custom type to database.
    */
   public function saveCustomTypes(Request $request)

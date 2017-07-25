@@ -19,6 +19,7 @@ Route::get('/task', 'PlannerController@index')->name('planner');
 Route::get('/agenda', 'PlannerController@showAgenda')->name('agenda');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
+Route::get('/task/{id}', 'TaskController@showTask');
 Route::get('/task/create', 'TaskController@create')->name('create_task');
 Route::post('/task/create', 'TaskController@assignTask');
 Route::get('/task/type', 'TaskController@showCustomTypes')->name('custom_type');
