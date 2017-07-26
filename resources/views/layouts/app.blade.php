@@ -41,7 +41,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                       <li><a href="{{ route('task') }}">1. Write Tasks</a></li>
-                      <li><a href="{{ route('sub-task') }}">2. Write Sub-Tasks</a></li>
+                      <li><a href="{{ route('sub-task') }}">2. Write Sub-Tasks For Each Task</a></li>
                       <li><a href="">3. Look At The Whole Picture</a></li>
                     </ul>
 
@@ -98,6 +98,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <script>
       $('.input-group.date').datepicker({
+        todayHighlight: true
       });
 
 

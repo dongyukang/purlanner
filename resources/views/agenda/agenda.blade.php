@@ -4,12 +4,6 @@
   <div class="container-fluid">
     @include('task_summary_dashboard')
 
-    <div class="container">
-      <div class="alert alert-info">
-        <center> This section is to set 'Sub-Tasks' to complete a 'Task'. </center>
-      </div>
-    </div>
-
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
         <h4>My Tasks</h4>
@@ -20,11 +14,12 @@
       <div class="col-xs-6">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h5> {{ $task->title }} | Due: {{ $task->due_date }} ({{ ucwords(strtolower($task->type)) }}) </h5>
+            <h5> <strong> {{ $task->title }} </strong> | Due: {{ $task->due_date }} ({{ ucwords(strtolower($task->type)) }}) </h5>
+            {{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}
           </div>
           <div class="panel-body">
             <center>
-              <a class="btn btn-primary btn-sm"> Add Sub Task <span class="glyphicon glyphicon-plus"></span></a>
+              <a class="btn btn-primary"> Sub Task <span class="glyphicon glyphicon-plus"></span></a>
             </center>
             <table class="table table-striped">
               <thead>
