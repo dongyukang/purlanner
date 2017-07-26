@@ -29,7 +29,7 @@
     </div>
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
-        <h4>Today's Date at Purdue: {{ \Carbon\Carbon::today()->toFormattedDateString() }}</h4>
+        <h4>Today's Date at Purdue: {{ \Carbon\Carbon::today('EST')->toFormattedDateString() }}</h4>
       </div>
     </div>
     <div class="row">

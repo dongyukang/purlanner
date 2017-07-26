@@ -57,6 +57,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User has many sub-tasks.
+     */
+    public function agendas()
+    {
+      return $this->hasMany('App\Agenda');
+    }
+
+    /**
      * Assign task to user.
      *
      * @param  array $data

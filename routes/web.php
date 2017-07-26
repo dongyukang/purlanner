@@ -15,10 +15,11 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('intro');
-Route::get('/task', 'PlannerController@index')->name('planner');
-Route::get('/agenda', 'PlannerController@showAgenda')->name('agenda');
+Route::get('/planner', 'PlannerController@index')->name('planner');
+Route::get('/sub-task', 'AgendaController@index')->name('sub-task');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
+Route::get('/task', 'TaskController@index')->name('task');
 Route::get('/task/view/{id}', 'TaskController@showTask');
 Route::get('/task/create', 'TaskController@create')->name('create_task');
 Route::post('/task/create', 'TaskController@assignTask');

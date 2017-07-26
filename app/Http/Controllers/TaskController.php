@@ -12,6 +12,16 @@ class TaskController extends Controller
   }
 
   /**
+   * Show main task mage.
+   *
+   * @return view
+   */
+  public function index()
+  {
+    return view('home');
+  }
+
+  /**
    * Show create task page.
    *
    * @return view

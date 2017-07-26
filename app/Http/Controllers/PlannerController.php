@@ -28,7 +28,14 @@ class PlannerController extends Controller
       auth()->user()->setTermId(Term::all()->last()->term_id);
       return redirect('settings');
     } else {
-      return view('home');
+      // TODO: if tasks and agenda is not empty, then go to 'whole picture'.
+      // else if tasks is not empty, but agenda is empty, then go to 'agenda'.
+      // else tasks is empty then go to 'tasks'.
+      $isTaskEmpty = auth()->user()->tasks()->count() == 0 ? true : false;
+      $isAgendaEmpty = auth()->user()->agendas()->count() == 0 ? true : false;
+
+      return redirect('/task');
+
     }
   }
 
