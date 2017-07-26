@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-xs-4">
     <div class="panel panel-danger">
-      <div class="panel-heading" style="text-align: center">
-        <h4>Due Tomorrow</h4>
+      <div class="panel-heading" style="text-align: center;">
+        <h4 style="color: white">Due Tomorrow</h4>
       </div>
       <div class="panel-body" style="text-align: center">
         <a style="cursor: pointer" data-toggle="modal" data-target="#taskDueTomorrow"><h2> {{ auth()->user()->tasksDueTomorrow()->count() }} </h2></a>
@@ -13,7 +13,7 @@
   <div class="col-xs-4">
     <div class="panel panel-warning">
       <div class="panel-heading" style="text-align: center">
-        <h4>Due This Week</h4>
+        <h4 style="color: white">Due This Week</h4>
       </div>
       <div class="panel-body" style="text-align: center">
         <a style="cursor: pointer" data-toggle="modal" data-target="#taskDueThisWeek"><h2>{{ auth()->user()->tasksDueThisWeek()->count() }}</h2></a>

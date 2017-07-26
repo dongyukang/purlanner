@@ -29,4 +29,20 @@ class AgendaController extends Controller
       'mytasks' => auth()->user()->tasks()->orderBy('due_date', 'asc')->get()
     ]);
   }
+
+  /**
+   * Save sub test.
+   */
+  public function saveSubTask(Request $request)
+  {
+    $requestData = [
+      'task_id' => $request->get('task_id'),
+      'desire_date' => Carbon::parse($request->get('desire_date'))->format('Y-m-d'),
+      'sub_task' => $request->get('sub_task')
+    ];
+
+    $saved = auth()->user()->agendas()->create($requestData) != null ? true : false;
+
+    if ($saved) return redirect('/sub-task');
+  }
 }

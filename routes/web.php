@@ -28,6 +28,8 @@ Route::get('/task/type/create', 'TaskController@showCreateCustomTypes')->name('c
 Route::post('/task/type/create', 'TaskController@saveCustomTypes')->name('save_custom_type');
 Route::get('/task/type/{type_id}', 'TaskController@deleteCustomType')->name('delete_custom_type');
 
+Route::post('/sub-task', 'AgendaController@saveSubTask')->name('save_sub_task');
+
 Route::get('/home', function () {
   return redirect('/planner');
 });
