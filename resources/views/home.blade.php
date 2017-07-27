@@ -60,6 +60,7 @@
                 @endforeach
               </tbody>
             </table>
+            <center><a class="btn btn-danger" href="#">View Past Due</a></center>
           </div>
         </div>
       </div>
@@ -89,6 +90,7 @@
                 @endforeach
               </tbody>
             </table>
+            <center><a class="btn btn-danger" href="#">View Past Due</a></center>
           </div>
         </div>
       </div>
@@ -120,6 +122,7 @@
                 @endforeach
               </tbody>
             </table>
+            <center><a class="btn btn-danger" href="#">View Past Due</a></center>
           </div>
         </div>
       </div>
@@ -149,39 +152,7 @@
                 @endforeach
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-heading" style="text-align: center">
-            <h4>Other Tasks <span class="badge">{{ collect(auth()->user()->others())->count() }}</span></h4>
-          </div>
-          <div class="panel-body">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <td style="text-align: center"><strong> Course </strong></td>
-                  <td style="text-align: center"><strong> Task Title </strong></td>
-                  <td style="text-align: center"><strong> Task Type </strong></td>
-                  <td style="text-align: center"><strong> Due Date </strong></td>
-                  <td style="text-align: center"></td>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach (auth()->user()->others() as $other)
-                  <tr>
-                    <td style="text-align: center">{{ \App\Course::find($other->course_id)->subject . ' ' . \App\Course::find($other->course_id)->course_number }}</td>
-                    <td style="text-align: center">{{ $other->title }}</td>
-                    <td style="text-align: center">{{ $other->type }}</td>
-                    <td style="text-align: center">{{ $other->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $other->id }}">View</a></td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
+            <center><a class="btn btn-danger" href="#">View Past Due</a></center>
           </div>
         </div>
       </div>
