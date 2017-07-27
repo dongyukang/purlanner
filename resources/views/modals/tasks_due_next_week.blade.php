@@ -23,7 +23,7 @@
                     <td style="text-align: center">{{ ucwords(strtolower($task->type)) }}</td>
                     <td style="text-align: center">{{ $task->title }}</td>
                     <td style="text-align: center">{{ $task->due_date }}</td>
-                    <td style="text-align: center"><a class="btn btn-primary" href="#">View</a></td>
+                    <td style="text-align: center"><a class="btn btn-primary" href="/task/view/{{ $task->id }}">View</a></td>
                   </tr>
                 @endforeach
               </tbody>

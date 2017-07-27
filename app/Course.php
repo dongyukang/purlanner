@@ -24,4 +24,21 @@ class Course extends Model
     {
       return $this->belongsToMany('App\User');
     }
+
+    /**
+     * Get course id by subject, course number and title.
+     *
+     * @param string $subject
+     * @param string $course_number
+     * @param string $title
+     * @return integer
+     */
+    public function getCourseId($subject, $course_number, $title)
+    {
+      return $this->where('subject', $subject)
+                  ->where('course_number', $course_number)
+                  ->where('course_title', $course_title)
+                  ->first()
+                  ->id;
+    }
 }

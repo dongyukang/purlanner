@@ -17,8 +17,9 @@
               </li>
             </ul>
           </div>
-          <form role="form" class="form-horizontal" action="/task/create" method="POST">
+          <form role="form" class="form-horizontal" action="/task/edit/{{ $task->id }}" method="POST">
             {{ csrf_field() }}
+            {{ method_field('PUT') }}
 
             <div class="row">
               <div class="col-xs-1">
@@ -54,7 +55,7 @@
               <div class="col-xs-11">
                 <select class="form-control" name="course_id">
                   @foreach(auth()->user()->getCourses() as $course)
-                    <option value="{{ $course['Id'] }}">{{ $course['Subject'] . ' ' . $course['Number'] . ' ' . $course['Title'] }}</option>
+                    <option value="{{ $course['Id'] }}" @if ($course['Id'] == $task->course_id) {{ 'selected' }} @endif>{{ $course['Subject'] . ' ' . $course['Number'] . ' ' . $course['Title'] }}</option>
                   @endforeach
                 </select>
               </div>
@@ -65,7 +66,7 @@
               </div>
               <div class="col-xs-11">
                 <div class="input-group date">
-                  <input type="text" name="due_date" class="form-control" value="{{ \Carbon\Carbon::parse($task->due_date)->format('m-d-Y') }}" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                  <input type="text" name="due_date" class="form-control" value="{{ \Carbon\Carbon::parse($task->due_date)->format('m/d/Y') }}" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
               </div>
             </div>

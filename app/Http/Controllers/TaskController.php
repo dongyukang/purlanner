@@ -63,6 +63,28 @@ class TaskController extends Controller
   }
 
   /**
+   * Edit Task.
+   *
+   * @param  Request $request
+   */
+  public function editTask(Request $request, $task_id)
+  {
+    $user = auth()->user()->tasks()->find($task_id);
+
+    $user->title = $request->get('title');
+    $user->type = $request->get('type');
+    $user->course_id = $request->get('course_id');
+    $user->location = $request->get('location');
+    $user->due_date = \Carbon\Carbon::parse($request->get('due_date'))->format('Y-m-d');
+    $user->note = $request->get('note');
+
+    if ($user->save()) {
+      return redirect('/task');
+    }
+
+  }
+
+  /**
    * Save custom type to database.
    */
   public function saveCustomTypes(Request $request)
