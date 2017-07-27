@@ -18,6 +18,10 @@ class TaskController extends Controller
    */
   public function index()
   {
+    if (auth()->user()->courses()->count() == 0) {
+      return redirect('/settings');
+    }
+
     return view('home');
   }
 

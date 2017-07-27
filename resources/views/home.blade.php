@@ -7,7 +7,7 @@
 
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center; background-color: white;">
-        <h4>Today's Date at Purdue: {{ \Carbon\Carbon::today('EST')->toFormattedDateString() }}</h4>
+        <h4>Today's Date: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }}</h4>
       </div>
     </div>
 

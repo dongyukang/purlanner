@@ -36,9 +36,9 @@
                   @endforeach
                 </select>
               </div>
-              <div class="col-xs-5">
+              {{-- <div class="col-xs-5">
                 <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a>
-              </div>
+              </div> --}}
             </div>
             <div class="row">
               <div class="col-xs-1">

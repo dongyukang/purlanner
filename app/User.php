@@ -289,7 +289,7 @@ class User extends Authenticatable
      */
     public function tasksDueTomorrow()
     {
-      return $this->tasks()->whereDate('due_date', Carbon::tomorrow('EST'))->get();
+      return $this->tasks()->whereDate('due_date', Carbon::parse(date('m/d/Y'))->addDay(1))->get();
     }
 
     /**
@@ -300,8 +300,8 @@ class User extends Authenticatable
     public function tasksDueThisWeek()
     {
       return $this->tasks()
-                  ->whereDate('due_date', '>=', Carbon::today('EST'))
-                  ->whereDate('due_date', '<=', Carbon::today('EST')->endOfWeek())
+                  ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y')))
+                  ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->endOfWeek())
                   ->orderBy('due_date', 'asc')
                   ->get();
     }
@@ -314,8 +314,8 @@ class User extends Authenticatable
     public function tasksDueNextWeek()
     {
       return $this->tasks()
-                  ->whereDate('due_date', '>=', Carbon::today('EST')->addWeek(1))
-                  ->whereDate('due_date', '<=', Carbon::today('EST')->addWeek(1)->endOfWeek())
+                  ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek())
+                  ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek()->endOfWeek())
                   ->orderBy('due_date', 'asc')
                   ->get();
     }
