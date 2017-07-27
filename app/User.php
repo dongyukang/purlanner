@@ -89,50 +89,50 @@ class User extends Authenticatable
      *
      * @return array
      */
-    public function exams()
-    {
-      return $this->tasks()->where('type', 'exam')->orderBy('due_date', 'asc')->get();
-    }
+    // public function exams()
+    // {
+    //   return $this->tasks()->where('type', 'exam')->orderBy('due_date', 'asc')->get();
+    // }
 
     /**
      * Return assignments that user has.
      *
      * @return array
      */
-    public function assignments()
-    {
-      return $this->tasks()->where('type', 'assignment')->orderBy('due_date', 'asc')->get();
-    }
+    // public function assignments()
+    // {
+    //   return $this->tasks()->where('type', 'assignment')->orderBy('due_date', 'asc')->get();
+    // }
 
     /**
      * Get user's papers.
      *
      * @return array
      */
-    public function papers()
-    {
-      return $this->tasks()->where('type', 'paper')->orderBy('due_date', 'asc')->get();
-    }
+    // public function papers()
+    // {
+    //   return $this->tasks()->where('type', 'paper')->orderBy('due_date', 'asc')->get();
+    // }
 
     /**
      * Return user's projects.
      *
      * @return array
      */
-    public function projects()
-    {
-      return $this->tasks()->where('type', 'project')->orderBy('due_date', 'asc')->get();
-    }
+    // public function projects()
+    // {
+    //   return $this->tasks()->where('type', 'project')->orderBy('due_date', 'asc')->get();
+    // }
 
     /**
      * Get tasks of types that are not exams, assignments, papers and projects.
      *
      * @return array
      */
-    public function others()
-    {
-      return collect($this->tasks()->get())->whereNotIn('type', ['exam', 'assignment', 'paper', 'project'])->all();
-    }
+    // public function others()
+    // {
+    //   return collect($this->tasks()->get())->whereNotIn('type', ['exam', 'assignment', 'paper', 'project'])->all();
+    // }
 
     /**
      * Make sure that user belongs to term.

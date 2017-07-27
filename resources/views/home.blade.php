@@ -33,7 +33,7 @@
           <a class="btn btn-success btn-block" style="padding: 12px" href="{{ route('create_task') }}"><span style="font-size: 18px;">New Task <span class="glyphicon glyphicon-plus"></span></span></a>
       </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-xs-6">
         <div class="panel panel-default">
           <div class="panel-heading" style="text-align: center">
@@ -156,6 +156,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 @endsection

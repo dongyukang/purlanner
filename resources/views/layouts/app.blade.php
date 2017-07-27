@@ -54,15 +54,18 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                  {{ Auth::user()->name }}<span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu" style="text-align: center">
+                                <ul class="dropdown-menu" role="menu">
                                     {{-- <li>
                                       <a href="{{ route('api') }}">API</a>
                                     </li> --}}
                                     <li>
                                       <a href="{{ route('settings') }}">Settings</a>
+                                    </li>
+                                    <li>
+                                      <a href="{{ route('custom_type') }}">Manage Type</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
