@@ -6,12 +6,18 @@
     @include('task_summary_dashboard')
 
     <div class="panel panel-default">
+      <div class="panel-heading" style="text-align: center; background-color: white;">
+        <h4>Today's Date at Purdue: {{ \Carbon\Carbon::today('EST')->toFormattedDateString() }}</h4>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
         <div class="row">
-          <div class="panel-heading" style="margin-top: -20px; text-align: left">
+          <div class="panel-heading" style="margin-top: -20px; text-align: left;">
              <h3> My Courses </h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" style="background-color: white">
             <form role="form" action="/" method="POST">
               {{ csrf_field() }}
               <button type="submit" class="btn btn-primary">All</button>
@@ -25,11 +31,6 @@
         </div>
         <hr />
           <a class="btn btn-success btn-block" style="padding: 12px" href="{{ route('create_task') }}"><span style="font-size: 18px;">New Task <span class="glyphicon glyphicon-plus"></span></span></a>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading" style="text-align: center">
-        <h4>Today's Date at Purdue: {{ \Carbon\Carbon::today('EST')->toFormattedDateString() }}</h4>
       </div>
     </div>
     <div class="row">

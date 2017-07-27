@@ -10,9 +10,9 @@
       </div>
       <div class="panel-body">
         <div class="container">
-          <div class="alert alert-info" role="alert">
+          <div class="alert alert-danger" role="alert">
             <ul>
-              <li>
+              <li style="font-size: 15px;">
                 Every field is required except Location and Note.
               </li>
             </ul>

@@ -40,9 +40,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                      <li><a href="{{ route('task') }}">1. Write Tasks</a></li>
-                      <li><a href="{{ route('sub-task') }}">2. Write Sub-Tasks For Each Task</a></li>
-                      <li><a href="">3. Look At The Whole Picture</a></li>
+                      <li><a href="{{ route('task') }}" style="color: black">1. Write Tasks</a></li>
+                      <li><a href="{{ route('sub-task') }}" style="color: black">2. Write Sub-Tasks For Each Task</a></li>
+                      <li><a href="" style="color: black">3. Look At The Whole Picture</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

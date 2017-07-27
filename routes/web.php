@@ -23,6 +23,7 @@ Route::get('/task', 'TaskController@index')->name('task');
 Route::get('/task/view/{id}', 'TaskController@showTask');
 Route::get('/task/create', 'TaskController@create')->name('create_task');
 Route::post('/task/create', 'TaskController@assignTask');
+Route::get('/task/delete/{task_id}', 'TaskController@deleteTask'); // delete task
 Route::get('/task/type', 'TaskController@showCustomTypes')->name('custom_type');
 Route::get('/task/type/create', 'TaskController@showCreateCustomTypes')->name('create_custom_type');
 Route::post('/task/type/create', 'TaskController@saveCustomTypes')->name('save_custom_type');

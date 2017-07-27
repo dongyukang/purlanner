@@ -57,7 +57,9 @@ class TaskController extends Controller
    */
   public function showTask($id)
   {
-    return view('tasks.view');
+    return view('tasks.view', [
+      'task' => auth()->user()->tasks()->find($id)
+    ]);
   }
 
   /**
@@ -94,6 +96,18 @@ class TaskController extends Controller
     auth()->user()->assignTask($request->all());
 
     return redirect('/task');
+  }
+
+  /**
+   * Delete Task.
+   *
+   * @param  Request $request
+   */
+  public function deleteTask($task_id)
+  {
+    if (auth()->user()->tasks()->find($task_id)->delete()) {
+      return redirect('/task');
+    }
   }
 
   /**
