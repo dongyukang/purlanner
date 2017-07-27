@@ -32,7 +32,7 @@
                   <option value="paper" @if ($task->type == "paper") {{ 'selected '}} @endif>Paper</option>
                   <option value="project" @if ($task->type == "project") {{ 'selected '}} @endif>Project</option>
                   @foreach(auth()->user()->types()->get() as $type)
-                    <option value="{{ $type->type_name }}">{{ $type->type_name }}</option>
+                    <option value="{{ $type->type_name }}" @if ($type->type_name == $task->type) {{ 'selected' }} @endif>{{ $type->type_name }}</option>
                   @endforeach
                 </select>
               </div>
