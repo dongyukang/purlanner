@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <a class="btn btn-primary" href="{{ route('create_task') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to Add Task</a>
+    <a class="btn btn-primary" href="{{ route('task') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to My Tasks</a>
     <hr />
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -20,7 +20,7 @@
           <tbody>
             @foreach(auth()->user()->types()->get() as $type)
               <tr>
-                <td>{{ $type->type_name }}</td>
+                <td>{{ ucwords(strtolower($type->type_name)) }}</td>
                 <td><a class="btn btn-danger" href="/task/type/{{ $type->id }}">Delete</a></td>
               </tr>
             @endforeach

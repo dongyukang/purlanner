@@ -85,56 +85,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Return exams that user has.
-     *
-     * @return array
-     */
-    // public function exams()
-    // {
-    //   return $this->tasks()->where('type', 'exam')->orderBy('due_date', 'asc')->get();
-    // }
-
-    /**
-     * Return assignments that user has.
-     *
-     * @return array
-     */
-    // public function assignments()
-    // {
-    //   return $this->tasks()->where('type', 'assignment')->orderBy('due_date', 'asc')->get();
-    // }
-
-    /**
-     * Get user's papers.
-     *
-     * @return array
-     */
-    // public function papers()
-    // {
-    //   return $this->tasks()->where('type', 'paper')->orderBy('due_date', 'asc')->get();
-    // }
-
-    /**
-     * Return user's projects.
-     *
-     * @return array
-     */
-    // public function projects()
-    // {
-    //   return $this->tasks()->where('type', 'project')->orderBy('due_date', 'asc')->get();
-    // }
-
-    /**
-     * Get tasks of types that are not exams, assignments, papers and projects.
-     *
-     * @return array
-     */
-    // public function others()
-    // {
-    //   return collect($this->tasks()->get())->whereNotIn('type', ['exam', 'assignment', 'paper', 'project'])->all();
-    // }
-
-    /**
      * Make sure that user belongs to term.
      *
      * @return boolean
@@ -157,16 +107,68 @@ class User extends Authenticatable
     }
 
     /**
+     * Create default types. Exam, Assignment, Paper, Project
+     *
+     * @return boolean
+     */
+    protected function createDefaultTypes()
+    {
+      /**
+       * 'Exam' default type.
+       *
+       * @var $exam
+       */
+      $exam = $this->types()->create([
+        'type_name' => 'exam'
+      ]);
+
+      /**
+       * 'Assignment' default type.
+       *
+       * @var $assignment
+       */
+      $assignment = $this->types()->create([
+        'type_name' => 'assignment'
+      ]);
+
+      /**
+       * 'Paper' default type.
+       *
+       * @var $paper
+       */
+      $paper = $this->types()->create([
+        'type_name' => 'paper'
+      ]);
+
+      /**
+       * 'Project' default type.
+       *
+       * @var $project
+       */
+      $project = $this->types()->create([
+        'type_name' => 'project'
+      ]);
+
+      if ($exam != null && $assignment != null && $paper != null && $project != null) return true;
+
+      return false;
+    }
+
+    /**
      * Set Term Id
      *
-     * @param String TermId
-     * @return Boolean Saved
+     * @param string $term_id
+     * @return boolean
      */
     public function setTermId($term_id)
     {
       $this->term_id = $term_id;
 
-      return $this->save();
+      if ($this->save() && $this->createDefaultTypes()) {
+        return true;
+      }
+
+      return false;
     }
 
     /**
@@ -283,12 +285,24 @@ class User extends Authenticatable
     }
 
     /**
+     * Set time zone.
+     *
+     * @param string $timezone
+     */
+    protected function setTimeZone($timezone)
+    {
+      date_default_timezone_set($timezone);
+    }
+
+    /**
      * Tasks due tomorrow.
      *
      * @return array
      */
     public function tasksDueTomorrow()
     {
+      $this->setTimeZone('EST');
+
       return $this->tasks()->whereDate('due_date', Carbon::parse(date('m/d/Y'))->addDay(1))->get();
     }
 
@@ -299,6 +313,8 @@ class User extends Authenticatable
      */
     public function tasksDueThisWeek()
     {
+      $this->setTimeZone('EST');
+
       return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y')))
                   ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->endOfWeek())
@@ -313,6 +329,8 @@ class User extends Authenticatable
      */
     public function tasksDueNextWeek()
     {
+      $this->setTimeZone('EST');
+
       return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek())
                   ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek()->endOfWeek())

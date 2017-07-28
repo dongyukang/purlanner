@@ -97,19 +97,19 @@ class TaskController extends Controller
       'type_name' => 'required'
     ]);
 
-    if (strcasecmp($request->get('type_name'), 'Exam') != 0 && strcasecmp($request->get('type_name'), 'Paper') != 0 &&
-        strcasecmp($request->get('type_name'), 'Project') != 0 && strcasecmp($request->get('type_name'), 'Assignment') != 0 &&
-        collect(auth()->user()->types()->get())->where('type_name', $request->get('type_name'))->first() == null) {
-      $saveType = auth()->user()->types()->create([
-        'type_name' => ucwords(strtolower($request->get('type_name')))
+    $type_name = strtolower($request->get('type_name'));
+
+    if (!auth()->user()->types()->where('type_name', $type_name)->exists()) {
+      $type_created = auth()->user()->types()->create([
+        'type_name' => $type_name
       ]);
 
-      if ($saveType != null) {
+      if ($type_created != null) {
         return redirect('/task/type');
       }
     }
 
-    return redirect()->back();
+    return 'already exists';
   }
 
   /**
