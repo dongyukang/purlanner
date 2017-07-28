@@ -155,6 +155,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Count number of tasks of given type name.
+     *
+     * @param string $type_name
+     * @return integer
+     */
+    public function countTask($type_name)
+    {
+      return $this->tasks()->where('type', strtolower($type_name))->count();
+    }
+
+    /**
      * Set Term Id
      *
      * @param string $term_id
@@ -301,7 +312,7 @@ class User extends Authenticatable
      */
     public function tasksDueTomorrow()
     {
-      $this->setTimeZone('EST');
+      $this->setTimeZone("America/New_York");
 
       return $this->tasks()->whereDate('due_date', Carbon::parse(date('m/d/Y'))->addDay(1))->get();
     }
@@ -313,7 +324,7 @@ class User extends Authenticatable
      */
     public function tasksDueThisWeek()
     {
-      $this->setTimeZone('EST');
+      $this->setTimeZone("America/New_York");
 
       return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y')))
@@ -329,7 +340,7 @@ class User extends Authenticatable
      */
     public function tasksDueNextWeek()
     {
-      $this->setTimeZone('EST');
+      $this->setTimeZone("America/New_York");
 
       return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek())

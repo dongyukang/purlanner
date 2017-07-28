@@ -26,17 +26,14 @@
               </div>
               <div class="col-xs-5">
                 <select class="form-control" name="type">
-                  <option value="exam" selected>Exam</option>
-                  <option value="assignment">Assignment</option>
-                  <option value="paper">Paper</option>
-                  <option value="project">Project</option>
                   @foreach(auth()->user()->types()->get() as $type)
-                    <option value="{{ $type->type_name }}">{{ $type->type_name }}</option>
+                    <option value="{{ $type->type_name }}">{{ ucwords(strtolower($type->type_name)) }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="col-xs-5">
                 <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a>
+                {{-- * You can manage types <a href="{{ route('custom_type') }}">here</a> --}}
               </div>
             </div>
             <div class="row">

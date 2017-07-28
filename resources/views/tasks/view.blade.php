@@ -27,12 +27,8 @@
               </div>
               <div class="col-xs-5">
                 <select class="form-control" name="type">
-                  <option value="exam" @if ($task->type == "exam") {{ 'selected '}} @endif>Exam</option>
-                  <option value="assignment" @if ($task->type == "assignment") {{ 'selected '}} @endif>Assignment</option>
-                  <option value="paper" @if ($task->type == "paper") {{ 'selected '}} @endif>Paper</option>
-                  <option value="project" @if ($task->type == "project") {{ 'selected '}} @endif>Project</option>
                   @foreach(auth()->user()->types()->get() as $type)
-                    <option value="{{ $type->type_name }}" @if ($type->type_name == $task->type) {{ 'selected' }} @endif>{{ $type->type_name }}</option>
+                    <option value="{{ $type->type_name }}" @if ($type->type_name == $task->type) {{ 'selected' }} @endif>{{ ucwords(strtolower($type->type_name)) }}</option>
                   @endforeach
                 </select>
               </div>

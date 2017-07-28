@@ -7,8 +7,8 @@
 
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center; background-color: white;">
-        <?php date_default_timezone_set('EST'); ?>
-        <h4>Today's Date: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }}</h4>
+        <?php date_default_timezone_set("America/New_York"); ?>
+        <h4>Today's Date in Purdue: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }}</h4>
       </div>
     </div>
 
@@ -36,15 +36,40 @@
     </div>
 
     @foreach (auth()->user()->types()->get() as $type)
-      <div class="col-xs-6">
-        <div class="panel panel-default">
-          <div class="panel-heading" style="text-align: center">
-            <h4> {{ ucwords(strtolower($type->type_name)) }} <span class="badge"></span></h4>
-          </div>
-          <div class="panel-body">
+        <div class="col-xs-6">
+          <div class="panel panel-default">
+            <div class="panel-heading" style="text-align: center">
+              <h4> {{ ucwords(strtolower($type->type_name)) }} <span class="badge">{{ auth()->user()->countTask($type->type_name) }}</span></h4>
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <td style="text-align: center">Course</td>
+                    <td style="text-align: center">Title</td>
+                    <td style="text-align: center">Due Date</td>
+                    <td style="text-align: center"></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach (auth()->user()->tasks()->where('type', $type->type_name)->get() as $task)
+                    <tr>
+                      <td style="text-align: center"></td>
+                      <td style="text-align: center">{{ $task->title }}</td>
+                      <td style="text-align: center"></td>
+                      <td style="text-align: center">
+                        <a class="btn btn-primary" href="">View</a>
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              <center>
+                <a class="btn btn-danger" href="#">Past Due Archive</a>
+              </center>
+            </div>
           </div>
         </div>
-      </div>
     @endforeach
   </div>
 @endsection

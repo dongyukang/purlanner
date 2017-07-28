@@ -18,10 +18,12 @@ class TaskController extends Controller
    */
   public function index()
   {
+    // if no courses are set to user, then make the user to set course first.
     if (auth()->user()->courses()->count() == 0) {
       return redirect('/settings');
     }
 
+    // show my tasks.
     return view('home');
   }
 
