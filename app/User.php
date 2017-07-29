@@ -174,6 +174,31 @@ class User extends Authenticatable
     }
 
     /**
+     * Get tasks by course id.
+     *
+     * @param string $type_name
+     * @param string $course_id
+     * @return array
+     */
+    public function getTasksByCourse($type_name, $course_id)
+    {
+      if ($course_id == 'all') {
+        return $this
+                ->tasks()
+                ->where('type', $type->type_name)
+                ->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))
+                ->get();
+      }
+
+      return $this
+              ->tasks()
+              ->where('type', $type->type_name)
+              ->where('course_id', $course_id)
+              ->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))
+              ->get();
+    }
+
+    /**
      * Set Term Id
      *
      * @param string $term_id

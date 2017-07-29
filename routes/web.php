@@ -20,6 +20,7 @@ Route::get('/sub-task', 'AgendaController@index')->name('sub-task');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
 Route::get('/task', 'TaskController@index')->name('task');
+Route::get('/task/filter/{course_id}', 'TaskController@filterTask')->name('filter_task');
 Route::get('/task/view/{id}', 'TaskController@showTask');
 Route::get('/task/create', 'TaskController@create')->name('create_task');
 Route::post('/task/create', 'TaskController@assignTask');

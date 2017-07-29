@@ -95,28 +95,12 @@
 
         @yield('content')
     </div>
-    <hr width="60%"/>
+    <hr width="80%"/>
     <div class="container">
       <center>
         <div class="row" style="margin-bottom: 25px;">
           <center><h4 style="color: #a4a6a8">Purlanner</h4></center>
         </div>
-        <div class="row">
-          <div class="container">
-            <ul id="footer" style="list-style-type: none; font-size: 15px;">
-              <li style="display: inline; margin-right: 25px;">
-                <a href="{{ route('task') }}"> 1. Write Tasks </a>
-              </li>
-              <li style="display: inline; margin-right: 25px;">
-                <a href="{{ route('sub-task') }}"> 2. Write Sub-Tasks For Each Task </a>
-              </li>
-              <li style="display: inline; margin-right: 25px;">
-                <a href=""> 3. Look At The Whole Picutre </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
         <div class="row">
           <span style="font-size: 15px;">COPYRIGHT © DONGYU KANG.</span>
         </div>
