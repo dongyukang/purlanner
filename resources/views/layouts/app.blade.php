@@ -60,7 +60,7 @@
                             </li>
                             <li class="dropdown" style="margin-right: 10px; margin-top: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="font-size: 15px;">
-                                  {{ auth()->user()->name }}<span class="caret"></span>
+                                  {{ auth()->user()->firstname }}<span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
