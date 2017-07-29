@@ -39,17 +39,19 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                  @if (Route::current()->uri != 'login' && Route::current()->uri != 'register' && Route::current()->uri != 'password/reset')
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav" style="font-size: 15px; margin-top: 5px;">
                       <li><a href="{{ route('task') }}"  @if (Route::currentRouteName() == 'task') style="color: #f77456" @endif style="color: black">1. Write Tasks</a></li>
                       <li><a href="{{ route('sub-task') }}" @if (Route::currentRouteName() == 'sub-task') style="color: #f77456" @endif style="color: black">2. Write Sub-Tasks For Each Task</a></li>
                       <li><a href="" style="color: black">3. Look At The Whole Picture</a></li>
                     </ul>
+                  @endif
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
+                        @if (auth()->guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
@@ -58,7 +60,7 @@
                             </li>
                             <li class="dropdown" style="margin-right: 10px; margin-top: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="font-size: 15px;">
-                                  {{ Auth::user()->name }}<span class="caret"></span>
+                                  {{ auth()->user()->name }}<span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
