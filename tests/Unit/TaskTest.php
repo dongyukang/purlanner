@@ -43,24 +43,4 @@ class TaskTest extends TestCase
 
       $this->assertTrue($response);
     }
-
-    /** @test */
-    public function count_type_exams_if_there_are_two_exams()
-    {
-      $task = [
-        'title' => 'fake title',
-        'type' => 'exam',
-        'course_id' => factory(\App\Course::class)->create()->id,
-        'location' => 'some classroom',
-        'note' => 'some note',
-        'due_date' => Carbon::tomorrow()
-      ];
-
-      $this->user()->assignTask($task);
-      $this->user()->assignTask($task);
-
-      $response = collect($this->user()->exams())->count();
-
-      $this->assertEquals(2, $response);
-    }
 }

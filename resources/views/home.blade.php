@@ -34,9 +34,9 @@
           <a class="btn btn-success btn-block" style="padding: 12px" href="{{ route('create_task') }}"><span style="font-size: 18px;">New Task <span class="glyphicon glyphicon-plus"></span></span></a>
       </div>
     </div>
-
-    @foreach (auth()->user()->types()->get() as $type)
-        <div class="col-xs-6">
+    <div class="container">
+      @foreach (auth()->user()->types()->get() as $type)
+        <div class="col-xs-12">
           <div class="panel panel-default">
             <div class="panel-heading" style="text-align: center">
               <h4> {{ ucwords(strtolower($type->type_name)) }} <span class="badge">{{ auth()->user()->countTask($type->type_name) }}</span></h4>
@@ -52,13 +52,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach (auth()->user()->tasks()->where('type', $type->type_name)->get() as $task)
+                  @foreach (auth()->user()->tasks()->where('type', $type->type_name)->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))->get() as $task)
                     <tr>
-                      <td style="text-align: center"></td>
+                      <td style="text-align: center">{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}</td>
                       <td style="text-align: center">{{ $task->title }}</td>
-                      <td style="text-align: center"></td>
+                      <td style="text-align: center">{{ $task->due_date }}</td>
                       <td style="text-align: center">
-                        <a class="btn btn-primary" href="">View</a>
+                        <a class="btn btn-primary" href="/task/view/{{ $task->id }}">View</a>
                       </td>
                     </tr>
                   @endforeach
@@ -70,6 +70,8 @@
             </div>
           </div>
         </div>
-    @endforeach
+      @endforeach
+    </div>
   </div>
+
 @endsection

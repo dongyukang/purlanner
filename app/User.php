@@ -65,6 +65,14 @@ class User extends Authenticatable
     }
 
     /**
+     * User belongs to
+     */
+    public function notifications()
+    {
+
+    }
+
+    /**
      * Assign task to user.
      *
      * @param  array $data
@@ -111,7 +119,7 @@ class User extends Authenticatable
      *
      * @return boolean
      */
-    protected function createDefaultTypes()
+    public function createDefaultTypes()
     {
       /**
        * 'Exam' default type.
@@ -175,7 +183,7 @@ class User extends Authenticatable
     {
       $this->term_id = $term_id;
 
-      if ($this->save() && $this->createDefaultTypes()) {
+      if ($this->save()) {
         return true;
       }
 

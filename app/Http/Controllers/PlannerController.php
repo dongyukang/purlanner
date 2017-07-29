@@ -35,7 +35,6 @@ class PlannerController extends Controller
       $isAgendaEmpty = auth()->user()->agendas()->count() == 0 ? true : false;
 
       return redirect('/task');
-
     }
   }
 
