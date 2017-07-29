@@ -73,8 +73,8 @@ class TaskController extends Controller
    */
   public function filterTask($course_id)
   {
-    return view('tasks.filter', [
-      'tasksByCourse' => auth()->user()->tasks()->where('course_id', $course_id)
+    return view('home', [
+      'course_id' => $course_id
     ]);
   }
 
