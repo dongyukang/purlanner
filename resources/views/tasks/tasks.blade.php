@@ -15,7 +15,7 @@
             </tr>
           </thead>
           <tbody>
-            @foreach (auth()->user()->tasks()->where('type', $type->type_name)->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))->get() as $task)
+            @foreach (auth()->user()->tasks()->where('type', $type->type_name)->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))->orderBy('due_date', 'asc')->get() as $task)
               <tr>
                 <td style="text-align: center">{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}</td>
                 <td style="text-align: center">{{ $task->title }}</td>
