@@ -20,10 +20,10 @@
           </div>
           <div class="panel-body" style="background-color: white">
 
-            <a href="{{ route('task') }}" class="btn btn-default">All</a>
+            <a href="{{ route('task') }}" @if (Route::currentRouteName() == 'task') class="btn btn-primary" @else class="btn btn-default" @endif>All</a>
 
             @foreach(auth()->user()->getCourses() as $course)
-              <a href="/task/filter/{{ $course['Id'] }}" class="btn btn-default">{{ $course['Subject'] . ' ' . $course['Number'] }}</a>
+              <a href="/task/filter/{{ $course['Id'] }}" @if (Route::currentRouteName() == 'filter_task' && $course['Id'] == $course_id) class="btn btn-primary" @else class="btn btn-default" @endif >{{ $course['Subject'] . ' ' . $course['Number'] }}</a>
             @endforeach
 
           </div>
@@ -34,55 +34,28 @@
     </div>
 
     <div class="container">
-      @foreach (auth()->user()->types()->get() as $type)
-        <div class="col-xs-12">
-          <div class="panel panel-default">
-            <div class="panel-heading" style="text-align: center">
-              <h4> {{ ucwords(strtolower($type->type_name)) }}</h4>
-            </div>
-            <div class="panel-body">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <td style="text-align: center">Course</td>
-                    <td style="text-align: center">Title</td>
-                    <td style="text-align: center">Due Date</td>
-                    <td style="text-align: center"></td>
-                  </tr>
-                </thead>
-                <tbody>
-                  @if (Route::currentRouteName() == 'filter_task')
-                    @foreach (auth()->user()->tasks()->where('type', $type->type_name)->where('course_id', $course_id)->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))->get() as $task)
-                      <tr>
-                        <td style="text-align: center">{{ \App\Course::find($course_id)->subject . ' ' . \App\Course::find($course_id)->course_number }}</td>
-                        <td style="text-align: center">{{ $task->title }}</td>
-                        <td style="text-align: center">{{ $task->due_date }}</td>
-                        <td style="text-align: center">
-                          <a class="btn btn-primary" href="/task/view/{{ $task->id }}">View</a>
-                        </td>
-                      </tr>
-                    @endforeach
-                  @else
-                    @foreach (auth()->user()->tasks()->where('type', $type->type_name)->whereDate('due_date', '>=', \Carbon\Carbon::parse(date("m/d/Y")))->get() as $task)
-                      <tr>
-                        <td style="text-align: center">{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}</td>
-                        <td style="text-align: center">{{ $task->title }}</td>
-                        <td style="text-align: center">{{ $task->due_date }}</td>
-                        <td style="text-align: center">
-                          <a class="btn btn-primary" href="/task/view/{{ $task->id }}">View</a>
-                        </td>
-                      </tr>
-                    @endforeach
-                  @endif
-                </tbody>
-              </table>
-              <center>
-                <a class="btn btn-danger" href="#">Past Due Archive</a>
-              </center>
-            </div>
-          </div>
-        </div>
-      @endforeach
+      @if (Route::currentRouteName() == 'task')
+        @if (collect(auth()->user()->getNoneZeroTypes())->count() > 0)
+          @include('tasks.tasks', [
+            'types' => auth()->user()->getNoneZeroTypes()
+          ])
+        @else
+          <center>
+            <h4>Congradulations! You are not currently busy.</h4>
+          </center>
+        @endif
+      @elseif (Route::currentRouteName() == 'filter_task')
+        @if (collect(auth()->user()->getNoneZeroTypes($course_id))->count() > 0)
+          @include('tasks.filter', [
+            'types' => auth()->user()->getNoneZeroTypes($course_id),
+            'course_id' => $course_id
+          ])
+        @else
+          <center>
+            <h4>Congradulations! You are not currently busy with this course.</h4>
+          </center>
+        @endif
+      @endif
     </div>
   </div>
 

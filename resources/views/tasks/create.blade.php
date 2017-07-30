@@ -32,8 +32,8 @@
                 </select>
               </div>
               <div class="col-xs-5">
-                <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a>
-                {{-- * You can manage types <a href="{{ route('custom_type') }}">here</a> --}}
+                {{-- <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a> --}}
+                * You can manage types <a href="{{ route('custom_type') }}">here</a>
               </div>
             </div>
             <div class="row">

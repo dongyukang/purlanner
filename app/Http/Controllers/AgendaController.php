@@ -21,7 +21,7 @@ class AgendaController extends Controller
    */
   public function index()
   {
-    if (auth()->user()->tasks()->count() == 0) {
+    if (collect(auth()->user()->getNoneZeroTypes())->count() == 0) {
       return redirect('/task');
     }
 

@@ -164,13 +164,51 @@ class User extends Authenticatable
 
     /**
      * Count number of tasks of given type name.
+     * If tasks are past due, then it should not count as valid task.
      *
      * @param string $type_name
      * @return integer
      */
-    public function countTask($type_name)
+    public function countTask($type_name, $course_id = null)
     {
-      return $this->tasks()->where('type', strtolower($type_name))->count();
+      date_default_timezone_set("America/New_York");
+
+      if ($course_id != null) {
+        return $this
+              ->tasks()
+              ->where('course_id', $course_id)
+              ->where('type', strtolower($type_name))
+              ->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))
+              ->count();
+      }
+
+      return $this
+            ->tasks()
+            ->where('type', strtolower($type_name))
+            ->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))
+            ->count();
+    }
+
+    /**
+     * Get types that have more than zero tasks.
+     * If tasks are past due, then it should not count as task.
+     *
+     * @param integer $course_id
+     * @return array
+     */
+    public function getNoneZeroTypes($course_id = null)
+    {
+      date_default_timezone_set("America/New_York");
+
+      if ($course_id == null) {
+        return collect($this->types()->get())->filter(function ($value, $key) {
+          return $this->countTask($value->type_name) > 0;
+        })->all();
+      }
+
+      return collect($this->tasks()->where('course_id', $course_id)->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))->pluck('type')->unique()->all())->filter(function ($value, $key) {
+        return $this->countTask($value) > 0;
+      })->all();
     }
 
     /**
