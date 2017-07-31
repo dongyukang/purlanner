@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <a class="btn btn-primary" href="{{ route('/task') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+    <a class="btn btn-primary" href="{{ route('task') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
     <hr />
     <div class="panel panel-danger">
       <div class="panel-heading">
