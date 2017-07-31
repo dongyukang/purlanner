@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <a class="btn btn-primary" href="{{ route('planner') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to My Tasks</a>
+    <a class="btn btn-primary" href="{{ url()->previous() }}"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
     <hr />
     <div class="panel panel-default">
       <div class="panel-heading">

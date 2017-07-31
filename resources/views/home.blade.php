@@ -39,6 +39,11 @@
           @include('tasks.tasks', [
             'types' => auth()->user()->getNoneZeroTypes()
           ])
+
+          <div style="text-align: center">
+            <a class="btn btn-danger" href="{{ route('past_due_archives') }}">Past Due Archives</a>
+          </div>
+
         @else
           <center>
             <h4>Congradulations! You are not currently busy.</h4>

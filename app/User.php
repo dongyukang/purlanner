@@ -212,6 +212,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get past due archives.
+     *
+     * @return array
+     */
+    public function getPastDueArchives()
+    {
+
+    }
+
+    /**
      * Set Term Id
      *
      * @param string $term_id

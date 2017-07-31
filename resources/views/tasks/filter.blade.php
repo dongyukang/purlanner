@@ -27,9 +27,6 @@
             @endforeach
           </tbody>
         </table>
-        <center>
-          <a class="btn btn-danger" href="#">Past Due Archive</a>
-        </center>
       </div>
     </div>
   </div>

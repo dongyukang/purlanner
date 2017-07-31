@@ -69,6 +69,20 @@ class TaskController extends Controller
   }
 
   /**
+   * Show past archives view.
+   *
+   * @return view
+   */
+  public function showPastArchives()
+  {
+    date_default_timezone_set("America/New_York");
+
+    return view('tasks.past_due', [
+      'tasks' => auth()->user()->tasks()->whereDate('due_date', '<', \Carbon\Carbon::parse(date("m/d/Y")))->orderBy('due_date', 'dec')->paginate(10)
+    ]);
+  }
+
+  /**
    * Filter task by course id.
    */
   public function filterTask($course_id)
