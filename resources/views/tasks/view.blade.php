@@ -86,7 +86,7 @@
             <center>
               <button type="submit" class="btn btn-success">Save</button>
               <a href="/task/delete/{{ $task->id }}" class="btn btn-warning">Delete</a>
-              <a class="btn btn-danger" href="{{ route('planner') }}">Cancel</a>
+              <a class="btn btn-danger" href="{{ url()->previous() }}">Cancel</a>
             </center>
           </form>
         </div>

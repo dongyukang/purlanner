@@ -13,7 +13,7 @@
           <div class="alert alert-danger" role="alert">
             <ul>
               <li style="font-size: 15px;">
-                Every field is required except Location and Note.
+                Every field is required except <u>Location</u> and <u>Note</u>.
               </li>
             </ul>
           </div>
@@ -22,7 +22,19 @@
 
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Type </h5></label>
+                <label><h5> Course(*) </h5></label>
+              </div>
+              <div class="col-xs-11">
+                <select class="form-control" name="course_id">
+                  @foreach(auth()->user()->getCourses() as $course)
+                    <option value="{{ $course['Id'] }}">{{ $course['Subject'] . ' ' . $course['Number'] . ' ' . $course['Title'] }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-1">
+                <label><h5> Type(*) </h5></label>
               </div>
               <div class="col-xs-5">
                 <select class="form-control" name="type">
@@ -38,32 +50,20 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Title </h5></label>
-              </div>
-              <div class="col-xs-11">
-                <input class="form-control" name="title" placeholder="Task Title" required>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-1">
-                <label><h5> Course </h5></label>
-              </div>
-              <div class="col-xs-11">
-                <select class="form-control" name="course_id">
-                  @foreach(auth()->user()->getCourses() as $course)
-                    <option value="{{ $course['Id'] }}">{{ $course['Subject'] . ' ' . $course['Number'] . ' ' . $course['Title'] }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-1">
-                <label><h5> Due Date </h5></label>
+                <label><h5> Date(*) </h5></label>
               </div>
               <div class="col-xs-11">
                 <div class="input-group date">
-                  <input type="text" name="due_date" class="form-control" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                  <input type="text" name="due_date" class="form-control" placeholder="When will it happen? or When is it due?" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-1">
+                <label><h5> Title(*) </h5></label>
+              </div>
+              <div class="col-xs-11">
+                <input class="form-control" name="title" placeholder="Brief description about this task. ex) Read chapter 2." required>
               </div>
             </div>
             <div class="row">
