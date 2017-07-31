@@ -13,7 +13,7 @@
           <div class="alert alert-danger" role="alert">
             <ul>
               <li style="font-size: 15px;">
-                Every field is required except <u>Location</u> and <u>Note</u>.
+                Every field is required except Location and Note.
               </li>
             </ul>
           </div>

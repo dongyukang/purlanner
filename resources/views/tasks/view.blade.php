@@ -23,30 +23,7 @@
 
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Type </h5></label>
-              </div>
-              <div class="col-xs-5">
-                <select class="form-control" name="type">
-                  @foreach(auth()->user()->types()->get() as $type)
-                    <option value="{{ $type->type_name }}" @if ($type->type_name == $task->type) {{ 'selected' }} @endif>{{ ucwords(strtolower($type->type_name)) }}</option>
-                  @endforeach
-                </select>
-              </div>
-              {{-- <div class="col-xs-5">
-                <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a>
-              </div> --}}
-            </div>
-            <div class="row">
-              <div class="col-xs-1">
-                <label><h5> Title </h5></label>
-              </div>
-              <div class="col-xs-11">
-                <input class="form-control" name="title" placeholder="Task Title" value="{{ $task->title }}" required>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-1">
-                <label><h5> Course </h5></label>
+                <label><h5> Course(*) </h5></label>
               </div>
               <div class="col-xs-11">
                 <select class="form-control" name="course_id">
@@ -58,12 +35,32 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Due Date </h5></label>
+                <label><h5> Type(*) </h5></label>
+              </div>
+              <div class="col-xs-5">
+                <select class="form-control" name="type">
+                  @foreach(auth()->user()->types()->get() as $type)
+                    <option value="{{ $type->type_name }}" @if ($type->type_name == $task->type) {{ 'selected' }} @endif>{{ ucwords(strtolower($type->type_name)) }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-1">
+                <label><h5> Date(*) </h5></label>
               </div>
               <div class="col-xs-11">
                 <div class="input-group date">
-                  <input type="text" name="due_date" class="form-control" value="{{ \Carbon\Carbon::parse($task->due_date)->format('m/d/Y') }}" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                  <input type="text" name="due_date" class="form-control" placeholder="When will it happen? or When is it due?" value="{{ \Carbon\Carbon::parse($task->due_date)->format('m/d/Y') }}" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-1">
+                <label><h5> Title(*) </h5></label>
+              </div>
+              <div class="col-xs-11">
+                <input class="form-control" name="title" placeholder="Brief description about this task. ex) Read chapter 2." value="{{ $task->title }}" required>
               </div>
             </div>
             <div class="row">
