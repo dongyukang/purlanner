@@ -147,7 +147,7 @@ class TaskController extends Controller
   {
     auth()->user()->assignTask($request->all());
 
-    return redirect('/task');
+    return redirect('/task')->with('flash', 'Now you have a new task!');
   }
 
   /**

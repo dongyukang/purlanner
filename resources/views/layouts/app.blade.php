@@ -94,6 +94,8 @@
         @include('notification')
 
         @yield('content')
+
+        <flash message="{{ session('flash') }}"></flash>
     </div>
     <hr width="80%"/>
     <div class="container">
