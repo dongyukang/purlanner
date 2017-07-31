@@ -95,7 +95,7 @@
 
         @yield('content')
 
-        <flash message="{{ session('flash') }}"></flash>
+        <flash message="{{ session('flash') }}" type="{{ session('type') }}"></flash>
     </div>
     <hr width="80%"/>
     <div class="container">

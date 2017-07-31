@@ -212,16 +212,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Get past due archives.
-     *
-     * @return array
-     */
-    public function getPastDueArchives()
-    {
-
-    }
-
-    /**
      * Set Term Id
      *
      * @param string $term_id
@@ -306,7 +296,7 @@ class User extends Authenticatable
     {
       $courses = array();
 
-      foreach ($this->courses as $course) {
+      foreach ($this->courses()->orderBy('subject', 'asc')->get() as $course) {
         array_push($courses, [
           'Id'      => $course->id,
           'Subject' => $course->subject,

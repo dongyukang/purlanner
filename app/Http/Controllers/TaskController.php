@@ -109,7 +109,7 @@ class TaskController extends Controller
     $user->note = $request->get('note');
 
     if ($user->save()) {
-      return redirect('/task');
+      return redirect('/task')->with('flash', 'Your task has been successfully modified.')->with('type', 'info');
     }
 
   }
@@ -131,11 +131,11 @@ class TaskController extends Controller
       ]);
 
       if ($type_created != null) {
-        return redirect('/task/type');
+        return redirect('/task/type')->with('flash', 'Type is successfully saved.')->with('type', 'info');
       }
     }
 
-    return 'already exists';
+    return redirect('/task/type')->with('flash', 'Type already exists.')->with('type', 'danger');
   }
 
   /**
@@ -147,7 +147,7 @@ class TaskController extends Controller
   {
     auth()->user()->assignTask($request->all());
 
-    return redirect('/task')->with('flash', 'Now you have a new task!');
+    return redirect('/task')->with('flash', 'Now you have a new task!')->with('type', 'info');
   }
 
   /**
@@ -158,7 +158,9 @@ class TaskController extends Controller
   public function deleteTask($task_id)
   {
     if (auth()->user()->tasks()->find($task_id)->delete()) {
-      return redirect('/task');
+      return redirect('/task')
+      ->with('flash', 'Task is successfully deleted.')
+      ->with('type', 'info');
     }
   }
 
@@ -168,6 +170,6 @@ class TaskController extends Controller
   public function deleteCustomType($type_id)
   {
     if (auth()->user()->types()->find($type_id)->delete())
-      return redirect()->back();
+      return redirect()->back()->with('flash', 'Type is successfully deleted!')->with('type', 'info');
   }
 }

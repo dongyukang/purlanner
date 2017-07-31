@@ -93,7 +93,7 @@ export default {
           course_title: title
         });
 
-        alert(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
+        flash(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
     },
 
