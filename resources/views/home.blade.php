@@ -40,15 +40,16 @@
             'types' => auth()->user()->getNoneZeroTypes()
           ])
 
-          <div style="text-align: center">
-            <a class="btn btn-danger" href="{{ route('past_due_archives') }}">Past Due Archives</a>
-          </div>
-
         @else
           <center>
             <h4>Congradulations! You are not currently busy.</h4>
           </center>
         @endif
+
+        <div style="text-align: center">
+          <a class="btn btn-danger" href="{{ route('past_due_archives') }}">Past Due Archives</a>
+        </div>
+
       @elseif (Route::currentRouteName() == 'filter_task')
         @if (collect(auth()->user()->getNoneZeroTypes($course_id))->count() > 0)
           @include('tasks.filter', [
