@@ -13,7 +13,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <td>Type Name</td>
+              <td></td>
               <td></td>
             </tr>
           </thead>

@@ -18,21 +18,7 @@ window.Vue = require('vue');
 Vue.component('flash', require('./components/flash.vue'));
 Vue.component('setupcourses', require('./components/setcourses.vue'));
 Vue.component('settings', require('./components/settings.vue'));
-
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue')
-);
-
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue')
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue')
-);
+Vue.component('subtask', require('./components/subtask.vue'));
 
 const app = new Vue({
     el: '#app'

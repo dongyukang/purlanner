@@ -26,11 +26,18 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Course::class, function (Faker\Generator $faker) {
-    static $password;
-
     return [
       'subject' => $faker->name,
       'course_number' => $faker->postcode,
       'course_title' => $faker->sentence
     ];
 });
+
+// $factory->define(App\Task::class, function (Faker\Generator $faker) {
+//     return [
+//       'due_date' => \Carbon\Carbon::tomorrow(),
+//       'course_id' => \App\Course::all()->random(1)->first()->id,
+//       'title' => $faker->sentence,
+//       'type' => \App\User::all()->random(1)->first()->types()->random(1)->first()->type_name
+//     ];
+// });

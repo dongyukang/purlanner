@@ -59,9 +59,9 @@ class User extends Authenticatable
     /**
      * User has many sub-tasks.
      */
-    public function agendas()
+    public function subtasks()
     {
-      return $this->hasMany('App\Agenda');
+      return $this->hasMany('App\SubTask');
     }
 
     /**
@@ -254,7 +254,6 @@ class User extends Authenticatable
      * Save Course into the database.
      *
      * @param  array $course_data
-     * @return boolean
      */
     public function saveCourse($course_data)
     {
@@ -282,8 +281,10 @@ class User extends Authenticatable
       // toggle to indicate that user belongs to the course id.
       if (!($this->courses()->find($course->id))) {
         $this->courses()->toggle($course->id);
+
         return true;
       }
+
       return false;
     }
 
@@ -322,8 +323,10 @@ class User extends Authenticatable
       // if exists, then detach it.
       if ($exists) {
         $this->courses()->toggle($course_id);
+
         return true;
       }
+
       return false;
     }
 

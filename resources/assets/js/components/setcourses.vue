@@ -69,7 +69,7 @@ export default {
   methods: {
     loadCourseNumbers() {
       this.number = undefined;
-      axios.get('/api/getCourseNumbers/' + this.subject)
+      axios.get('/getCourseNumbers/' + this.subject)
       .then(res => {
         this.course_numbers = res.data;
       });
@@ -87,7 +87,7 @@ export default {
 
         title = title.trim();
 
-        axios.post('/api/saveCourse', {
+        axios.post('/saveCourse', {
           subject: this.subject,
           course_number: this.number.split(" ")[0],
           course_title: title
@@ -98,7 +98,7 @@ export default {
     },
 
     removeCourse(course_id) {
-      axios.post('/api/removeCourse', {
+      axios.post('/removeCourse', {
         course_id: course_id
       });
     },
@@ -113,7 +113,7 @@ export default {
     this.courses_array = JSON.parse(this.courses);
     this.fetch();
 
-    axios.get('/api/currentTermName')
+    axios.get('/currentTermName')
     .then(res => {
       this.termname = res.data;
     });

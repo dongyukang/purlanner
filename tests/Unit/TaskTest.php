@@ -50,6 +50,8 @@ class TaskTest extends TestCase
       $user = factory(\App\User::class)->create();
 
       $user->createDefaultTypes();
+      
+      date_default_timezone_set("America/New_York");
 
       $task = [
         'title' => 'fake title',

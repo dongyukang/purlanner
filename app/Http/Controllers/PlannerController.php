@@ -25,14 +25,22 @@ class PlannerController extends Controller
   public function index()
   {
     if (auth()->user()->isCurrentCourseEmpty()) {
-      auth()->user()->setTermId(Term::all()->last()->term_id);
-      return redirect('settings');
+      // if (auth()->user()->getTermId() == null) {
+        auth()->user()->setTermId(Term::all()->last()->term_id);
+      // }
+
+      return redirect('/settings');
     } else {
       // TODO: if tasks and agenda is not empty, then go to 'whole picture'.
-      // else if tasks is not empty, but agenda is empty, then go to 'agenda'.
       // else tasks is empty then go to 'tasks'.
-      $isTaskEmpty = auth()->user()->tasks()->count() == 0 ? true : false;
-      $isAgendaEmpty = auth()->user()->agendas()->count() == 0 ? true : false;
+      date_default_timezone_set("America/New_York");
+
+      $isTaskEmpty = auth()->user()->tasks()->whereDate('due_date', '>=', Carbon::today())->count() == 0 ? true : false;
+      // $isSubTaskEmpty = auth()->user()->subtasks()->count() == 0 ? true : false;
+
+      if (!$isTaskEmpty) {
+        return redirect('/look-at-the-whole-picture');
+      }
 
       return redirect('/task');
     }

@@ -11,7 +11,7 @@ class PurdueCourseController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth:api');
+    $this->middleware('auth');
   }
 
   /**
@@ -44,7 +44,7 @@ class PurdueCourseController extends Controller
    * Get course numbers based on $subject.
    *
    * @param  string $subject
-   * @return array $course_numbers          
+   * @return array $course_numbers
    */
   public function getCourseNumbers($subject)
   {

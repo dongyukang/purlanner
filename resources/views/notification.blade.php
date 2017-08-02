@@ -4,23 +4,25 @@
       <div class="modal-header">
         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">NOTIFICATIONS</h4>
-        <hr />
       </div>
       <div class="modal-body">
-        <div class="notification-container">
-          <div class="notification-body">
-            Hey All!
-
-            Just pushed out a free 4.0 update for compatibility with Laravel 5.4. Enjoy!
-          </div>
-        </div>
-        <hr />
-        <div class="notification-container">
-          <div class="notification-body">
-            Hey All!
-
-            Just pushed out a free 4.0 update for compatibility with Laravel 5.4. Enjoy!
-          </div>
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">A new update has been released!</h5>
+              <small>3 days ago</small>
+            </div>
+            <p class="mb-1">New update has been released!</p>
+            <small>Dongyu Kang</small>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Welcome to Purlanner</h5>
+              <small>3 days ago</small>
+            </div>
+            <p class="mb-1">Welcome to Purlanner.com! I am very pleasure to meet you.</p>
+            <small>Dongyu Kang</small>
+          </a>
         </div>
       </div>
       <div class="modal-footer">

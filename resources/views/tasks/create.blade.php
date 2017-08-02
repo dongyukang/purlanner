@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <a class="btn btn-primary" href="{{ route('planner') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to My Tasks</a>
+    <a class="btn btn-primary" href="{{ route('task') }}"><span class="glyphicon glyphicon-arrow-left"></span> Back to My Tasks</a>
     <hr />
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -22,7 +22,7 @@
 
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Course(*) </h5></label>
+                <label><h5> Course* </h5></label>
               </div>
               <div class="col-xs-11">
                 <select class="form-control" name="course_id">
@@ -34,7 +34,7 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Type(*) </h5></label>
+                <label><h5> Type* </h5></label>
               </div>
               <div class="col-xs-5">
                 <select class="form-control" name="type">
@@ -43,14 +43,15 @@
                   @endforeach
                 </select>
               </div>
-              <div class="col-xs-5">
+              <div class="col-xs-5" style="margin-top: 5px;">
                 {{-- <a class="btn btn-primary" href="{{ route('custom_type') }}">Manage Custom Type</a> --}}
-                * You can manage types <a href="{{ route('custom_type') }}">here </a> or there <i class="fa fa-external-link-square"></i>
+                {{-- <a href="{{ route('custom_type') }}"><u>here</u> </a> or  --}}
+                * You can manage types there <i class="fa fa-external-link-square"></i>
               </div>
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Date(*) </h5></label>
+                <label><h5> Date* </h5></label>
               </div>
               <div class="col-xs-11">
                 <div class="input-group date">
@@ -60,7 +61,7 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Title(*) </h5></label>
+                <label><h5> Title* </h5></label>
               </div>
               <div class="col-xs-11">
                 <input class="form-control" name="title" placeholder="Brief description about this task. ex) Read chapter 2." required>
@@ -85,7 +86,7 @@
             <hr />
             <center>
               <button type="submit" class="btn btn-success">Save</button>
-              <a class="btn btn-danger" href="{{ route('planner') }}">Cancel</a>
+              <a class="btn btn-danger" href="{{ route('task') }}">Cancel</a>
             </center>
           </form>
         </div>

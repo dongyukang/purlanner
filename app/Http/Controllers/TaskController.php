@@ -8,7 +8,7 @@ class TaskController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware(['auth', 'course_redirect_guard']);
   }
 
   /**
@@ -18,12 +18,6 @@ class TaskController extends Controller
    */
   public function index()
   {
-    // if no courses are set to user, then make the user to set course first.
-    if (auth()->user()->courses()->count() == 0) {
-      return redirect('/settings');
-    }
-
-    // show my tasks.
     return view('home');
   }
 
@@ -147,7 +141,7 @@ class TaskController extends Controller
   {
     auth()->user()->assignTask($request->all());
 
-    return redirect('/task')->with('flash', 'Now you have a new task!')->with('type', 'info');
+    return redirect('/task')->with('flash', 'Your task has been successfully saved.')->with('type', 'info');
   }
 
   /**

@@ -23,7 +23,7 @@
 
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Course(*) </h5></label>
+                <label><h5> Course* </h5></label>
               </div>
               <div class="col-xs-11">
                 <select class="form-control" name="course_id">
@@ -35,7 +35,7 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Type(*) </h5></label>
+                <label><h5> Type* </h5></label>
               </div>
               <div class="col-xs-5">
                 <select class="form-control" name="type">
@@ -47,7 +47,7 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Date(*) </h5></label>
+                <label><h5> Date* </h5></label>
               </div>
               <div class="col-xs-11">
                 <div class="input-group date">
@@ -57,7 +57,7 @@
             </div>
             <div class="row">
               <div class="col-xs-1">
-                <label><h5> Title(*) </h5></label>
+                <label><h5> Title* </h5></label>
               </div>
               <div class="col-xs-11">
                 <input class="form-control" name="title" placeholder="Brief description about this task. ex) Read chapter 2." value="{{ $task->title }}" required>
