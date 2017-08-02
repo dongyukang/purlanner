@@ -46,7 +46,7 @@
           </center>
         @endif
 
-        <div style="text-align: center">
+        <div style="text-align: center; margin-top: 25px;">
           <a class="btn btn-danger" href="{{ route('past_due_archives') }}">Past Due Archives</a>
         </div>
 

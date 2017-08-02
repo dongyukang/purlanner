@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+          <a href="#" class="list-group-item list-group-item-action list-group-item-success flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">A new update has been released!</h5>
               <small>3 days ago</small>

@@ -81,8 +81,8 @@
             </div>
             <hr />
             <center>
-              <button type="submit" class="btn btn-success">Save</button>
-              <a href="/task/delete/{{ $task->id }}" class="btn btn-warning">Delete</a>
+              <button type="submit" class="btn btn-success" onclick="showPleaseWait()">Save</button>
+              <a href="/task/delete/{{ $task->id }}" class="btn btn-warning" onclick="showPleaseWait()">Delete</a>
               <a class="btn btn-danger" href="{{ url()->previous() }}">Cancel</a>
             </center>
           </form>

@@ -19,6 +19,7 @@ Vue.component('flash', require('./components/flash.vue'));
 Vue.component('setupcourses', require('./components/setcourses.vue'));
 Vue.component('settings', require('./components/settings.vue'));
 Vue.component('subtask', require('./components/subtask.vue'));
+Vue.component('notification-button', require('./components/NotificationButton.vue'));
 
 const app = new Vue({
     el: '#app'

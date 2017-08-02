@@ -3,6 +3,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>{{ termname }}</h4>
+        <span style="color: red">*</span>It may take some seconds to load course information.
       </div>
 
       <div class="panel-body" style="text-align: center;">

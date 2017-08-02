@@ -56,7 +56,10 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li>
-                              <a style="cursor: pointer" data-toggle="modal" data-target="#notifications"><i class="fa fa-bell fa-2x"></i> <span class="badge" style="margin-bottom: 8px;">0</span></a>
+                              <div style="margin-top: 20px">
+                                <notification-button></notification-button>
+                              </div>
+                              {{-- <a style="cursor: pointer" data-toggle="modal" data-target="#notifications"><i class="fa fa-bell fa-2x"></i> <span class="label label-danger" style="margin-bottom: 15px;">New</span></a> --}}
                             </li>
                             <li class="dropdown" style="margin-right: 10px; margin-top: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="font-size: 15px;">
@@ -68,7 +71,7 @@
                                       <a href="{{ route('api') }}">API</a>
                                     </li> --}}
                                     <li>
-                                      <a href="{{ route('settings') }}">Settings</a>
+                                      <a href="{{ route('settings') }}" onclick="showPleaseWait()">Settings</a>
                                     </li>
                                     <li>
                                       <a href="{{ route('custom_type') }}">Manage Type</a>
@@ -113,11 +116,35 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <script>
+        /**
+       * Displays overlay with "Please wait" text. Based on bootstrap modal. Contains animated progress bar.
+       */
+      function showPleaseWait() {
+          var modalLoading = '<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false role="dialog">\
+              <div class="modal-dialog">\
+                  <div class="modal-content">\
+                      <div class="modal-header">\
+                          <h4 class="modal-title" style="text-align: center">Please wait...</h4>\
+                      </div>\
+                      <div class="modal-body">\
+                        <center> <i class="fa fa-refresh fa-spin fa-5x"></i> </center>\
+                      </div>\
+                  </div>\
+              </div>\
+          </div>';
+          $(document.body).append(modalLoading);
+          $("#pleaseWaitDialog").modal("show");
+      }
+
+      /**
+       * Hides "Please wait" overlay. See function showPleaseWait().
+       */
+      function hidePleaseWait() {
+          $("#pleaseWaitDialog").modal("hide");
+      }
       $('.input-group.date').datepicker({
         todayHighlight: true
       });
-
-
     </script>
 </body>
 </html>

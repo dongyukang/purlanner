@@ -85,7 +85,7 @@
             </div>
             <hr />
             <center>
-              <button type="submit" class="btn btn-success">Save</button>
+              <button type="submit" class="btn btn-success" onclick="showPleaseWait()">Save</button>
               <a class="btn btn-danger" href="{{ route('task') }}">Cancel</a>
             </center>
           </form>
