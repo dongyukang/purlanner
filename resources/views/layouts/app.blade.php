@@ -73,9 +73,11 @@
                                     <li>
                                       <a href="{{ route('settings') }}" onclick="showPleaseWait()">Settings</a>
                                     </li>
-                                    <li>
-                                      <a href="{{ route('custom_type') }}">Manage Type</a>
-                                    </li>
+                                    @if (Route::current()->uri != '/')
+                                      <li>
+                                        <a href="{{ route('custom_type') }}">Manage Type</a>
+                                      </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

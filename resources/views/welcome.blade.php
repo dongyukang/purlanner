@@ -89,4 +89,27 @@
     <img src="{{ url('/img/rational_decision_maker.png') }}" width="600" style="margin-right: 40px;">
     {{-- <iframe src="https://embed.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator" width="800px" height="480px" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> --}}
   </center>
+  <br>
+  <center>
+  </center>
+  <div class="container" style="text-align: center">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4><i class="fa fa-pencil"></i> Write Tasks</h4>
+        <p>
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <h4><i class="fa fa-list-ol"></i> Write Sub Tasks</h4>
+        <p>
+
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <h4><i class="fa fa-camera-retro"></i> The Whole Picture</h4>
+        <p>
+        </p>
+      </div>
+    </div>
+  </div>
 @endsection
