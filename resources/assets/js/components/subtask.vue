@@ -4,18 +4,16 @@
       <a class="btn btn-primary btn-sm" @click="showAdd()"><span><i class="fa fa-caret-right" v-if="!this.clicked"></i> <i class="fa fa-caret-down" v-else></i> {{ course }} - {{ task.title }} | {{ task.due_date }}</span></a>
       <div v-show="this.clicked">
         <div class="jumbotron">
-          <form role="form" @submit.prevent>
+          <form role="form" @submit.prevent="addSubTask()">
             <div class="row">
               <div class="col-xs-4">
-                <div class="input-group date">
-                  <input type="text" name="due_date" v-model="due_date" v-on:keyup="this.due_date = $event.due_date.value" class="form-control" placeholder="Desire due date" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                </div>
+                <date-picker input-class="form-control" format="MMM dd yyyy" placeholder="Desire Due Date" v-model="due_date"></date-picker>
               </div>
               <div class="col-xs-7">
                 <input class="form-control" v-model="subtask" placeholder="Brief description about subtask" required>
               </div>
               <div class="col-xs-1">
-                <button @click="" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
               </div>
             </div>
           </form>
@@ -51,6 +49,12 @@
     methods: {
       showAdd() {
         this.clicked = !this.clicked;
+      },
+
+      addSubTask() {
+        alert(this.due_date + ' ' + this.subtask);
+        this.due_date = '';
+        this.subtask = '';
       }
     },
 

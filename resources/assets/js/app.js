@@ -20,6 +20,8 @@ Vue.component('setupcourses', require('./components/setcourses.vue'));
 Vue.component('settings', require('./components/settings.vue'));
 Vue.component('subtask', require('./components/subtask.vue'));
 Vue.component('notification-button', require('./components/NotificationButton.vue'));
+Vue.component('date-picker', require('vuejs-datepicker'));
+
 
 const app = new Vue({
     el: '#app'
