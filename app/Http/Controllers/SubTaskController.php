@@ -11,6 +11,8 @@ class SubTaskController extends Controller
 
   public function __construct()
   {
+    date_default_timezone_set("America/New_York");
+
     $this->middleware(['auth', 'redirect_guard']);
   }
 
@@ -22,7 +24,7 @@ class SubTaskController extends Controller
   public function index()
   {
     return view('subtask.subtask', [
-      'mytasks' => auth()->user()->tasks()->orderBy('due_date', 'asc')->get()
+      'mytasks' => auth()->user()->tasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->paginate(10)
     ]);
   }
 

@@ -42,9 +42,9 @@
                   @if (Route::current()->uri != 'login' && Route::current()->uri != 'register' && Route::current()->uri != 'password/reset' && Route::current()->uri != '/')
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav" style="font-size: 15px; margin-top: 5px;">
-                      <li><a href="{{ route('task') }}"  @if (Route::currentRouteName() == 'task' || Route::currentRouteName() == 'filter_task') style="color: #f77456" @endif style="color: white">1. Write Tasks</a></li>
-                      <li><a href="{{ route('sub-task') }}" @if (Route::currentRouteName() == 'sub-task') style="color: #f77456" @endif style="color: white">2. Write Sub-Tasks For Each Task</a></li>
-                      <li><a href="{{ route('whole-picture') }}" @if (Route::currentRouteName() == 'whole-picture') style="color: #f77456" @endif style="color: white">3. Look At The Whole Picture</a></li>
+                      <li><a href="{{ route('task') }}"  @if (Route::currentRouteName() == 'task' || Route::currentRouteName() == 'filter_task') style="color: #f77456" @endif style="color: white"> Write Tasks</a></li>
+                      <li><a href="{{ route('sub-task') }}" @if (Route::currentRouteName() == 'sub-task') style="color: #f77456" @endif style="color: white"> Write Sub-Tasks For Each Task</a></li>
+                      <li><a href="{{ route('whole-picture') }}" @if (Route::currentRouteName() == 'whole-picture') style="color: #f77456" @endif style="color: white"> Look At The Whole Picture</a></li>
                     </ul>
                   @endif
 

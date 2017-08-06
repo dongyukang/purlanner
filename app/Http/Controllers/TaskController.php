@@ -141,7 +141,7 @@ class TaskController extends Controller
   {
     auth()->user()->assignTask($request->all());
 
-    return redirect('/task')->with('flash', 'Your task has been successfully saved.')->with('type', 'info');
+    return redirect('/look-at-the-whole-picture')->with('flash', 'Your task has been successfully saved.')->with('type', 'info');
   }
 
   /**

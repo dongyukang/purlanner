@@ -11977,15 +11977,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['task_data', 'course'],
 
   data: function data() {
     return {
-      task: JSON.parse(this.task_data)
+      task: JSON.parse(this.task_data),
+      clicked: false,
+      due_date: '',
+      subtask: ''
     };
   },
+
+
+  methods: {
+    showAdd: function showAdd() {
+      this.clicked = !this.clicked;
+    }
+  },
+
   mounted: function mounted() {}
 });
 
@@ -14470,7 +14508,7 @@ exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\na[data-v-ad0e1544] {\n  cursor: pointer;\n}\nspan[data-v-ad0e1544] {\n  font-size: 16px;\n}\n.jumbotron[data-v-ad0e1544] {\n  margin-top: 10px;\n  margin-bottom: -1px;\n  background-color: white;\n}\n", ""]);
 
 /***/ }),
 /* 43 */
@@ -42400,13 +42438,123 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('div', {
     staticClass: "list-group"
   }, [_c('a', {
-    staticClass: "list-group-item"
-  })])])
+    staticClass: "btn btn-primary btn-sm",
+    on: {
+      "click": function($event) {
+        _vm.showAdd()
+      }
+    }
+  }, [_c('span', [(!this.clicked) ? _c('i', {
+    staticClass: "fa fa-caret-right"
+  }) : _c('i', {
+    staticClass: "fa fa-caret-down"
+  }), _vm._v(" " + _vm._s(_vm.course) + " - " + _vm._s(_vm.task.title) + " | " + _vm._s(_vm.task.due_date))])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (this.clicked),
+      expression: "this.clicked"
+    }]
+  }, [_c('div', {
+    staticClass: "jumbotron"
+  }, [_c('form', {
+    attrs: {
+      "role": "form"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+      }
+    }
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-xs-4"
+  }, [_c('div', {
+    staticClass: "input-group date"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.due_date),
+      expression: "due_date"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "due_date",
+      "placeholder": "Desire due date",
+      "required": ""
+    },
+    domProps: {
+      "value": (_vm.due_date)
+    },
+    on: {
+      "keyup": function($event) {
+        this.due_date = $event.due_date.value
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.due_date = $event.target.value
+      }
+    }
+  }), _vm._m(0)])]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-7"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.subtask),
+      expression: "subtask"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "placeholder": "Brief description about subtask",
+      "required": ""
+    },
+    domProps: {
+      "value": (_vm.subtask)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.subtask = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-1"
+  }, [_c('button', {
+    staticClass: "btn btn-success",
+    on: {
+      "click": function($event) {}
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  })])])])])]), _vm._v(" "), _c('a', {
+    staticClass: "list-group-item list-group-item-default",
+    on: {
+      "click": function($event) {}
+    }
+  }, [_vm._v("\n        ddd\n      ")]), _vm._v(" "), _c('a', {
+    staticClass: "list-group-item list-group-item-default",
+    on: {
+      "click": function($event) {}
+    }
+  }, [_vm._v("\n        ddd\n      ")]), _vm._v(" "), _c('a', {
+    staticClass: "list-group-item list-group-item-default",
+    on: {
+      "click": function($event) {}
+    }
+  }, [_vm._v("\n        ddd\n      ")])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "input-group-addon"
+  }, [_c('i', {
+    staticClass: "glyphicon glyphicon-th"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

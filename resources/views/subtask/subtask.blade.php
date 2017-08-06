@@ -12,11 +12,15 @@
       </div>
     </div>
 
-    @foreach ($mytasks as $task)
-      <subtask
-            task_data="{{ $task }}"
-            course="{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}">
-      </subtask>
-    @endforeach
+    <div class="container jumbotron">
+      @foreach ($mytasks as $task)
+        <subtask
+              task_data="{{ $task }}"
+              course="{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}">
+        </subtask>
+      @endforeach
+    </div>
+
+    <center> {{ $mytasks->links() }} </center>
   </div>
 @endsection
