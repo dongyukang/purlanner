@@ -65,6 +65,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Get user's subtasks.
+     *
+     * @return array
+     */
+    public function getSubTasks()
+    {
+      date_default_timezone_set("America/New_York");
+
+      return $this->subtasks()->whereDate('due_date', '>=', Carbon::today())->get();
+    }
+
+    /**
      * User belongs to
      */
     public function notifications()

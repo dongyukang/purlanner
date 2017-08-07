@@ -25,6 +25,4 @@ class Task extends Model
   protected $hidden = [
 
   ];
-
-
 }

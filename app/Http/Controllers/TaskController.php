@@ -139,9 +139,15 @@ class TaskController extends Controller
    */
   public function assignTask(Request $request)
   {
-    auth()->user()->assignTask($request->all());
+    $result = auth()->user()->assignTask($request->all());
 
-    return redirect('/look-at-the-whole-picture')->with('flash', 'Your task has been successfully saved.')->with('type', 'info');
+    if ($result) {
+      // $mostRecentTask = auth()->user()->tasks()->get()->last()->id;
+
+      return redirect('/task')->with('flash', 'Your task has been successfully saved.')->with('type', 'info');
+    }
+
+    return redirect('/task')->with('flash', 'Somehow I could not save your task.')->with('type', 'danger');
   }
 
   /**

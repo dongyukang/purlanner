@@ -22,6 +22,7 @@
                 <td style="text-align: center">{{ $task->due_date }}</td>
                 <td style="text-align: center">
                   <a class="btn btn-primary" href="/task/view/{{ $task->id }}">View</a>
+                  <a class="btn btn-warning" href="/sub-task/active/{{ $task->id }}">Write Sub Tasks</a>
                 </td>
               </tr>
             @endforeach

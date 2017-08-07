@@ -22,6 +22,7 @@ Route::post('/removeCourse', 'PurdueCourseController@removeCourse');
 Route::get('/', 'HomeController@index')->name('intro');
 Route::get('/planner', 'PlannerController@index')->name('planner');
 Route::get('/sub-task', 'SubTaskController@index')->name('sub-task');
+Route::get('/sub-task/active/{task_id}', 'SubTaskController@indexActive')->name('sub-task-active');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
 Route::get('/task', 'TaskController@index')->name('task');
@@ -37,7 +38,9 @@ Route::post('/task/type/create', 'TaskController@saveCustomTypes')->name('save_c
 Route::get('/task/type/{type_id}', 'TaskController@deleteCustomType')->name('delete_custom_type');
 Route::get('/task/past_due_archives', 'TaskController@showPastArchives')->name('past_due_archives');
 
+Route::get('/subtasksByTask/{task_id}', 'SubTaskController@getSubTasksByTask');
 Route::post('/sub-task', 'SubTaskController@saveSubTask')->name('save_sub_task');
+Route::delete('/sub-task/{task_id}', 'SubTaskController@deleteSubTask');
 
 Route::get('/look-at-the-whole-picture', 'AgendaController@index')->name('whole-picture');
 

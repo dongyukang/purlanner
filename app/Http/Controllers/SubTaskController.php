@@ -24,7 +24,21 @@ class SubTaskController extends Controller
   public function index()
   {
     return view('subtask.subtask', [
-      'mytasks' => auth()->user()->tasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->paginate(10)
+      'active_id' => 0,
+      'mytasks' => auth()->user()->tasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get()
+    ]);
+  }
+
+  /**
+   * If there is task_id that wants to be activated.
+   *
+   * @return view
+   */
+  public function indexActive($task_id)
+  {
+    return view('subtask.subtask', [
+      'active_id' => $task_id,
+      'mytasks' => auth()->user()->tasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get()
     ]);
   }
 
@@ -33,11 +47,32 @@ class SubTaskController extends Controller
    */
   public function saveSubTask(Request $request)
   {
+    //\Carbon\Carbon::parse($request->get('due_date'))->format('Y-m-d');
+    // task, task_id, due_date
     $requestData = [
+      'task' => $request->get('task'),
+      'task_id' => $request->get('task_id'),
+      'due_date' => \Carbon\Carbon::parse($request->get('due_date'))->format('Y-m-d')
     ];
 
-    $saved = auth()->user()->agendas()->create($requestData) != null ? true : false;
+    $saved = auth()->user()->subtasks()->create($requestData) != null ? true : false;
+  }
 
-    if ($saved) return redirect('/sub-task');
+  /**
+   * Delete subtask.
+   */
+  public function deleteSubTask($task_id)
+  {
+    auth()->user()->subtasks()->find($task_id)->delete();
+  }
+
+  /**
+   * Return user's subtasks.
+   *
+   * @return array
+   */
+  public function getSubTasksByTask($task_id)
+  {
+    return collect(auth()->user()->getSubTasks())->where('task_id', $task_id)->all();
   }
 }
