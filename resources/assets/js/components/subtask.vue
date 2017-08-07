@@ -6,11 +6,11 @@
         <div class="jumbotron">
           <form role="form" @submit.prevent="addSubTask()">
             <div class="row">
-              <div class="col-xs-4">
-                <date-picker input-class="form-control" :disabled="this.state.disabled" format="MMM dd yyyy" placeholder="Desire Due Date" v-model="due_date"></date-picker>
-              </div>
               <div class="col-xs-7">
                 <input class="form-control" v-model="subtask" placeholder="Brief Description About Subtask" required>
+              </div>
+              <div class="col-xs-4">
+                <date-picker input-class="form-control" :disabled="this.state.disabled" placeholder="Desire Due Date" v-model="desire_date"></date-picker>
               </div>
               <div class="col-xs-1">
                 <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
@@ -18,10 +18,13 @@
             </div>
           </form>
         </div>
-        <a v-for="subtask in subtasks" class="list-group-item list-group-item-default">
-          {{ subtask.task }} | {{ subtask.due_date }}
-          <button id="deleteSubTask" class="btn btn-danger btn-sm" @click="deleteSubTask(subtask.id)">X</button>
-        </a>
+        <div v-for="subtask in subtasks">
+          <a class="list-group-item list-group-item-default" @click="changeToEditable()">
+            <strong style="color: red">{{ subtask.task }}</strong> by <strong>{{ subtask.due_date }}</strong>
+            <button id="deleteSubTask" class="btn btn-danger btn-sm" @click="deleteSubTask(subtask.id)">X</button>
+            <!-- <subtask-editor v-show="editable"></subtask-editor> -->
+          </a>
+        </div>
       </div>
     </div>
 
@@ -39,10 +42,11 @@
       return {
         task: JSON.parse(this.task_data),
         clicked: false,
-        due_date: '',
         isActive: false,
+        desire_date: '',
         subtask: '',
         subtasks: {},
+        editable: false,
         state: {
           disabled: {
             to: now
@@ -63,26 +67,30 @@
         });
       },
 
+      changeToEditable(task, due_date) {
+        this.editable = !this.editable;
+      },
+
       deleteSubTask(task_id) {
         axios.delete('/sub-task/' + task_id)
         .catch(err => {
           alert(err);
+        }).then(res => {
+          this.fetchSubTasks();
         });
-
-        this.fetchSubTasks();
       },
 
       addSubTask() {
         axios.post('/sub-task', {
           'task_id': this.task.id,
           'task': this.subtask,
-          'due_date': this.due_date
+          'due_date': this.desire_date
+        }).then(res => {
+          this.fetchSubTasks();
         });
 
         this.due_date = '';
         this.subtask = '';
-
-        this.fetchSubTasks();
       }
     },
 

@@ -10824,6 +10824,7 @@ Vue.component('settings', __webpack_require__(50));
 Vue.component('subtask', __webpack_require__(51));
 Vue.component('notification-button', __webpack_require__(47));
 Vue.component('date-picker', __webpack_require__(63));
+Vue.component('subtask-editor', __webpack_require__(70));
 
 var app = new Vue({
   el: '#app'
@@ -11998,6 +11999,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 var now = new Date();
 now.setDate(now.getDate() - 1);
@@ -12009,10 +12013,11 @@ now.setDate(now.getDate() - 1);
     return {
       task: JSON.parse(this.task_data),
       clicked: false,
-      due_date: '',
       isActive: false,
+      desire_date: '',
       subtask: '',
       subtasks: {},
+      editable: false,
       state: {
         disabled: {
           to: now
@@ -12033,24 +12038,31 @@ now.setDate(now.getDate() - 1);
         _this.subtasks = res.data;
       });
     },
+    changeToEditable: function changeToEditable(task, due_date) {
+      this.editable = !this.editable;
+    },
     deleteSubTask: function deleteSubTask(task_id) {
+      var _this2 = this;
+
       axios.delete('/sub-task/' + task_id).catch(function (err) {
         alert(err);
+      }).then(function (res) {
+        _this2.fetchSubTasks();
       });
-
-      this.fetchSubTasks();
     },
     addSubTask: function addSubTask() {
+      var _this3 = this;
+
       axios.post('/sub-task', {
         'task_id': this.task.id,
         'task': this.subtask,
-        'due_date': this.due_date
+        'due_date': this.desire_date
+      }).then(function (res) {
+        _this3.fetchSubTasks();
       });
 
       this.due_date = '';
       this.subtask = '';
-
-      this.fetchSubTasks();
     }
   },
 
@@ -42509,22 +42521,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-xs-4"
-  }, [_c('date-picker', {
-    attrs: {
-      "input-class": "form-control",
-      "disabled": this.state.disabled,
-      "format": "MMM dd yyyy",
-      "placeholder": "Desire Due Date"
-    },
-    model: {
-      value: (_vm.due_date),
-      callback: function($$v) {
-        _vm.due_date = $$v
-      },
-      expression: "due_date"
-    }
-  })], 1), _vm._v(" "), _c('div', {
     staticClass: "col-xs-7"
   }, [_c('input', {
     directives: [{
@@ -42547,10 +42543,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.subtask = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _vm._l((_vm.subtasks), function(subtask) {
-    return _c('a', {
-      staticClass: "list-group-item list-group-item-default"
-    }, [_vm._v("\n        " + _vm._s(subtask.task) + " | " + _vm._s(subtask.due_date) + "\n        "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-4"
+  }, [_c('date-picker', {
+    attrs: {
+      "input-class": "form-control",
+      "disabled": this.state.disabled,
+      "placeholder": "Desire Due Date"
+    },
+    model: {
+      value: (_vm.desire_date),
+      callback: function($$v) {
+        _vm.desire_date = $$v
+      },
+      expression: "desire_date"
+    }
+  })], 1), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _vm._l((_vm.subtasks), function(subtask) {
+    return _c('div', [_c('a', {
+      staticClass: "list-group-item list-group-item-default",
+      on: {
+        "click": function($event) {
+          _vm.changeToEditable()
+        }
+      }
+    }, [_c('strong', {
+      staticStyle: {
+        "color": "red"
+      }
+    }, [_vm._v(_vm._s(subtask.task))]), _vm._v(" by "), _c('strong', [_vm._v(_vm._s(subtask.due_date))]), _vm._v(" "), _c('button', {
       staticClass: "btn btn-danger btn-sm",
       attrs: {
         "id": "deleteSubTask"
@@ -42560,7 +42580,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deleteSubTask(subtask.id)
         }
       }
-    }, [_vm._v("X")])])
+    }, [_vm._v("X")])])])
   })], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
@@ -42837,6 +42857,109 @@ module.exports = function(module) {
 __webpack_require__(12);
 module.exports = __webpack_require__(13);
 
+
+/***/ }),
+/* 66 */,
+/* 67 */,
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(72)
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(68),
+  /* template */
+  __webpack_require__(71),
+  /* scopeId */
+  "data-v-ff36286a",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/dongyukang/Desktop/laravel-projects/purlanner/resources/assets/js/components/subtaskeditor.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] subtaskeditor.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ff36286a", Component.options)
+  } else {
+    hotAPI.reload("data-v-ff36286a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_vm._v("\n  editable\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ff36286a", module.exports)
+  }
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(69);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("b32c6e32", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-ff36286a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subtaskeditor.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-ff36286a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./subtaskeditor.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

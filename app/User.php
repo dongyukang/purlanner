@@ -73,7 +73,7 @@ class User extends Authenticatable
     {
       date_default_timezone_set("America/New_York");
 
-      return $this->subtasks()->whereDate('due_date', '>=', Carbon::today())->get();
+      return $this->subtasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get();
     }
 
     /**
