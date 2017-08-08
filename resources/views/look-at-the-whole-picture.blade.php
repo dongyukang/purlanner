@@ -12,11 +12,26 @@
     </div>
 
     <div class="container">
-      <div class="panel panel-success">
+      <div class="panel panel-default">
         <div class="panel-heading">
-          <h3>Today's Subtasks List</h3>
+          <h3>Today's Todo List</h3>
         </div>
         <div class="panel-body">
+          <h4>Tasks Due Today</h4>
+          <ul class="list-group">
+            @foreach (auth()->user()->tasks()->whereDate('due_date', \Carbon\Carbon::today())->get() as $task)
+              <li class="list-group-item list-group-item-default">
+                  <i class="fa fa-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                  <strong><span style="font-size: 18px; color: red">
+                  {{ $task->title }}
+                </span></strong>
+                - {{ \App\Course::find($task->course_id)->subject }}
+                  {{ \App\Course::find($task->course_id)->course_number }}
+              </li>
+            @endforeach
+          </ul>
+          <hr />
+          <h4>Sub-Tasks</h4>
           <ul class="list-group">
             @foreach (auth()->user()->subtasks()->whereDate('due_date', \Carbon\Carbon::today())->get() as $subtask)
               <li class="list-group-item list-group-item-default">
@@ -33,5 +48,4 @@
         </div>
       </div>
     </div>
-  </div>
 @endsection
