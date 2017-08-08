@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    @include('task_summary_dashboard')
+    {{-- @include('task_summary_dashboard') --}}
 
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center; background-color: white;">

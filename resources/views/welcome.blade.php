@@ -86,7 +86,7 @@
   <div class="container-fluid" style="text-align: center">
     <div class="container">
       <div class="row" style="margin-top: 25px; margin-bottom: 25px;">
-        <h3><strong> I believe that if you have clear set of lists of what to do today, then it is most likely you will finish the list. </strong></h3>
+        {{-- <h3><strong> I believe that if you have clear set of lists of what to do today, then it is most likely you will finish the list. </strong></h3> --}}
         <iframe src="https://embed.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator" width="100%" height="450px" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
       </div>
     </div>
@@ -127,7 +127,7 @@
               Writing Sub tasks is very important as it shows you what to do for each day.
               However, how you manage to write proper amount of sub tasks is not easy. Without looking
               at the whole picture, you would make a mistake of putting so much works into one day, and gradually,
-              you will end up thinking yourself, "Oh my god! I am not good at this kind of stuff! I gave up!"
+              you will end up thinking yourself, "Holy F*ck! I am not good at this kind of sh*t! I will give up."
             </p>
           </div>
         </div>

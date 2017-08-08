@@ -42383,7 +42383,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "color": "red"
     }
-  }, [_vm._v("*")]), _vm._v("It may take some seconds to load course information.\n    ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("*")]), _vm._v("It may take some time to load course numbers once you choose subject.\n    ")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body",
     staticStyle: {
       "text-align": "center"

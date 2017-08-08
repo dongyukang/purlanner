@@ -55,12 +55,11 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li>
+                            {{-- <li>
                               <div style="margin-top: 20px">
                                 <notification-button></notification-button>
                               </div>
-                              {{-- <a style="cursor: pointer" data-toggle="modal" data-target="#notifications"><i class="fa fa-bell fa-2x"></i> <span class="label label-danger" style="margin-bottom: 15px;">New</span></a> --}}
-                            </li>
+                            </li> --}}
                             <li class="dropdown" style="margin-right: 10px; margin-top: 5px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="font-size: 15px;">
                                   {{ auth()->user()->firstname }}<span class="caret"></span>
