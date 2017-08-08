@@ -38,7 +38,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="course in this.table_array">
+            <tr v-for="course in this.courses_array">
               <td>{{ course.Subject }}</td>
               <td>{{ course.Number }}</td>
               <td>{{ course.Title }}</td>
@@ -62,8 +62,7 @@ export default {
       termname: '',
       course_numbers: [],
       subjects_array: [],
-      courses_array:  [],
-      table_array:    []
+      courses_array:  []
     }
   },
 
@@ -106,17 +105,25 @@ export default {
       }).then(res => {
         this.fetch();
       });
+
+      flash('The course has been removed from your course list.');
     },
 
     fetch() {
-      this.table_array = this.courses_array;
+      axios.get('/getMyCourses')
+      .then(res => {
+        this.courses_array = res.data;
+      });
     }
   },
 
   mounted() {
-    this.subjects_array = JSON.parse(this.subjects);
-    this.courses_array = JSON.parse(this.courses);
     this.fetch();
+
+    axios.get('/getCurrentTermSubjects')
+    .then(res => {
+      this.subjects_array = res.data;
+    });
 
     axios.get('/currentTermName')
     .then(res => {

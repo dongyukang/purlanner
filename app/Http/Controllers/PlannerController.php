@@ -53,17 +53,15 @@ class PlannerController extends Controller
    */
   public function showSettings()
   {
-    $subjects = array();
-    $courses = auth()->user()->getCourses();
-
-    foreach (Purdue::subjects() as $subject) {
-      array_push($subjects, $subject['Abbreviation']);
-    }
+    // $subjects = array();
+    //
+    // foreach (Purdue::subjects() as $subject) {
+    //   array_push($subjects, $subject['Abbreviation']);
+    // }
 
     return view('settings', [
       'termName' => Purdue::currentTerm()->termName,
-      'subjects' => $subjects,
-      'courses'  => $courses
+      // 'subjects' => $subjects
     ]);
   }
 

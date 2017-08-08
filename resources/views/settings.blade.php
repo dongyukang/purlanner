@@ -2,6 +2,7 @@
 
 @section('content')
   <div class="container">
-    <settings subjects="{{ json_encode($subjects) }}" courses="{{ json_encode($courses) }}"></settings>
+    <settings></settings>
+    {{-- <settings subjects="{{ json_encode($subjects) }}" courses="{{ json_encode($courses) }}"></settings> --}}
   </div>
 @endsection

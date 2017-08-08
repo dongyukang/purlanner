@@ -294,10 +294,10 @@ class User extends Authenticatable
       if (!($this->courses()->find($course->id))) {
         $this->courses()->toggle($course->id);
 
-        return true;
+        // return true;
       }
 
-      return false;
+      // return false;
     }
 
     /**
@@ -336,10 +336,10 @@ class User extends Authenticatable
       if ($exists) {
         $this->courses()->toggle($course_id);
 
-        return true;
+        // return true;
       }
 
-      return false;
+      // return false;
     }
 
     /**

@@ -15,7 +15,9 @@
 Auth::routes();
 
 Route::get('/currentTermName', 'PurdueCourseController@getCurrentTermName');
+Route::get('/getCurrentTermSubjects', 'PurdueCourseController@getCurrentTermSubjects');
 Route::get('/getCourseNumbers/{subject}', 'PurdueCourseController@getCourseNumbers');
+Route::get('/getMyCourses', 'PurdueCourseController@getMyCourses');
 Route::post('/saveCourse', 'PurdueCourseController@saveCourse');
 Route::post('/removeCourse', 'PurdueCourseController@removeCourse');
 

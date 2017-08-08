@@ -11838,8 +11838,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       termname: '',
       course_numbers: [],
       subjects_array: [],
-      courses_array: [],
-      table_array: []
+      courses_array: []
     };
   },
 
@@ -11886,21 +11885,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (res) {
         _this3.fetch();
       });
+
+      flash('The course has been removed from your course list.');
     },
     fetch: function fetch() {
-      this.table_array = this.courses_array;
+      var _this4 = this;
+
+      axios.get('/getMyCourses').then(function (res) {
+        _this4.courses_array = res.data;
+      });
     }
   },
 
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
-    this.subjects_array = JSON.parse(this.subjects);
-    this.courses_array = JSON.parse(this.courses);
     this.fetch();
 
+    axios.get('/getCurrentTermSubjects').then(function (res) {
+      _this5.subjects_array = res.data;
+    });
+
     axios.get('/currentTermName').then(function (res) {
-      _this4.termname = res.data;
+      _this5.termname = res.data;
     });
   }
 });
@@ -11941,8 +11948,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['subjects', 'courses'],
-
   data: function data() {
     return {
       course_settings: true,
@@ -14558,7 +14563,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 41 */
@@ -42460,7 +42465,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((this.table_array), function(course) {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((this.courses_array), function(course) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(course.Subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Title))]), _vm._v(" "), _c('td', [_c('button', {
       staticClass: "btn btn-danger",
       on: {
@@ -42701,12 +42706,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v(" Security Settings ")])])])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-9"
-  }, [(_vm.course_settings) ? _c('setupcourses', {
-    attrs: {
-      "subjects": this.subjects,
-      "courses": this.courses
-    }
-  }) : _vm._e()], 1)])
+  }, [(_vm.course_settings) ? _c('setupcourses') : _vm._e()], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel-heading"

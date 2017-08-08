@@ -102,6 +102,16 @@ class PurdueCourseController extends Controller
   }
 
   /**
+   * Get authenticated user's courses.
+   *
+   * @return array
+   */
+  public function getMyCourses()
+  {
+    return auth()->user()->getCourses();
+  }
+
+  /**
    * Register Course.
    *
    * @param \Illuminate\Http\Request
