@@ -92,6 +92,8 @@ export default {
           subject: this.subject,
           course_number: this.number.split(" ")[0],
           course_title: title
+        }).then(res => {
+          this.fetch();
         });
 
         flash(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
@@ -101,6 +103,8 @@ export default {
     removeCourse(course_id) {
       axios.post('/removeCourse', {
         course_id: course_id
+      }).then(res => {
+        this.fetch();
       });
     },
 

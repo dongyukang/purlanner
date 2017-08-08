@@ -14,7 +14,7 @@
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3>Today's Todo List</h3>
+          <h3>Summary</h3>
         </div>
         <div class="panel-body">
           <h4>Tasks Due Today</h4>
@@ -31,7 +31,7 @@
             @endforeach
           </ul>
           <hr />
-          <h4>Sub-Tasks</h4>
+          <h4>Todo List For Today</h4>
           <ul class="list-group">
             @foreach (auth()->user()->subtasks()->whereDate('due_date', \Carbon\Carbon::today())->get() as $subtask)
               <li class="list-group-item list-group-item-default">
@@ -48,4 +48,8 @@
         </div>
       </div>
     </div>
+
+
+
+  </div>
 @endsection

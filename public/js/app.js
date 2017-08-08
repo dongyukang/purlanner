@@ -11854,6 +11854,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     saveCourse: function saveCourse() {
+      var _this2 = this;
+
       if (this.subject != '' && this.subject != undefined && this.number != '' && this.number != undefined) {
         var number = '';
         var title = '';
@@ -11869,14 +11871,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           subject: this.subject,
           course_number: this.number.split(" ")[0],
           course_title: title
+        }).then(function (res) {
+          _this2.fetch();
         });
 
         flash(this.subject + " " + this.number.split(" ")[0] + " is added to your course list.");
       }
     },
     removeCourse: function removeCourse(course_id) {
+      var _this3 = this;
+
       axios.post('/removeCourse', {
         course_id: course_id
+      }).then(function (res) {
+        _this3.fetch();
       });
     },
     fetch: function fetch() {
@@ -11885,14 +11893,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   mounted: function mounted() {
-    var _this2 = this;
+    var _this4 = this;
 
     this.subjects_array = JSON.parse(this.subjects);
     this.courses_array = JSON.parse(this.courses);
     this.fetch();
 
     axios.get('/currentTermName').then(function (res) {
-      _this2.termname = res.data;
+      _this4.termname = res.data;
     });
   }
 });
@@ -14550,7 +14558,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 41 */
