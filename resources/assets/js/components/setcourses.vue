@@ -23,6 +23,11 @@
       </div>
     </div>
 
+    <div class="alert alert-info">
+      Here is a page that you are going to add your courses that you are taking currently.<br>
+      Once you add the courses, then you will be able to write tasks.
+    </div>
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>My Course List</h4>
@@ -46,6 +51,8 @@
             </tr>
           </tbody>
         </table>
+
+        <a href="/planner" class="btn btn-primary btn-block" v-show="this.courses_array.length > 0">I'm Done Setting My Courses</a>
       </div>
     </div>
   </div>

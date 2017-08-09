@@ -11,6 +11,15 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="alert alert-info">
+        Here is where you write 'sub tasks'. <br>
+        While 'Writing Task' is marking due dates, <br>
+       'Writing sub-tasks' is writing what you will do each day
+        to achieve the task.
+      </div>
+    </div>
+
     <div class="container jumbotron">
       @foreach ($mytasks as $task)
         <subtask

@@ -12,6 +12,10 @@
       </div>
     </div>
 
+    <div class="alert alert-info">
+      This is a page that you are going to mark due dates or other important dates.    
+    </div>
+
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center">
         <div class="row">

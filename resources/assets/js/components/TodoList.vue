@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <ul class="list-group">
       @foreach (auth()->user()->subtasks()->whereDate('due_date', \Carbon\Carbon::today())->get() as $subtask)
@@ -25,4 +25,4 @@
 </script>
 
 <style scoped>
-</style>
+</style> -->

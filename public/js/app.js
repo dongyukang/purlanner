@@ -11828,6 +11828,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['subjects', 'courses'],
@@ -14564,7 +14571,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 41 */
@@ -42480,13 +42487,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.saveCourse()
       }
     }
-  }, [_vm._v("Add To My Course List (+)")])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Add To My Course List (+)")])])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "panel panel-default"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((this.courses_array), function(course) {
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', _vm._l((this.courses_array), function(course) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(course.Subject))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(course.Title))]), _vm._v(" "), _c('td', [_c('button', {
       staticClass: "btn btn-danger",
       on: {
@@ -42495,8 +42502,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v("Remove Course (-)")])])])
-  }))])])])])
+  }))]), _vm._v(" "), _c('a', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (this.courses_array.length > 0),
+      expression: "this.courses_array.length > 0"
+    }],
+    staticClass: "btn btn-primary btn-block",
+    attrs: {
+      "href": "/planner"
+    }
+  }, [_vm._v("I'm Done Setting My Courses")])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "alert alert-info"
+  }, [_vm._v("\n    Here is a page that you are going to add your courses that you are taking currently."), _c('br'), _vm._v("\n    Once you add the courses, then you will be able to write tasks.\n  ")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel-heading"
   }, [_c('h4', [_vm._v("My Course List")])])
