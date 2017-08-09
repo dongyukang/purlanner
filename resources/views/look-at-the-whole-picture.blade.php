@@ -11,6 +11,16 @@
       </div>
     </div>
 
+    {{-- <div class="container-fluid">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3>Incomplete</h3>
+        </div>
+        <div class="panel-body">
+        </div>
+      </div>
+    </div> --}}
+
     <div class="container-fluid">
       <div class="panel panel-info">
         <div class="panel-heading">
@@ -25,8 +35,11 @@
                   <strong><span style="font-size: 15px; color: red">
                   {{ $task->title }}
                 </span></strong>
-                - {{ \App\Course::find($task->course_id)->subject }}
+                <span class="label label-danger">
+                  {{ \App\Course::find($task->course_id)->subject }}
                   {{ \App\Course::find($task->course_id)->course_number }}
+                </span>
+                <span class="label label-success">{{ auth()->user()->tasks()->find($task->id)->type }}</span>
               </li>
             @endforeach
           </ul>
@@ -39,9 +52,12 @@
                 <strong><span style="font-size: 15px; color: red">
                   {{ $subtask->task }}
                 </span></strong>
-                  ({{ auth()->user()->tasks()->find($subtask->task_id)->title }})
-                  - {{ \App\Course::find(auth()->user()->tasks()->find($subtask->task_id)->course_id)->subject }}
+                  <span class="label label-info">{{ auth()->user()->tasks()->find($subtask->task_id)->title }}</span>
+                  <span class="label label-danger">
+                    {{ \App\Course::find(auth()->user()->tasks()->find($subtask->task_id)->course_id)->subject }}
                     {{ \App\Course::find(auth()->user()->tasks()->find($subtask->task_id)->course_id)->course_number }}
+                  </span>
+                  {{-- <span class="label label-success">{{ auth()->user()->tasks()->find($subtask->task_id)->type }}</span> --}}
               </li>
             @endforeach
           </ul>
@@ -84,7 +100,11 @@
                           @if (\Carbon\Carbon::parse($task->due_date)->day == $day)
                             <li>
                               <span style="color: red">
-                                {{ $task->title }}
+                                {{ $task->title }} <span class="label label-success">{{ $task->type }}</span>
+                                <span class="label label-danger">
+                                  {{ \App\Course::find(auth()->user()->tasks()->find($task->id)->course_id)->subject }}
+                                  {{ \App\Course::find(auth()->user()->tasks()->find($task->id)->course_id)->course_number }}
+                                </label>
                               </span>
                             </li>
                           @endif
@@ -98,6 +118,11 @@
                           @if (\Carbon\Carbon::parse($subtask->due_date)->day == $day)
                             <li>
                               {{ $subtask->task }}
+                              <span class="label label-info">{{ auth()->user()->tasks()->find($subtask->task_id)->title }}</span>
+                              <span class="label label-danger">
+                                {{ \App\Course::find(auth()->user()->tasks()->find($subtask->task_id)->course_id)->subject }}
+                                {{ \App\Course::find(auth()->user()->tasks()->find($subtask->task_id)->course_id)->course_number }}
+                              </span>
                             </li>
                           @endif
                         </ul>

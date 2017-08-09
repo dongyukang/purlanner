@@ -7,7 +7,7 @@
           <form role="form" @submit.prevent="addSubTask()">
             <div class="row">
               <div class="col-xs-7">
-                <input class="form-control" v-model="subtask" placeholder="Brief Description About Subtask" required>
+                <input class="form-control" v-model="subtask" placeholder="Brief Description About Subtask ex) Write introduction..." required>
               </div>
               <div class="col-xs-4">
                 <date-picker input-class="form-control" :disabled="this.state.disabled" placeholder="Desire Due Date" v-model="desire_date"></date-picker>

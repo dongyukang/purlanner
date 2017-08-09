@@ -22,6 +22,7 @@ Vue.component('subtask', require('./components/subtask.vue'));
 Vue.component('notification-button', require('./components/NotificationButton.vue'));
 Vue.component('date-picker', require('vuejs-datepicker'));
 Vue.component('subtask-editor', require('./components/subtaskeditor.vue'));
+Vue.component('todo-list', require('./components/TodoList.vue'));
 
 const app = new Vue({
     el: '#app'
