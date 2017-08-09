@@ -42517,7 +42517,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "alert alert-info"
-  }, [_vm._v("\n    Here is a page that you are going to add your courses that you are taking currently."), _c('br'), _vm._v("\n    Once you add the courses, then you will be able to write tasks.\n  ")])
+  }, [_vm._v("\n    Here is a page that you are going to add your courses that you are currently taking."), _c('br'), _vm._v("\n    Once you add the courses, then you will be able to write tasks.\n  ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel-heading"

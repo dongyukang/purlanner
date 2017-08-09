@@ -24,7 +24,7 @@
     </div>
 
     <div class="alert alert-info">
-      Here is a page that you are going to add your courses that you are taking currently.<br>
+      Here is a page that you are going to add your courses that you are currently taking.<br>
       Once you add the courses, then you will be able to write tasks.
     </div>
 

@@ -20,6 +20,7 @@
 
 <script>
   export default {
+    props: ['tasks', 'subtasks'],
 
   }
 </script>

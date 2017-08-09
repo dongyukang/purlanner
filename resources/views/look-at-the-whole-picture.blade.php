@@ -22,7 +22,7 @@
     </div> --}}
 
     <div class="container-fluid">
-      <div class="panel panel-info">
+      <div class="panel panel-success">
         <div class="panel-heading">
           <h3>Summary</h3>
         </div>
@@ -45,6 +45,7 @@
           </ul>
           <hr />
           <h4>Todo List For Today</h4>
+          <span style="color: red; font-size: 13px;"><p>* By clicking on a white dot of each list, you will be eliminating your subtask from the list. </p></span>
           <ul class="list-group">
             @foreach (auth()->user()->subtasks()->whereDate('due_date', \Carbon\Carbon::today())->get() as $subtask)
               <li class="list-group-item list-group-item-default">
@@ -71,6 +72,9 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3>Overview This Month</h3>
+          <p style="font-size: 13px; color: red;">
+            *Calendar will start from today.
+          </p>
         </div>
         <div class="panel-body">
           <table class="table table-bordered table-striped">

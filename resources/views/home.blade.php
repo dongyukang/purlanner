@@ -13,7 +13,7 @@
     </div>
 
     <div class="alert alert-info">
-      This is a page that you are going to mark due dates or other important dates.    
+      This is a page that you are going to mark due dates or other important dates.
     </div>
 
     <div class="panel panel-default">
@@ -21,6 +21,11 @@
         <div class="row">
           <div class="panel-heading" style="margin-top: -20px; text-align: left;">
              <h3> My Courses </h3>
+             <span style="font-size: 13px; color: red;">
+               <p>
+                 *Clicking on each course will sort your tasks by course.
+               </p>
+             </span>
           </div>
           <div class="panel-body" style="background-color: white">
 
