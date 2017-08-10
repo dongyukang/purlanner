@@ -12037,72 +12037,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-var now = new Date();
-now.setDate(now.getDate() - 1);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['task_data', 'course', 'active_id'],
+  props: ['task_data', 'course', 'active_id', 'today'],
 
   data: function data() {
     return {
       task: JSON.parse(this.task_data),
-      clicked: false,
-      isActive: false,
+      currentDate: new Date(this.today),
+      dateRange: [],
       desire_date: '',
-      subtask: '',
-      subtasks: {},
-      editable: false,
-      state: {
-        disabled: {
-          to: now
-        }
-      }
+      todo: '',
+      clicked: false
     };
   },
 
+
+  computed: {
+    isPaginatable: function isPaginatable() {
+      return this.dateRange.length - 1 > 7;
+    }
+  },
 
   methods: {
     showAdd: function showAdd() {
       this.clicked = !this.clicked;
     },
-    fetchSubTasks: function fetchSubTasks() {
-      var _this = this;
-
-      axios.get('/subtasksByTask/' + this.task.id).then(function (res) {
-        _this.subtasks = res.data;
-      });
-    },
-    changeToEditable: function changeToEditable(task, due_date) {
-      this.editable = !this.editable;
-    },
-    deleteSubTask: function deleteSubTask(task_id) {
-      var _this2 = this;
-
-      axios.delete('/sub-task/' + task_id).catch(function (err) {
-        alert(err);
-      }).then(function (res) {
-        _this2.fetchSubTasks();
-      });
-    },
-    addSubTask: function addSubTask() {
-      var _this3 = this;
-
-      axios.post('/sub-task', {
-        'task_id': this.task.id,
-        'task': this.subtask,
-        'due_date': this.desire_date
-      }).then(function (res) {
-        _this3.fetchSubTasks();
-      });
-
-      this.due_date = '';
-      this.subtask = '';
+    addTodo: function addTodo(date) {
+      this.desire_date = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
     }
   },
 
   mounted: function mounted() {
-    this.fetchSubTasks();
+    // somehow, this.task.due_date is off by 1 day in vue.
+    var due_date = new Date(this.task.due_date);
+    // therefore, add 1 day to get rid of date offset.
+    due_date.setDate(due_date.getDate() + 1);
+
+    for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
+      this.dateRange.push(new Date(date));
+    }
+
+    // set to initial
+    this.currentDate = new Date(this.today);
 
     if (this.active_id == this.task.id) {
       this.clicked = true;
@@ -42636,106 +42633,138 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (this.clicked),
       expression: "this.clicked"
     }]
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "jumbotron jumbotron-white"
-  }, [_c('form', {
+  }, [_c('p', {
+    staticStyle: {
+      "color": "red",
+      "font-size": "15px"
+    }
+  }, [_vm._v("\n          *Click on the day that you want to add your subtasks.\n        ")]), _vm._v(" "), _c('table', {
+    staticClass: "table table-bordered table-striped"
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((this.dateRange), function(date) {
+    return _c('tr', [_c('td', {
+      staticStyle: {
+        "text-align": "center"
+      }
+    }, [_c('a', {
+      staticStyle: {
+        "cursor": "pointer",
+        "text-decoration": "none"
+      },
+      on: {
+        "click": function($event) {
+          _vm.addTodo(date)
+        }
+      }
+    }, [_c('h4', [_vm._v(" " + _vm._s(date.getDate()) + " ")])])]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true)])
+  }))]), _vm._v(" "), _c('div', [_c('form', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (this.desire_date != ''),
+      expression: "this.desire_date != ''"
+    }],
     attrs: {
       "role": "form"
     },
     on: {
       "submit": function($event) {
         $event.preventDefault();
-        _vm.addSubTask()
       }
     }
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.desire_date),
+      expression: "desire_date"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "disabled": ""
+    },
+    domProps: {
+      "value": (_vm.desire_date)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.desire_date = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-7"
   }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.subtask),
-      expression: "subtask"
+      value: (_vm.todo),
+      expression: "todo"
     }],
     staticClass: "form-control",
     attrs: {
-      "placeholder": "Brief Description About Subtask EX) Finish introduction...",
-      "required": ""
+      "placeholder": "Write Brief Description Of What You Want To Finish This Day."
     },
     domProps: {
-      "value": (_vm.subtask)
+      "value": (_vm.todo)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.subtask = $event.target.value
+        _vm.todo = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
-    staticClass: "col-xs-4"
-  }, [_c('date-picker', {
-    attrs: {
-      "input-class": "form-control",
-      "disabled": this.state.disabled,
-      "placeholder": "Desire Due Date"
-    },
-    model: {
-      value: (_vm.desire_date),
-      callback: function($$v) {
-        _vm.desire_date = $$v
-      },
-      expression: "desire_date"
-    }
-  })], 1), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _vm._l((_vm.subtasks), function(subtask) {
-    return _c('div', [_c('a', {
-      staticClass: "list-group-item list-group-item-default",
-      on: {
-        "click": function($event) {
-          _vm.changeToEditable()
-        }
-      }
-    }, [_c('strong', {
-      staticStyle: {
-        "color": "red"
-      }
-    }, [_vm._v(_vm._s(subtask.task))]), _vm._v(" by "), _c('strong', [_vm._v(_vm._s(subtask.due_date))]), _vm._v(" "), _c('button', {
-      staticClass: "btn btn-danger btn-sm",
-      attrs: {
-        "id": "deleteSubTask"
-      },
-      on: {
-        "click": function($event) {
-          _vm.deleteSubTask(subtask.id)
-        }
-      }
-    }, [_vm._v("X")]), _vm._v(" "), _c('subtask-editor', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: (_vm.editable),
-        expression: "editable"
-      }]
-    })], 1)])
-  })], 2)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "jumbotron jumbotron-white"
-  }, [_c('table', {
-    staticClass: "table table-bordered table-striped"
-  }, [_c('thead', [_c('tr', [_c('td', [_vm._v("Day")]), _vm._v(" "), _c('td', [_vm._v("Due/Event Date")]), _vm._v(" "), _c('td', [_vm._v("Todo List")])])]), _vm._v(" "), _c('tbody', [_c('tr')])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
     staticClass: "col-xs-1"
   }, [_c('button', {
-    staticClass: "btn btn-success",
+    staticClass: "btn btn-info",
+    on: {
+      "click": function($event) {}
+    }
+  }, [_vm._v("Save")])])])])])]), _vm._v(" "), (this.isPaginatable) ? _c('div', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._m(3)]) : _vm._e()])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('td', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._v("Day")]), _vm._v(" "), _c('td', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._v("Due/Event Date")]), _vm._v(" "), _c('td', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._v("Todo")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('ul', [_c('li', [_vm._v("\n                    Thesis paper\n                  ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('ul', [_c('li', [_vm._v("\n                    Finish chapter 1\n                  ")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('ul', {
+    staticClass: "pager"
+  }, [_c('li', [_c('a', {
     attrs: {
-      "type": "submit"
+      "href": "#"
     }
   }, [_c('i', {
-    staticClass: "fa fa-plus"
-  })])])
+    staticClass: "fa fa-arrow-left"
+  }), _vm._v(" Previous 7 Days")])]), _vm._v(" "), _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Next 7 Days "), _c('i', {
+    staticClass: "fa fa-arrow-right"
+  })])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

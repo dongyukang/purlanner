@@ -4,68 +4,85 @@
       <a class="btn btn-primary btn-sm" @click="showAdd()"><span><i class="fa fa-caret-right" v-if="!this.clicked"></i> <i class="fa fa-caret-down" v-else></i> {{ course }} - {{ task.title }} | {{ task.due_date }}</span></a>
       <div v-show="this.clicked">
         <div class="jumbotron jumbotron-white">
+          <p style="color: red; font-size: 15px;">
+            *Click on the day that you want to add your subtasks.
+          </p>
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <td>Day</td>
-                <td>Due/Event Date</td>
-                <td>Todo List</td>
+                <td style="text-align: center">Day</td>
+                <td style="text-align: center">Due/Event Date</td>
+                <td style="text-align: center">Todo</td>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="date in this.dateRange">
+                <td style="text-align: center">
+                  <a style="cursor: pointer; text-decoration: none;" @click="addTodo(date)"><h4> {{ date.getDate() }} </h4></a>
+                </td>
+                <td>
+                  <ul>
+                    <li>
+                      Thesis paper
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    <li>
+                      Finish chapter 1
+                    </li>
+                  </ul>
+                </td>
               </tr>
             </tbody>
           </table>
-        </div>
-        <div class="jumbotron jumbotron-white">
-          <form role="form" @submit.prevent="addSubTask()">
-            <div class="row">
-              <div class="col-xs-7">
-                <input class="form-control" v-model="subtask" placeholder="Brief Description About Subtask EX) Finish introduction..." required>
+          <div>
+            <form role="form" v-show="this.desire_date != ''" @submit.prevent>
+              <div class="row">
+                <div class="col-xs-3">
+                  <input class="form-control" disabled v-model="desire_date">
+                </div>
+                <div class="col-xs-7">
+                  <input class="form-control" v-model="todo" placeholder="Write Brief Description Of What You Want To Finish This Day.">
+                </div>
+                <div class="col-xs-1">
+                  <button class="btn btn-info" @click="">Save</button>
+                </div>
               </div>
-              <div class="col-xs-4">
-                <date-picker input-class="form-control" :disabled="this.state.disabled" placeholder="Desire Due Date" v-model="desire_date"></date-picker>
-              </div>
-              <div class="col-xs-1">
-                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-        <div v-for="subtask in subtasks">
-          <a class="list-group-item list-group-item-default" @click="changeToEditable()">
-            <strong style="color: red">{{ subtask.task }}</strong> by <strong>{{ subtask.due_date }}</strong>
-            <button id="deleteSubTask" class="btn btn-danger btn-sm" @click="deleteSubTask(subtask.id)">X</button>
-            <subtask-editor v-show="editable"></subtask-editor>
-          </a>
-        </div>
+        <div style="text-align:center;" v-if="this.isPaginatable">
+          <ul class="pager">
+           <li><a href="#"><i class="fa fa-arrow-left"></i> Previous 7 Days</a></li>
+           <li><a href="#">Next 7 Days <i class="fa fa-arrow-right"></i></a></li>
+         </ul>
+       </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  var now = new Date();
-  now.setDate(now.getDate() - 1);
 
   export default {
-    props: ['task_data', 'course', 'active_id'],
+    props: ['task_data', 'course', 'active_id', 'today'],
 
     data() {
       return {
         task: JSON.parse(this.task_data),
-        clicked: false,
-        isActive: false,
+        currentDate: new Date(this.today),
+        dateRange: [],
         desire_date: '',
-        subtask: '',
-        subtasks: {},
-        editable: false,
-        state: {
-          disabled: {
-            to: now
-          }
-        }
+        todo: '',
+        clicked: false
+      }
+    },
+
+    computed: {
+      isPaginatable() {
+        return (this.dateRange.length - 1) > 7;
       }
     },
 
@@ -74,42 +91,23 @@
         this.clicked = !this.clicked;
       },
 
-      fetchSubTasks() {
-        axios.get('/subtasksByTask/' + this.task.id)
-        .then(res => {
-          this.subtasks = res.data;
-        });
-      },
-
-      changeToEditable(task, due_date) {
-        this.editable = !this.editable;
-      },
-
-      deleteSubTask(task_id) {
-        axios.delete('/sub-task/' + task_id)
-        .catch(err => {
-          alert(err);
-        }).then(res => {
-          this.fetchSubTasks();
-        });
-      },
-
-      addSubTask() {
-        axios.post('/sub-task', {
-          'task_id': this.task.id,
-          'task': this.subtask,
-          'due_date': this.desire_date
-        }).then(res => {
-          this.fetchSubTasks();
-        });
-
-        this.due_date = '';
-        this.subtask = '';
+      addTodo(date) {
+        this.desire_date = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
       }
     },
 
     mounted() {
-      this.fetchSubTasks();
+      // somehow, this.task.due_date is off by 1 day in vue.
+      var due_date = new Date(this.task.due_date);
+      // therefore, add 1 day to get rid of date offset.
+      due_date.setDate(due_date.getDate() + 1);
+
+      for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
+        this.dateRange.push(new Date(date));
+      }
+
+      // set to initial
+      this.currentDate = new Date(this.today);
 
       if (this.active_id == this.task.id) {
         this.clicked = true;

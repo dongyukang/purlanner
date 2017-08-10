@@ -25,4 +25,12 @@ class Task extends Model
   protected $hidden = [
 
   ];
+
+  /**
+   * Has many subtasks.
+   */
+  public function subtasks()
+  {
+    return $this->hasMany('App\SubTask');
+  }
 }
