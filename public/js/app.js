@@ -12023,6 +12023,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var now = new Date();
 now.setDate(now.getDate() - 1);
@@ -14592,7 +14606,7 @@ exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\na[data-v-ad0e1544] {\n  cursor: pointer;\n}\na:hover.list-group-item[data-v-ad0e1544] {\n  background-color: white;\n}\nspan[data-v-ad0e1544] {\n  font-size: 16px;\n}\n.jumbotron[data-v-ad0e1544] {\n  margin-top: 10px;\n  margin-bottom: -1px;\n  background-color: white;\n}\n#deleteSubTask[data-v-ad0e1544], #editSubTask[data-v-ad0e1544] {\n  /*display: flex;*/\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n", ""]);
+exports.push([module.i, "\na[data-v-ad0e1544] {\n  cursor: pointer;\n}\na:hover.list-group-item[data-v-ad0e1544] {\n  background-color: white;\n}\nspan[data-v-ad0e1544] {\n  font-size: 16px;\n}\n.jumbotron-white[data-v-ad0e1544] {\n  margin-top: 10px;\n  margin-bottom: -1px;\n  background-color: white;\n}\n#deleteSubTask[data-v-ad0e1544], #editSubTask[data-v-ad0e1544] {\n  /*display: flex;*/\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n}\n", ""]);
 
 /***/ }),
 /* 44 */
@@ -42622,8 +42636,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (this.clicked),
       expression: "this.clicked"
     }]
-  }, [_c('div', {
-    staticClass: "jumbotron"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "jumbotron jumbotron-white"
   }, [_c('form', {
     attrs: {
       "role": "form"
@@ -42647,7 +42661,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "placeholder": "Brief Description About Subtask ex) Write introduction...",
+      "placeholder": "Brief Description About Subtask EX) Finish introduction...",
       "required": ""
     },
     domProps: {
@@ -42674,7 +42688,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "desire_date"
     }
-  })], 1), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _vm._l((_vm.subtasks), function(subtask) {
+  })], 1), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _vm._l((_vm.subtasks), function(subtask) {
     return _c('div', [_c('a', {
       staticClass: "list-group-item list-group-item-default",
       on: {
@@ -42696,9 +42710,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deleteSubTask(subtask.id)
         }
       }
-    }, [_vm._v("X")])])])
+    }, [_vm._v("X")]), _vm._v(" "), _c('subtask-editor', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (_vm.editable),
+        expression: "editable"
+      }]
+    })], 1)])
   })], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "jumbotron jumbotron-white"
+  }, [_c('table', {
+    staticClass: "table table-bordered table-striped"
+  }, [_c('thead', [_c('tr', [_c('td', [_vm._v("Day")]), _vm._v(" "), _c('td', [_vm._v("Due/Event Date")]), _vm._v(" "), _c('td', [_vm._v("Todo List")])])]), _vm._v(" "), _c('tbody', [_c('tr')])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-1"
   }, [_c('button', {
