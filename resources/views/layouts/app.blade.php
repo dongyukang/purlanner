@@ -43,8 +43,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav" style="font-size: 15px; margin-top: 5px;">
                       <li><a href="{{ route('task') }}"  @if (Route::currentRouteName() == 'task' || Route::currentRouteName() == 'filter_task') style="color: #f77456" @endif style="color: white"> Write Tasks</a></li>
-                      <li><a href="{{ route('sub-task') }}" @if (Route::currentRouteName() == 'sub-task' || Route::currentRouteName() == 'sub-task-active') style="color: #f77456" @endif style="color: white"> Write Sub-Tasks For Each Task</a></li>
-                      <li><a href="{{ route('whole-picture') }}" @if (Route::currentRouteName() == 'whole-picture') style="color: #f77456" @endif style="color: white"> Look At The Whole Picture</a></li>
+                      <li><a href="{{ route('sub-task') }}" @if (Route::currentRouteName() == 'sub-task' || Route::currentRouteName() == 'sub-task-active') style="color: #f77456" @endif style="color: white"> Write Sub-Tasks</a></li>
+                      <li><a href="{{ route('whole-picture') }}" @if (Route::currentRouteName() == 'whole-picture') style="color: #f77456" @endif style="color: white">The Whole Picture</a></li>
                     </ul>
                   @endif
 
@@ -125,7 +125,7 @@
               <div class="modal-dialog">\
                   <div class="modal-content">\
                       <div class="modal-header">\
-                          <h4 class="modal-title" style="text-align: center">Please wait...</h4>\
+                          <h4 class="modal-title" style="text-align: center">Please wait... It may take a while.</h4>\
                       </div>\
                       <div class="modal-body">\
                         <center> <i class="fa fa-refresh fa-spin fa-5x"></i> </center>\

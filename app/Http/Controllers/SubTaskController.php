@@ -73,6 +73,6 @@ class SubTaskController extends Controller
    */
   public function getSubTasksByTask($task_id)
   {
-    return collect(auth()->user()->getSubTasks())->where('task_id', $task_id)->all();
+    return auth()->user()->tasks()->find($task_id)->subtasks()->get();    
   }
 }

@@ -71,7 +71,7 @@
     <div class="container-fluid">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3>Overview This Month</h3>
+          <h3>Overview By Month</h3>
           <p style="font-size: 13px; color: red;">
             *Calendar will start from today.
           </p>
@@ -90,11 +90,7 @@
                 <tr>
                     <td style="text-align: center">
                       <h4>
-                          @if (\Carbon\Carbon::today()->day == $day)
-                            <span style="color: red">{{ $day }}</span>
-                          @else
-                            {{ $day }}
-                          @endif
+                        {{ $day }}
                      </h4>
                     </td>
                     {{-- Tasks --}}

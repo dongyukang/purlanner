@@ -39,6 +39,7 @@ Route::get('/task/type/create', 'TaskController@showCreateCustomTypes')->name('c
 Route::post('/task/type/create', 'TaskController@saveCustomTypes')->name('save_custom_type');
 Route::get('/task/type/{type_id}', 'TaskController@deleteCustomType')->name('delete_custom_type');
 Route::get('/task/past_due_archives', 'TaskController@showPastArchives')->name('past_due_archives');
+Route::get('/tasksFromToday', 'TaskController@getTasksFromToday');
 
 Route::get('/subtasksByTask/{task_id}', 'SubTaskController@getSubTasksByTask');
 Route::post('/sub-task', 'SubTaskController@saveSubTask')->name('save_sub_task');

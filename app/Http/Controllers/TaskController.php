@@ -8,6 +8,8 @@ class TaskController extends Controller
 {
   public function __construct()
   {
+    date_default_timezone_set("America/New_York");
+
     $this->middleware(['auth', 'course_redirect_guard']);
   }
 
@@ -69,8 +71,6 @@ class TaskController extends Controller
    */
   public function showPastArchives()
   {
-    date_default_timezone_set("America/New_York");
-
     return view('tasks.past_due', [
       'tasks' => auth()->user()->tasks()->whereDate('due_date', '<', \Carbon\Carbon::parse(date("m/d/Y")))->orderBy('due_date', 'dec')->paginate(10)
     ]);
@@ -171,5 +171,15 @@ class TaskController extends Controller
   {
     if (auth()->user()->types()->find($type_id)->delete())
       return redirect()->back()->with('flash', 'Type is successfully deleted!')->with('type', 'info');
+  }
+
+  /**
+   * Get tasks from today.
+   *
+   * @return array
+   */
+  public function getTasksFromToday()
+  {
+    return auth()->user()->tasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get();
   }
 }

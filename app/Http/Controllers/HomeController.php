@@ -13,6 +13,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+      if (auth()->check())
+        return redirect('planner');
+
       return view('welcome');
     }
 

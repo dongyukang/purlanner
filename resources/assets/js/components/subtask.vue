@@ -16,38 +16,31 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="date in this.dateRange">
+              <tr v-for="date in this.dates">
                 <td style="text-align: center">
                   <a style="cursor: pointer; text-decoration: none;" @click="addTodo(date)"><h4> {{ date.getDate() }} </h4></a>
                 </td>
                 <td>
-                  <ul>
-                    <li>
-                      Thesis paper
-                    </li>
-                  </ul>
+                  <task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list>
                 </td>
                 <td>
-                  <ul>
-                    <li>
-                      Finish chapter 1
-                    </li>
-                  </ul>
                 </td>
               </tr>
             </tbody>
           </table>
           <div>
             <form role="form" v-show="this.desire_date != ''" @submit.prevent>
-              <div class="row">
-                <div class="col-xs-3">
-                  <input class="form-control" disabled v-model="desire_date">
-                </div>
-                <div class="col-xs-7">
-                  <input class="form-control" v-model="todo" placeholder="Write Brief Description Of What You Want To Finish This Day.">
-                </div>
-                <div class="col-xs-1">
-                  <button class="btn btn-info" @click="">Save</button>
+              <div class="jumbotron" style="background-color: #97cd76;">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <input class="form-control" disabled v-model="desire_date">
+                  </div>
+                  <div class="col-xs-7">
+                    <input class="form-control" v-model="todo" placeholder="Write Brief Description Of What You Want To Finish This Day.">
+                  </div>
+                  <div class="col-xs-1">
+                    <button class="btn btn-info" @click="">Save</button>
+                  </div>
                 </div>
               </div>
             </form>
@@ -65,8 +58,13 @@
 </template>
 
 <script>
+  import TaskList from './subtasks/TaskList.vue';
 
   export default {
+    components: {
+      'task-list': TaskList
+    },
+
     props: ['task_data', 'course', 'active_id', 'today'],
 
     data() {
@@ -83,6 +81,42 @@
     computed: {
       isPaginatable() {
         return (this.dateRange.length - 1) > 7;
+      },
+
+      dates() {
+        /*
+        ------------------------
+        Setting Up Date Ranges
+        ------------------------
+         */
+        // somehow, this.task.due_date is off by 1 day in Vue.
+        var due_date = new Date(this.task.due_date);
+        // therefore, add 1 day to get rid of date offset.
+        due_date.setDate(due_date.getDate() + 1);
+
+        for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
+          this.dateRange.push(new Date(date));
+        }
+
+        // set to initial
+        this.currentDate = new Date(this.today);
+
+        /*
+        ------------------------
+        Divide By Seven Days
+        ------------------------
+         */
+        if (this.isPaginatable) {
+          var dates = [];
+
+          for (var i = 0; i < 8; i++) {
+            dates.push(this.dateRange[i]);
+          }
+
+          return dates;
+        } else {
+          return this.dateRange;
+        }
       }
     },
 
@@ -97,18 +131,6 @@
     },
 
     mounted() {
-      // somehow, this.task.due_date is off by 1 day in vue.
-      var due_date = new Date(this.task.due_date);
-      // therefore, add 1 day to get rid of date offset.
-      due_date.setDate(due_date.getDate() + 1);
-
-      for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
-        this.dateRange.push(new Date(date));
-      }
-
-      // set to initial
-      this.currentDate = new Date(this.today);
-
       if (this.active_id == this.task.id) {
         this.clicked = true;
       }

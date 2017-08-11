@@ -10826,6 +10826,7 @@ Vue.component('notification-button', __webpack_require__(49));
 Vue.component('date-picker', __webpack_require__(69));
 Vue.component('subtask-editor', __webpack_require__(55));
 Vue.component('todo-list', __webpack_require__(50));
+// Vue.component('task-list', require('./components/subtasks/TaskList.vue'));
 
 var app = new Vue({
   el: '#app'
@@ -11990,6 +11991,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__subtasks_TaskList_vue__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__subtasks_TaskList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__subtasks_TaskList_vue__);
 //
 //
 //
@@ -12049,16 +12052,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    'task-list': __WEBPACK_IMPORTED_MODULE_0__subtasks_TaskList_vue___default.a
+  },
+
   props: ['task_data', 'course', 'active_id', 'today'],
 
   data: function data() {
@@ -12076,6 +12077,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   computed: {
     isPaginatable: function isPaginatable() {
       return this.dateRange.length - 1 > 7;
+    },
+    dates: function dates() {
+      /*
+      ------------------------
+      Setting Up Date Ranges
+      ------------------------
+       */
+      // somehow, this.task.due_date is off by 1 day in Vue.
+      var due_date = new Date(this.task.due_date);
+      // therefore, add 1 day to get rid of date offset.
+      due_date.setDate(due_date.getDate() + 1);
+
+      for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
+        this.dateRange.push(new Date(date));
+      }
+
+      // set to initial
+      this.currentDate = new Date(this.today);
+
+      /*
+      ------------------------
+      Divide By Seven Days
+      ------------------------
+       */
+      if (this.isPaginatable) {
+        var dates = [];
+
+        for (var i = 0; i < 8; i++) {
+          dates.push(this.dateRange[i]);
+        }
+
+        return dates;
+      } else {
+        return this.dateRange;
+      }
     }
   },
 
@@ -12089,18 +12125,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   mounted: function mounted() {
-    // somehow, this.task.due_date is off by 1 day in vue.
-    var due_date = new Date(this.task.due_date);
-    // therefore, add 1 day to get rid of date offset.
-    due_date.setDate(due_date.getDate() + 1);
-
-    for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
-      this.dateRange.push(new Date(date));
-    }
-
-    // set to initial
-    this.currentDate = new Date(this.today);
-
     if (this.active_id == this.task.id) {
       this.clicked = true;
     }
@@ -42642,7 +42666,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n          *Click on the day that you want to add your subtasks.\n        ")]), _vm._v(" "), _c('table', {
     staticClass: "table table-bordered table-striped"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((this.dateRange), function(date) {
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((this.dates), function(date) {
     return _c('tr', [_c('td', {
       staticStyle: {
         "text-align": "center"
@@ -42657,7 +42681,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.addTodo(date)
         }
       }
-    }, [_c('h4', [_vm._v(" " + _vm._s(date.getDate()) + " ")])])]), _vm._v(" "), _vm._m(1, true), _vm._v(" "), _vm._m(2, true)])
+    }, [_c('h4', [_vm._v(" " + _vm._s(date.getDate()) + " ")])])]), _vm._v(" "), _c('td', [_c('task-list', {
+      attrs: {
+        "month": date.getMonth() + 1,
+        "day": date.getDate(),
+        "year": date.getFullYear()
+      }
+    })], 1), _vm._v(" "), _c('td')])
   }))]), _vm._v(" "), _c('div', [_c('form', {
     directives: [{
       name: "show",
@@ -42672,6 +42702,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "submit": function($event) {
         $event.preventDefault();
       }
+    }
+  }, [_c('div', {
+    staticClass: "jumbotron",
+    staticStyle: {
+      "background-color": "#97cd76"
     }
   }, [_c('div', {
     staticClass: "row"
@@ -42726,11 +42761,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {}
     }
-  }, [_vm._v("Save")])])])])])]), _vm._v(" "), (this.isPaginatable) ? _c('div', {
+  }, [_vm._v("Save")])])])])])])]), _vm._v(" "), (this.isPaginatable) ? _c('div', {
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._m(3)]) : _vm._e()])])])
+  }, [_vm._m(1)]) : _vm._e()])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('td', {
     staticStyle: {
@@ -42745,10 +42780,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "text-align": "center"
     }
   }, [_vm._v("Todo")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('ul', [_c('li', [_vm._v("\n                    Thesis paper\n                  ")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('ul', [_c('li', [_vm._v("\n                    Finish chapter 1\n                  ")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('ul', {
     staticClass: "pager"
@@ -43065,6 +43096,155 @@ module.exports = function(module) {
 __webpack_require__(12);
 module.exports = __webpack_require__(13);
 
+
+/***/ }),
+/* 72 */,
+/* 73 */,
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['month', 'day', 'year'],
+
+  data: function data() {
+    return {
+      tasksAllFromToday: []
+    };
+  },
+
+
+  computed: {
+    tasks: function tasks() {
+      var tasks = []; // tasks that their due dates are equal to given day
+
+      for (var t = 0; t < this.tasksAllFromToday.length; t++) {
+        var date = new Date(this.tasksAllFromToday[t].due_date);
+        date.setDate(date.getDate() + 1);
+
+        if (date.getDate() == this.day && date.getFullYear() == this.year && date.getMonth() + 1 == this.month) {
+          tasks.push(this.tasksAllFromToday[t]);
+        }
+      }
+
+      return tasks;
+    }
+  },
+
+  methods: {
+    fetchTasksFromToday: function fetchTasksFromToday() {
+      var _this = this;
+
+      axios.get('/tasksFromToday').then(function (res) {
+        _this.tasksAllFromToday = res.data;
+      });
+    }
+  },
+
+  mounted: function mounted() {
+    this.fetchTasksFromToday();
+  }
+});
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)();
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(78)
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(74),
+  /* template */
+  __webpack_require__(77),
+  /* scopeId */
+  "data-v-3112445d",
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/dongyukang/Desktop/laravel-projects/purlanner/resources/assets/js/components/subtasks/TaskList.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] TaskList.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3112445d", Component.options)
+  } else {
+    hotAPI.reload("data-v-3112445d", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', _vm._l((this.tasks), function(task) {
+    return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(task.title) + "\n    ")])])
+  }))
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3112445d", module.exports)
+  }
+}
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(75);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("e7ddc7e2", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3112445d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TaskList.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-3112445d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TaskList.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);
