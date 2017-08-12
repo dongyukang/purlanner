@@ -73,6 +73,6 @@ class SubTaskController extends Controller
    */
   public function getSubTasksByTask($task_id)
   {
-    return auth()->user()->tasks()->find($task_id)->subtasks()->get();    
+    return auth()->user()->tasks()->find($task_id)->subtasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get();    
   }
 }

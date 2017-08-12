@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="date in this.dates">
+              <tr v-for="date in dates">
                 <td style="text-align: center">
                   <a style="cursor: pointer; text-decoration: none;" @click="addTodo(date)"><h4> {{ date.getDate() }} </h4></a>
                 </td>
@@ -24,6 +24,7 @@
                   <task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list>
                 </td>
                 <td>
+                  <subtask-list :task_id="task.id" :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></subtask-list>
                 </td>
               </tr>
             </tbody>
@@ -59,10 +60,12 @@
 
 <script>
   import TaskList from './subtasks/TaskList.vue';
+  import SubTaskList from './subtasks/SubTaskList.vue';
 
   export default {
     components: {
-      'task-list': TaskList
+      'task-list': TaskList,
+      'subtask-list': SubTaskList
     },
 
     props: ['task_data', 'course', 'active_id', 'today'],
