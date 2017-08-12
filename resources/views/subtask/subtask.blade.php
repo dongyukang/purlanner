@@ -19,16 +19,5 @@
         to achieve the task.
       </div>
     </div>
-
-    <div class="container jumbotron">
-      @foreach ($mytasks as $task)
-        <subtask
-              today = "{{ \Carbon\Carbon::today() }}"
-              task_data="{{ $task }}"
-              active_id="{{ $active_id }}"
-              course="{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}">
-        </subtask>
-      @endforeach
-    </div>
   </div>
 @endsection
