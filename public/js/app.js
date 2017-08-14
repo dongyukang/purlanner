@@ -12081,6 +12081,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -12101,15 +12102,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         year: ''
       },
 
-      // task id, due_date
+      //  due_date
       task: {
-        id: '',
         day: '',
         month: '',
         year: ''
       },
 
-      taskClicked: false,
+      dayClicked: false,
       due_date: '',
 
       months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -12141,17 +12141,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    changeTaskClickStatus: function changeTaskClickStatus(task_id) {
-      var _this = this;
+    changeDayClickStatus: function changeDayClickStatus(date) {
+      this.dayClicked = !this.dayClicked;
 
-      this.taskClicked = !this.taskClicked;
+      this.task.day = date.getDate();
+      this.task.month = date.getMonth() + 1;
+      this.taskyear = date.getFullYear();
 
-      window.events.$on('task-clicked', function (e) {
-        _this.task.id = e.task_id;
-        _this.task.day = e.day;
-        _this.task.month = e.month;
-        _this.task.year = e.year;
-      });
+      // window.events.$on('task-clicked', (e) => {
+      //   this.task.id = e.task_id;
+      //   this.task.day = e.day;
+      //   this.task.month = e.month;
+      //   this.task.year = e.year;
+      // });
     },
     nextMonth: function nextMonth() {
       if (this.currentDate.month == 12) {
@@ -12242,7 +12244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['task_id', 'day', 'month', 'year'],
+  props: ['day', 'month', 'year'],
 
   computed: {},
 
@@ -12362,16 +12364,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get('/tasksFromToday').then(function (res) {
         _this.tasksAllFromToday = res.data;
-      });
-    },
-    emitStatus: function emitStatus(task_id) {
-      this.$emit('task-clicked');
-
-      window.events.$emit('task-clicked', {
-        'task_id': task_id,
-        'day': this.day,
-        'month': this.month,
-        'year': this.year
       });
     }
   },
@@ -42861,17 +42853,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((this.tasks), function(task) {
-    return _c('ul', [_c('li', [_c('a', {
-      staticStyle: {
-        "cursor": "pointer",
-        "text-decoration": "none"
-      },
-      on: {
-        "click": function($event) {
-          _vm.emitStatus(task.id)
-        }
-      }
-    }, [_vm._v(_vm._s(task.title))])])])
+    return _c('ul', [_c('li', [_vm._v("\n       " + _vm._s(task.title) + "\n    ")])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -42970,7 +42952,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('div', {
     staticClass: "container"
-  }, [(!_vm.taskClicked) ? _c('div', [_c('p'), _c('div', {
+  }, [(!_vm.dayClicked) ? _c('div', [_c('p'), _c('div', {
     staticClass: "jumbotron jumbotron-gradient",
     staticStyle: {
       "background-color": "#e4e9f2"
@@ -43024,28 +43006,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "color": "red"
     }
-  }, [_vm._v("\n        * Click on the task(Due/Event) that you wish to write your subtasks.\n      ")]), _vm._v(" "), _c('table', {
+  }, [_vm._v("\n        * Click on the day that you wish to write your subtasks.\n      ")]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped table-bordered"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.dates), function(date) {
     return _c('tr', [_c('td', {
       staticStyle: {
         "text-align": "center"
       }
-    }, [_c('h4', [_vm._v(_vm._s(date.getDate()))])]), _vm._v(" "), _c('td', [_c('task-list', {
+    }, [_c('a', {
+      staticStyle: {
+        "cursor": "pointer",
+        "text-decoration": "none"
+      },
+      on: {
+        "click": function($event) {
+          _vm.changeDayClickStatus(date)
+        }
+      }
+    }, [_c('h4', [_vm._v(_vm._s(date.getDate()))])])]), _vm._v(" "), _c('td', [_c('task-list', {
       attrs: {
         "month": date.getMonth() + 1,
         "day": date.getDate(),
         "year": date.getFullYear()
-      },
-      on: {
-        "task-clicked": function($event) {
-          _vm.changeTaskClickStatus()
-        }
       }
     })], 1)])
-  }))])]) : _vm._e(), _vm._v(" "), (_vm.taskClicked) ? _c('div', [_c('subtask-editor', {
+  }))])]) : _vm._e(), _vm._v(" "), (_vm.dayClicked) ? _c('div', [_c('subtask-editor', {
     attrs: {
-      "task_id": _vm.task.id,
       "day": _vm.task.day,
       "month": _vm.task.month,
       "year": _vm.task.year
@@ -43054,7 +43040,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn btn-primary btn btn-block",
     on: {
       "click": function($event) {
-        _vm.taskClicked = false
+        _vm.dayClicked = false
       }
     }
   }, [_c('i', {
@@ -43173,7 +43159,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   })]), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', [_c('table', {
-    staticClass: "table table-striped"
+    staticClass: "table table-striped table-bordered"
   }, [_vm._m(1), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', {
     staticStyle: {
       "text-align": "center"

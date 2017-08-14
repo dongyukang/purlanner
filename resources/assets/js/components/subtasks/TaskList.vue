@@ -2,7 +2,7 @@
   <div>
     <ul v-for="task in this.tasks">
       <li>
-        <a style="cursor: pointer; text-decoration: none;" @click="emitStatus(task.id)">{{ task.title }}</a>
+         {{ task.title }}
       </li>
     </ul>
   </div>
@@ -43,16 +43,16 @@
         });
       },
 
-      emitStatus(task_id) {
-        this.$emit('task-clicked');
-
-        window.events.$emit('task-clicked', {
-          'task_id': task_id,
-          'day': this.day,
-          'month': this.month,
-          'year': this.year
-        });
-      }
+      // emitStatus(task_id) {
+      //   this.$emit('task-clicked');
+      //
+      //   window.events.$emit('task-clicked', {
+      //     'task_id': task_id,
+      //     'day': this.day,
+      //     'month': this.month,
+      //     'year': this.year
+      //   });
+      // }
     },
 
     mounted() {

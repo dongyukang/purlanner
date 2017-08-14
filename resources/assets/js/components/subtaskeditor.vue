@@ -15,7 +15,7 @@
       </div>
 
       <div>
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
           <thead>
             <tr>
               <td style="text-align: center">Day</td>
@@ -36,7 +36,7 @@
 
 <script>
   export default {
-    props: ['task_id', 'day', 'month', 'year'],
+    props: ['day', 'month', 'year'],
 
     computed: {
     },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div v-if="!taskClicked">
+      <div v-if="!dayClicked">
         <p>
           <div class="jumbotron jumbotron-gradient" style="background-color: #e4e9f2;">
             <center><h2 style="color: white">{{ months[currentDate.month - 1] }}</h2></center>
@@ -15,7 +15,7 @@
           </div>
         </p>
         <p style="color: red;">
-          * Click on the task(Due/Event) that you wish to write your subtasks.
+          * Click on the day that you wish to write your subtasks.
         </p>
         <table class="table table-striped table-bordered">
           <thead>
@@ -27,18 +27,19 @@
           </thead>
           <tbody>
             <tr v-for="date in dates">
-              <td style="text-align: center"><h4>{{ date.getDate() }}</h4></td>
-              <td><task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()" @task-clicked="changeTaskClickStatus()"></task-list></td>
+              <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)"><h4>{{ date.getDate() }}</h4></a></td>
+               <!-- @task-clicked="changeDayClickStatus()" -->
+              <td><task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list></td>
               <!-- <td><subtask-list :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-list></td> -->
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div v-if="taskClicked">
-        <subtask-editor :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-editor>
+      <div v-if="dayClicked">
+        <subtask-editor :day="task.day" :month="task.month" :year="task.year"></subtask-editor>
         <center>
-          <button class="btn btn-primary btn btn-block" @click="taskClicked = false"><i class="fa fa-calendar fa-2x"></i></button>
+          <button class="btn btn-primary btn btn-block" @click="dayClicked = false"><i class="fa fa-calendar fa-2x"></i></button>
         </center>
       </div>
     </div>
@@ -65,15 +66,14 @@
           year: ''
         },
 
-        // task id, due_date
+        //  due_date
         task: {
-          id: '',
           day: '',
           month: '',
           year: ''
         },
 
-        taskClicked: false,
+        dayClicked: false,
         due_date: '',
 
         months: [
@@ -108,15 +108,19 @@
     },
 
     methods: {
-      changeTaskClickStatus(task_id) {
-        this.taskClicked = !this.taskClicked;
+      changeDayClickStatus(date) {
+        this.dayClicked = !this.dayClicked;
 
-        window.events.$on('task-clicked', (e) => {
-          this.task.id = e.task_id;
-          this.task.day = e.day;
-          this.task.month = e.month;
-          this.task.year = e.year;
-        });
+        this.task.day = date.getDate();
+        this.task.month = date.getMonth() + 1;
+        this.taskyear = date.getFullYear();
+
+        // window.events.$on('task-clicked', (e) => {
+        //   this.task.id = e.task_id;
+        //   this.task.day = e.day;
+        //   this.task.month = e.month;
+        //   this.task.year = e.year;
+        // });
       },
 
       nextMonth() {
