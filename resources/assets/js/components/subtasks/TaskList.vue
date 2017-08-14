@@ -2,7 +2,7 @@
   <div>
     <ul v-for="task in this.tasks">
       <li>
-        {{ task.title }}
+        <a style="cursor: pointer; text-decoration: none;" @click="emitStatus(task.id)">{{ task.title }}</a>
       </li>
     </ul>
   </div>
@@ -40,6 +40,17 @@
         axios.get('/tasksFromToday')
         .then(res => {
           this.tasksAllFromToday = res.data;
+        });
+      },
+
+      emitStatus(task_id) {
+        this.$emit('task-clicked');
+
+        window.events.$emit('task-clicked', {
+          'task_id': task_id,
+          'day': this.day,
+          'month': this.month,
+          'year': this.year
         });
       }
     },

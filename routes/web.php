@@ -47,10 +47,6 @@ Route::delete('/sub-task/{task_id}', 'SubTaskController@deleteSubTask');
 
 Route::get('/look-at-the-whole-picture', 'AgendaController@index')->name('whole-picture');
 
-Route::get('/page', function() {
-  return auth()->user()->tasks()->get()->count() / 7;
-});
-
 Route::get('/home', function () {
   return redirect('/planner');
 });

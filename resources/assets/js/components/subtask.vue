@@ -1,163 +1,181 @@
 <template>
   <div>
-    <div class="list-group">
-      <a class="btn btn-primary btn-sm" @click="showAdd()"><span><i class="fa fa-caret-right" v-if="!this.clicked"></i> <i class="fa fa-caret-down" v-else></i> {{ course }} - {{ task.title }} | {{ task.due_date }}</span></a>
-      <div v-show="this.clicked">
-        <div class="jumbotron jumbotron-white">
-          <p style="color: red; font-size: 15px;">
-            *Click on the day that you want to add your subtasks.
-          </p>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <td style="text-align: center">Day</td>
-                <td style="text-align: center">Due/Event Date</td>
-                <td style="text-align: center">Todo</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="date in dates">
-                <td style="text-align: center">
-                  <a style="cursor: pointer; text-decoration: none;" @click="addTodo(date)"><h4> {{ date.getDate() }} </h4></a>
-                </td>
-                <td>
-                  <task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list>
-                </td>
-                <td>
-                  <subtask-list :task_id="task.id" :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></subtask-list>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <form role="form" v-show="this.desire_date != ''" @submit.prevent>
-              <div class="jumbotron" style="background-color: #97cd76;">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <input class="form-control" disabled v-model="desire_date">
-                  </div>
-                  <div class="col-xs-7">
-                    <input class="form-control" v-model="todo" placeholder="Write Brief Description Of What You Want To Finish This Day.">
-                  </div>
-                  <div class="col-xs-1">
-                    <button class="btn btn-info" @click="">Save</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+    <div class="container">
+      <div v-if="!taskClicked">
+        <p>
+          <div class="jumbotron jumbotron-gradient" style="background-color: #e4e9f2;">
+            <center><h2 style="color: white">{{ months[currentDate.month - 1] }}</h2></center>
+
+            <div style="margin-top: 40px;">
+              <ul class="pager">
+                <li><a style="margin-right: 35px; cursor: pointer;" @click="prevMonth()" v-show="canPrev"><i class="fa fa-arrow-left"></i> Prev Month</a></li>
+                <li><a style="cursor: pointer;" @click="nextMonth()" v-show="canNext">Next Month <i class="fa fa-arrow-right"></i></a></li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div style="text-align:center;" v-if="this.isPaginatable">
-          <ul class="pager">
-           <li><a href="#"><i class="fa fa-arrow-left"></i> Previous 7 Days</a></li>
-           <li><a href="#">Next 7 Days <i class="fa fa-arrow-right"></i></a></li>
-         </ul>
-       </div>
+        </p>
+        <p style="color: red;">
+          * Click on the task(Due/Event) that you wish to write your subtasks.
+        </p>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <td style="text-align: center">Day</td>
+              <td style="text-align: center">Due/Event</td>
+              <td style="text-align: center">Todo</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="date in dates">
+              <td style="text-align: center"><h4>{{ date.getDate() }}</h4></td>
+              <td><task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()" @task-clicked="changeTaskClickStatus()"></task-list></td>
+              <!-- <td><subtask-list :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-list></td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div v-if="taskClicked">
+        <subtask-editor :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-editor>
+        <center>
+          <button class="btn btn-primary btn btn-block" @click="taskClicked = false"><i class="fa fa-calendar fa-2x"></i></button>
+        </center>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import SubTaskEditor from './subtaskeditor.vue';
   import TaskList from './subtasks/TaskList.vue';
   import SubTaskList from './subtasks/SubTaskList.vue';
 
   export default {
     components: {
+      'subtask-editor': SubTaskEditor,
       'task-list': TaskList,
-      'subtask-list': SubTaskList
+      'subtask-list': SubTaskList,
     },
-
-    props: ['task_data', 'course', 'active_id', 'today'],
 
     data() {
       return {
-        task: JSON.parse(this.task_data),
-        currentDate: new Date(this.today),
-        dateRange: [],
-        desire_date: '',
-        todo: '',
-        clicked: false
+        currentDate: {
+          month: '',
+          day: '',
+          year: ''
+        },
+
+        // task id, due_date
+        task: {
+          id: '',
+          day: '',
+          month: '',
+          year: ''
+        },
+
+        taskClicked: false,
+        due_date: '',
+
+        months: [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ],
+
+        dates: [],
       }
     },
 
     computed: {
-      isPaginatable() {
-        return (this.dateRange.length - 1) > 7;
+      canPrev() {
+        var today = new Date();
+
+        if (this.currentDate.month > today.getMonth() + 1) {
+          return true;
+        }
+
+        return false;
       },
 
-      dates() {
-        /*
-        ------------------------
-        Setting Up Date Ranges
-        ------------------------
-         */
-        // somehow, this.task.due_date is off by 1 day in Vue.
-        var due_date = new Date(this.task.due_date);
-        // therefore, add 1 day to get rid of date offset.
-        due_date.setDate(due_date.getDate() + 1);
+      canNext() {
+        var today = new Date();
 
-        for (var date = this.currentDate; date < due_date; date.setDate(date.getDate() + 1)) {
-          this.dateRange.push(new Date(date));
+        if (this.currentDate.month >= today.getMonth() + 1) {
+          return true;
         }
 
-        // set to initial
-        this.currentDate = new Date(this.today);
-
-        /*
-        ------------------------
-        Divide By Seven Days
-        ------------------------
-         */
-        if (this.isPaginatable) {
-          var dates = [];
-
-          for (var i = 0; i < 8; i++) {
-            dates.push(this.dateRange[i]);
-          }
-
-          return dates;
-        } else {
-          return this.dateRange;
-        }
+        return false;
       }
     },
 
     methods: {
-      showAdd() {
-        this.clicked = !this.clicked;
+      changeTaskClickStatus(task_id) {
+        this.taskClicked = !this.taskClicked;
+
+        window.events.$on('task-clicked', (e) => {
+          this.task.id = e.task_id;
+          this.task.day = e.day;
+          this.task.month = e.month;
+          this.task.year = e.year;
+        });
       },
 
-      addTodo(date) {
-        this.desire_date = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+      nextMonth() {
+        if (this.currentDate.month == 12) {
+          this.fetchCalendar(this.currentDate.year, this.currentDate.month = 1);
+        } else {
+          this.currentDate.month++;
+          this.fetchCalendar(this.currentDate.year, this.currentDate.month);
+        }
+      },
+
+      prevMonth() {
+        if (this.currentDate.month == 1) {
+          this.currentDate.month = 12;
+        } else {
+          this.currentDate.month--;
+          this.fetchCalendar(this.currentDate.year, this.currentDate.month);
+        }
+      },
+
+      fetchCalendar(year, month) {
+        this.dates.splice(0, this.dates.length);
+
+        var thisDay = {
+          month: new Date().getMonth() + 1,
+          year: new Date().getFullYear()
+        };
+
+        var beginDate = (year == thisDay.year) && (month == thisDay.month) ? new Date() : new Date(year, month - 1, 1);
+
+        var endDate = new Date(year, month, 0);
+
+        for (var date = beginDate; date < endDate; date.setDate(date.getDate() + 1)) {
+          this.dates.push(new Date(date));
+        }
+        this.dates.push(new Date(endDate)); // '1 day offset' problem
       }
     },
 
     mounted() {
-      if (this.active_id == this.task.id) {
-        this.clicked = true;
-      }
+      var date = new Date();
+      this.currentDate.month = date.getMonth() + 1;
+      this.currentDate.day = date.getDate();
+      this.currentDate.year = date.getFullYear();
+
+      this.fetchCalendar(this.currentDate.year, this.currentDate.month);
     }
   }
 </script>
 
 <style scoped>
-  a {
-    cursor: pointer;
-  }
-  a:hover.list-group-item {
-    background-color: white;
-  }
-  span {
-    font-size: 16px;
-  }
-  .jumbotron-white {
-    margin-top: 10px;
-    margin-bottom: -1px;
-    background-color: white;
-  }
-  #deleteSubTask, #editSubTask {
-    /*display: flex;*/
-    justify-content: flex-end;
+  .jumbotron-gradient {
+    background: rgba(147,206,222,1);
+    background: -moz-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));
+    background: -webkit-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -o-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -ms-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );
   }
 </style>

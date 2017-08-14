@@ -72,7 +72,9 @@ class TaskController extends Controller
   public function showPastArchives()
   {
     return view('tasks.past_due', [
-      'tasks' => auth()->user()->tasks()->whereDate('due_date', '<', \Carbon\Carbon::parse(date("m/d/Y")))->orderBy('due_date', 'dec')->paginate(10)
+      'tasks' => auth()->user()->tasks()
+      ->whereDate('due_date', '<', \Carbon\Carbon::parse(date("m/d/Y")))
+      ->orderBy('due_date', 'dec')->paginate(10)
     ]);
   }
 
@@ -180,6 +182,6 @@ class TaskController extends Controller
    */
   public function getTasksFromToday()
   {
-    return auth()->user()->tasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get();
+    return auth()->user()->tasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->orderBy('due_date', 'asc')->get();
   }
 }
