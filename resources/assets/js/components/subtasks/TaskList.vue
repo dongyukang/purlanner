@@ -20,18 +20,16 @@
 
     computed: {
       tasks() {
-        var tasks = []; // tasks that their due dates are equal to given day
+        var tasksToSave = collect(this.tasksAllFromToday);
 
-        for (var t = 0; t < this.tasksAllFromToday.length; t++) {
-          var date = new Date(this.tasksAllFromToday[t].due_date);
+        var tasks = tasksToSave.filter((value, key) => {
+          var date = new Date(value.due_date);
           date.setDate(date.getDate() + 1);
 
-          if (date.getDate() == this.day && date.getFullYear() == this.year && date.getMonth() + 1 == this.month) {
-            tasks.push(this.tasksAllFromToday[t]);
-          }
-        }
+          return (date.getDate() == this.day) && (date.getFullYear() == this.year) && (date.getMonth() + 1 == this.month);
+        });
 
-        return tasks;
+        return tasks.all();
       }
     },
 

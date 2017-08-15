@@ -19,6 +19,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
+    "collect.js": "^3.0.48",
     "forever": "^0.15.3",
     "ioredis": "^3.1.1",
     "socket.io": "^2.0.3",
