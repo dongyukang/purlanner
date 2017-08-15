@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    props: ['task_id', 'month', 'year' ,'day'],
+    props: ['month', 'year' ,'day'],
 
     data() {
       return {
@@ -36,7 +36,7 @@
     },
 
     mounted() {
-      axios.get('/subtasksByTask/' + this.task_id)
+      axios.get('/subtasksByTask/')
       .then(res => {
         this.todos_data = res.data;
       });

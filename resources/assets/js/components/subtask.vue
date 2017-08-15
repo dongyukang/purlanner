@@ -113,7 +113,7 @@
 
         this.task.day = date.getDate();
         this.task.month = date.getMonth() + 1;
-        this.taskyear = date.getFullYear();
+        this.task.year = date.getFullYear();
 
         // window.events.$on('task-clicked', (e) => {
         //   this.task.id = e.task_id;

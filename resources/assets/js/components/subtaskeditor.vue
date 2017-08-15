@@ -25,7 +25,10 @@
           </thead>
           <tbody>
             <tr>
-              <td style="text-align: center">{{ day }}</td>
+              <td style="text-align: center"><h4> {{ day }} </h4></td>
+              <td>
+                <task-list :day="this.day" :month="this.month" :year="this.year"></task-list>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -35,8 +38,20 @@
 </template>
 
 <script>
+  import TaskList from './subtasks/TaskList.vue';
+
   export default {
+    components: {
+      'task-list': TaskList
+    },
+
     props: ['day', 'month', 'year'],
+
+    data() {
+      return {
+        subtask: ''
+      }
+    },
 
     computed: {
     },
@@ -47,10 +62,9 @@
       }
     },
 
-    data() {
-      return {
-        subtask: ''
-      }
+
+
+    mounted() {
     }
   }
 </script>

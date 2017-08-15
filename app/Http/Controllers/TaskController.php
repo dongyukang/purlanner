@@ -182,6 +182,9 @@ class TaskController extends Controller
    */
   public function getTasksFromToday()
   {
-    return auth()->user()->tasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->orderBy('due_date', 'asc')->get();
+    return auth()->user()->tasks()
+                        ->whereDate('due_date', '>=', \Carbon\Carbon::today())
+                        ->orderBy('due_date', 'asc')
+                        ->get();
   }
 }
