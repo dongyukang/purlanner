@@ -39,18 +39,7 @@
         .then(res => {
           this.tasksAllFromToday = res.data;
         });
-      },
-
-      // emitStatus(task_id) {
-      //   this.$emit('task-clicked');
-      //
-      //   window.events.$emit('task-clicked', {
-      //     'task_id': task_id,
-      //     'day': this.day,
-      //     'month': this.month,
-      //     'year': this.year
-      //   });
-      // }
+      }
     },
 
     mounted() {
