@@ -17,23 +17,31 @@
         <p style="color: red;">
           * Click on the day that you wish to write your subtasks.
         </p>
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <td style="text-align: center">Day</td>
-              <td style="text-align: center">Due/Event</td>
-              <td style="text-align: center">Todo</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="date in dates">
-              <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)"><h4>{{ date.getDate() }}</h4></a></td>
-               <!-- @task-clicked="changeDayClickStatus()" -->
-              <td><task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list></td>
-              <!-- <td><subtask-list :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-list></td> -->
-            </tr>
-          </tbody>
-        </table>
+        <div class="panel panel-default">
+          <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-calendar fa-4x"></i>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <td style="text-align: center">Day</td>
+                  <td style="text-align: center">Todo</td>
+                  <td style="text-align: center">Due/Event</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="date in dates">
+                  <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)"><h4>{{ date.getDate() }}</h4></a></td>
+                   <!-- @task-clicked="changeDayClickStatus()" -->
+                  <td><subtask-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></subtask-list></td>
+                  <td><task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list></td>
+                  <!-- <td><subtask-list :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-list></td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div v-if="dayClicked">

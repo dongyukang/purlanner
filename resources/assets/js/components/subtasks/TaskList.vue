@@ -2,7 +2,7 @@
   <div>
     <ul v-for="task in this.tasks">
       <li>
-         {{ task.title }}
+        {{ task.title }}
       </li>
     </ul>
   </div>
@@ -49,4 +49,7 @@
 </script>
 
 <style scoped>
+  li {
+    color: red;
+  }
 </style>

@@ -14,32 +14,31 @@
 
     data() {
       return {
-        todos_data: []
+        subtasks: []
       }
     },
 
     computed: {
       todos() {
-        var todos = [];
+        console.log(this.subtasks[0]); // subtasks for first task
 
-        for (var t = 0; t < this.todos_data.length; t++) {
-          var date = new Date(this.todos_data[t].due_date);
-          date.setDate(date.getDate() + 1);
-
-          if (date.getDate() == this.day && date.getFullYear() == this.year && date.getMonth() + 1 == this.month) {
-            todos.push(this.todos_data[t]);
-          }
+        for (var i = 0; this.subtasks.length; i++) { // iterate through number of tasks
         }
+      }
+    },
 
-        return todos;
+    methods: {
+      fetchSubtasks() {
+        axios.get('/subtasksFromToday')
+        .then(res => {
+          this.subtasks = res.data;
+          // this.subtasks = collect(res.data).pluck('subtasks').all();
+        });
       }
     },
 
     mounted() {
-      axios.get('/subtasksByTask/')
-      .then(res => {
-        this.todos_data = res.data;
-      });
+      this.fetchSubtasks();
     }
   }
 </script>

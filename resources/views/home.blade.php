@@ -48,7 +48,6 @@
           @include('tasks.tasks', [
             'types' => auth()->user()->getNoneZeroTypes()
           ])
-
         @else
           <center>
             <h4>Congradulations! You are not currently busy.</h4>

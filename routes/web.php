@@ -42,6 +42,7 @@ Route::get('/task/past_due_archives', 'TaskController@showPastArchives')->name('
 Route::get('/tasksFromToday', 'TaskController@getTasksFromToday');
 
 Route::get('/subtasksByTask/{task_id}', 'SubTaskController@getSubTasksByTask');
+Route::get('/subtasksFromToday', 'SubTaskController@getSubTasksFromToday');
 Route::post('/sub-task', 'SubTaskController@saveSubTask')->name('save_sub_task');
 Route::delete('/sub-task/{task_id}', 'SubTaskController@deleteSubTask');
 

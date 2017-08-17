@@ -4,7 +4,13 @@
       <div class="jumbotron jumbotron-gradient">
         <form role="form" @submit.prevent="addSubTask()">
           <div class="row">
-            <div class="col-xs-10">
+            <div class="col-xs-3">
+              <select class="form-control">
+                <option value="none" disabled selected>Select your task</option>
+                <option>Do some of the important homeworks here - ABS 10000</option>
+              </select>
+            </div>
+            <div class="col-xs-7">
               <input class="form-control" placeholder="What do you want to accomplish on this day?" v-model="subtask" required>
             </div>
             <div class="col-xs-2">
@@ -19,13 +25,14 @@
           <thead>
             <tr>
               <td style="text-align: center">Day</td>
-              <td style="text-align: center">Due/Event</td>
               <td style="text-align: center">Todo</td>
+              <td style="text-align: center">Due/Event</td>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td style="text-align: center"><h4> {{ day }} </h4></td>
+              <td></td>
               <td>
                 <task-list :day="this.day" :month="this.month" :year="this.year"></task-list>
               </td>

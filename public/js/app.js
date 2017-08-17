@@ -12135,6 +12135,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12300,6 +12308,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12350,34 +12365,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      todos_data: []
+      subtasks: []
     };
   },
 
 
   computed: {
     todos: function todos() {
-      var todos = [];
+      console.log(this.subtasks[0]); // subtasks for first task
 
-      for (var t = 0; t < this.todos_data.length; t++) {
-        var date = new Date(this.todos_data[t].due_date);
-        date.setDate(date.getDate() + 1);
-
-        if (date.getDate() == this.day && date.getFullYear() == this.year && date.getMonth() + 1 == this.month) {
-          todos.push(this.todos_data[t]);
-        }
+      for (var i = 0; this.subtasks.length; i++) {// iterate through number of tasks
       }
+    }
+  },
 
-      return todos;
+  methods: {
+    fetchSubtasks: function fetchSubtasks() {
+      var _this = this;
+
+      axios.get('/subtasksFromToday').then(function (res) {
+        _this.subtasks = res.data;
+        // this.subtasks = collect(res.data).pluck('subtasks').all();
+      });
     }
   },
 
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/subtasksByTask/').then(function (res) {
-      _this.todos_data = res.data;
-    });
+    this.fetchSubtasks();
   }
 });
 
@@ -16606,7 +16620,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\nli[data-v-3112445d] {\n  color: red;\n}\n", ""]);
 
 /***/ }),
 /* 124 */
@@ -16620,7 +16634,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 126 */
@@ -16648,7 +16662,7 @@ exports.push([module.i, "\na[data-v-d032084c] {\n  cursor: pointer;\n}\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
 
 /***/ }),
 /* 130 */
@@ -44581,7 +44595,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((this.tasks), function(task) {
-    return _c('ul', [_c('li', [_vm._v("\n       " + _vm._s(task.title) + "\n    ")])])
+    return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(task.title) + "\n    ")])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -44734,9 +44748,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "color": "red"
     }
-  }, [_vm._v("\n        * Click on the day that you wish to write your subtasks.\n      ")]), _vm._v(" "), _c('table', {
+  }, [_vm._v("\n        * Click on the day that you wish to write your subtasks.\n      ")]), _vm._v(" "), _c('div', {
+    staticClass: "panel panel-default"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('table', {
     staticClass: "table table-striped table-bordered"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.dates), function(date) {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.dates), function(date) {
     return _c('tr', [_c('td', {
       staticStyle: {
         "text-align": "center"
@@ -44751,14 +44769,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.changeDayClickStatus(date)
         }
       }
-    }, [_c('h4', [_vm._v(_vm._s(date.getDate()))])])]), _vm._v(" "), _c('td', [_c('task-list', {
+    }, [_c('h4', [_vm._v(_vm._s(date.getDate()))])])]), _vm._v(" "), _c('td', [_c('subtask-list', {
+      attrs: {
+        "month": date.getMonth() + 1,
+        "day": date.getDate(),
+        "year": date.getFullYear()
+      }
+    })], 1), _vm._v(" "), _c('td', [_c('task-list', {
       attrs: {
         "month": date.getMonth() + 1,
         "day": date.getDate(),
         "year": date.getFullYear()
       }
     })], 1)])
-  }))])]) : _vm._e(), _vm._v(" "), (_vm.dayClicked) ? _c('div', [_c('subtask-editor', {
+  }))])])])]) : _vm._e(), _vm._v(" "), (_vm.dayClicked) ? _c('div', [_c('subtask-editor', {
     attrs: {
       "day": _vm.task.day,
       "month": _vm.task.month,
@@ -44775,6 +44799,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-calendar fa-2x"
   })])])], 1) : _vm._e()])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-heading",
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-calendar fa-4x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('td', {
     staticStyle: {
       "text-align": "center"
@@ -44783,11 +44816,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._v("Due/Event")]), _vm._v(" "), _c('td', {
+  }, [_vm._v("Todo")]), _vm._v(" "), _c('td', {
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._v("Todo")])])])
+  }, [_vm._v("Due/Event")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -44863,8 +44896,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-10"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "col-xs-7"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -44886,13 +44919,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.subtask = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', [_c('table', {
+  })]), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c('div', [_c('table', {
     staticClass: "table table-striped table-bordered"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', {
+  }, [_vm._m(2), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', {
     staticStyle: {
       "text-align": "center"
     }
-  }, [_c('h4', [_vm._v(" " + _vm._s(_vm.day) + " ")])]), _vm._v(" "), _c('td', [_c('task-list', {
+  }, [_c('h4', [_vm._v(" " + _vm._s(_vm.day) + " ")])]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_c('task-list', {
     attrs: {
       "day": this.day,
       "month": this.month,
@@ -44900,6 +44933,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })], 1)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('select', {
+    staticClass: "form-control"
+  }, [_c('option', {
+    attrs: {
+      "value": "none",
+      "disabled": "",
+      "selected": ""
+    }
+  }, [_vm._v("Select your task")]), _vm._v(" "), _c('option', [_vm._v("Do some of the important homeworks here - ABS 10000")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-2"
   }, [_c('button', {
@@ -44917,11 +44962,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._v("Due/Event")]), _vm._v(" "), _c('td', {
+  }, [_vm._v("Todo")]), _vm._v(" "), _c('td', {
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._v("Todo")])])])
+  }, [_vm._v("Due/Event")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

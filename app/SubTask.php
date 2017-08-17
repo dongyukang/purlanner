@@ -12,4 +12,12 @@ class SubTask extends Model
   protected $fillable = [
     'task', 'task_id', 'due_date'
   ];
+
+  /**
+   * subtask belongs to task.
+   */
+  public function tasks()
+  {
+    return $this->belongsTo('App\Task');  
+  }
 }

@@ -73,6 +73,30 @@ class SubTaskController extends Controller
    */
   public function getSubTasksByTask($task_id)
   {
-    return auth()->user()->tasks()->find($task_id)->subtasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get();    
+    return auth()->user()->tasks()->find($task_id)->subtasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get();
+  }
+
+  /**
+   * Get subtasks from today.
+   *
+   * @return array
+   */
+  public function getSubTasksFromToday()
+  {
+    $taskIds = auth()->user()
+                     ->tasks()
+                     ->whereDate('due_date', '>=', \Carbon\Carbon::today())
+                     ->pluck('id');
+
+    $subtasks = [];
+
+    foreach ($taskIds as $taskid) {
+      array_push($subtasks, [
+        'task_id'  => $taskid,
+        'subtasks' => $this->getSubTasksByTask($taskid)
+      ]);
+    }
+
+    return $subtasks;
   }
 }
