@@ -4,7 +4,7 @@
       <div v-if="!dayClicked">
         <p>
           <div class="jumbotron jumbotron-gradient" style="background-color: #e4e9f2;">
-            <center><h2 style="color: white">{{ months[currentDate.month - 1] }}</h2></center>
+            <center><h2 style="color: white">{{ months[currentDate.month - 1] }}, {{ currentDate.year }}</h2></center>
 
             <div style="margin-top: 40px;">
               <ul class="pager">
@@ -22,21 +22,22 @@
             <i class="fa fa-calendar fa-4x"></i>
           </div>
           <div class="panel-body">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped">
               <thead>
                 <tr>
-                  <td style="text-align: center">Day</td>
-                  <td style="text-align: center">Todo</td>
-                  <td style="text-align: center">Due/Event</td>
+                  <td>Day</td>
+                  <td>Todo</td>
+                  <td>Due/Event</td>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="date in dates">
-                  <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)"><h4>{{ date.getDate() }}</h4></a></td>
+                  <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)">
+                    <button class="btn btn-default btn-sm"><h4>{{ date.getDate() }}</h4></button>
+                  </a></td>
                    <!-- @task-clicked="changeDayClickStatus()" -->
                   <td><subtask-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></subtask-list></td>
                   <td><task-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></task-list></td>
-                  <!-- <td><subtask-list :task_id="task.id" :day="task.day" :month="task.month" :year="task.year"></subtask-list></td> -->
                 </tr>
               </tbody>
             </table>

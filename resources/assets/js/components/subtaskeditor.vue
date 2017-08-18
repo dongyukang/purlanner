@@ -32,7 +32,9 @@
           <tbody>
             <tr>
               <td style="text-align: center"><h4> {{ day }} </h4></td>
-              <td></td>
+              <td>
+                <subtask-list :day="this.day" :month="this.month" :year="this.year"></subtask-list>
+              </td>
               <td>
                 <task-list :day="this.day" :month="this.month" :year="this.year"></task-list>
               </td>
@@ -46,16 +48,19 @@
 
 <script>
   import TaskList from './subtasks/TaskList.vue';
+  import SubTaskList from './subtasks/SubTaskList.vue';
 
   export default {
     components: {
-      'task-list': TaskList
+      'task-list': TaskList,
+      'subtask-list': SubTaskList
     },
 
     props: ['day', 'month', 'year'],
 
     data() {
       return {
+        tasks_data: [],
         subtask: ''
       }
     },
@@ -66,12 +71,22 @@
     methods: {
       addSubTask() {
         flash('Subtask Successfully Added!');
+      },
+
+      fetchTasks() {
+        axios.get('/tasksFromToday')
+        .then(res => {
+          this.tasks_data = collect(res.data).filter((value, key) => {
+
+          });
+        });
       }
     },
 
 
 
     mounted() {
+      this.fetchTasks();
     }
   }
 </script>

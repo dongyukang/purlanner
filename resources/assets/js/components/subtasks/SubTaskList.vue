@@ -20,10 +20,16 @@
 
     computed: {
       todos() {
-        console.log(this.subtasks[0]); // subtasks for first task
+        var subtasksToSave = collect(this.subtasks);
 
-        for (var i = 0; this.subtasks.length; i++) { // iterate through number of tasks
-        }
+        var subtasks = subtasksToSave.filter((value, key) => {
+          var date = new Date(value.due_date);
+          date.setDate(date.getDate() + 1);
+
+          return (date.getDate() == this.day) && (date.getFullYear() == this.year) && (date.getMonth() + 1 == this.month);
+        });
+
+        return subtasks.all();
       }
     },
 
@@ -32,7 +38,6 @@
         axios.get('/subtasksFromToday')
         .then(res => {
           this.subtasks = res.data;
-          // this.subtasks = collect(res.data).pluck('subtasks').all();
         });
       }
     },

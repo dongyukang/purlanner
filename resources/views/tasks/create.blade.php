@@ -64,7 +64,7 @@
                 <label><h5> Title* </h5></label>
               </div>
               <div class="col-xs-11">
-                <input class="form-control" name="title" placeholder="Brief description about this task. ex) Read chapter 2." required>
+                <input class="form-control" name="title" placeholder="Brief description about this task. ex) Homework 1 Due." required>
               </div>
             </div>
             <div class="row">
