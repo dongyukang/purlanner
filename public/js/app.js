@@ -12202,6 +12202,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         year: ''
       },
 
+      days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
       //  due_date
       task: {
         day: '',
@@ -44805,7 +44807,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('button', {
       staticClass: "btn btn-default btn-sm"
-    }, [_c('h4', [_vm._v(_vm._s(date.getDate()))])])])]), _vm._v(" "), _c('td', [_c('subtask-list', {
+    }, [_c('h4', [_vm._v(_vm._s(date.getDate()))]), _vm._v(" " + _vm._s(_vm.days[date.getDay()]))])])]), _vm._v(" "), _c('td', [_c('subtask-list', {
       attrs: {
         "month": date.getMonth() + 1,
         "day": date.getDate(),

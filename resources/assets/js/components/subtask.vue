@@ -33,7 +33,7 @@
               <tbody>
                 <tr v-for="date in dates">
                   <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)">
-                    <button class="btn btn-default btn-sm"><h4>{{ date.getDate() }}</h4></button>
+                    <button class="btn btn-default btn-sm"><h4>{{ date.getDate() }}</h4> {{ days[date.getDay()] }}</button>
                   </a></td>
                    <!-- @task-clicked="changeDayClickStatus()" -->
                   <td><subtask-list :month="date.getMonth() + 1" :day="date.getDate()" :year="date.getFullYear()"></subtask-list></td>
@@ -74,6 +74,8 @@
           day: '',
           year: ''
         },
+
+        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 
         //  due_date
         task: {
