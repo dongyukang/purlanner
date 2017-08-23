@@ -12378,8 +12378,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
 
-  computed: {},
-
   methods: {
     addSubTask: function addSubTask() {
       flash('Subtask Successfully Added!');
@@ -12388,7 +12386,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       axios.get('/tasksFromToday').then(function (res) {
-        _this.tasks_data = collect(res.data).filter(function (value, key) {});
+        var tasks = [];
+        var today = new Date();
+
+        tasks = res.data;
+
+        var filtered = collect(tasks).filter(function (value, key) {
+          var date = new Date(value.due_date);
+          date.setDate(date.getDate() + 1);
+
+          return date.getFullYear() >= _this.year && date.getMonth() + 1 >= _this.month && date.getDate() >= _this.day;
+        });
+
+        _this.tasks_data = filtered.all();
       });
     }
   },
@@ -16724,7 +16734,7 @@ exports.push([module.i, "\na[data-v-d032084c] {\n  cursor: pointer;\n}\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
 
 /***/ }),
 /* 131 */
@@ -44910,7 +44920,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(0), _vm._v(" "), _c('div', {
+  }, [_c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('select', {
+    staticClass: "form-control"
+  }, [_c('option', {
+    attrs: {
+      "disabled": "",
+      "selected": ""
+    }
+  }, [_vm._v("Select Your Task")]), _vm._v(" "), _vm._l((_vm.tasks_data), function(task) {
+    return _c('option', [_vm._v(_vm._s(task.title))])
+  })], 2)]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-7"
   }, [_c('input', {
     directives: [{
@@ -44933,9 +44954,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.subtask = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(1)])])]), _vm._v(" "), _c('div', [_c('table', {
+  })]), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('div', [_c('table', {
     staticClass: "table table-striped table-bordered"
-  }, [_vm._m(2), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', {
     staticStyle: {
       "text-align": "center"
     }
@@ -44953,18 +44974,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })], 1)])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "col-xs-3"
-  }, [_c('select', {
-    staticClass: "form-control"
-  }, [_c('option', {
-    attrs: {
-      "value": "none",
-      "disabled": "",
-      "selected": ""
-    }
-  }, [_vm._v("Select your task")]), _vm._v(" "), _c('option', [_vm._v("Do some of the important homeworks here - ABS 10000")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-2"
   }, [_c('button', {

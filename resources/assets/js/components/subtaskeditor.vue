@@ -6,8 +6,8 @@
           <div class="row">
             <div class="col-xs-3">
               <select class="form-control">
-                <option value="none" disabled selected>Select your task</option>
-                <option>Do some of the important homeworks here - ABS 10000</option>
+                <option disabled selected>Select Your Task</option>
+                <option v-for="task in tasks_data">{{ task.title }}</option>
               </select>
             </div>
             <div class="col-xs-7">
@@ -65,9 +65,6 @@
       }
     },
 
-    computed: {
-    },
-
     methods: {
       addSubTask() {
         flash('Subtask Successfully Added!');
@@ -76,14 +73,22 @@
       fetchTasks() {
         axios.get('/tasksFromToday')
         .then(res => {
-          this.tasks_data = collect(res.data).filter((value, key) => {
+          var tasks = [];
+          var today = new Date();
 
+          tasks = res.data;
+
+          var filtered = collect(tasks).filter((value, key) => {
+            var date = new Date(value.due_date);
+            date.setDate(date.getDate() + 1);
+
+            return (date.getFullYear() >= this.year) && ((date.getMonth() + 1) >= this.month) && (date.getDate() >= this.day);
           });
+
+          this.tasks_data = filtered.all();
         });
       }
     },
-
-
 
     mounted() {
       this.fetchTasks();

@@ -47,7 +47,6 @@ class SubTaskController extends Controller
    */
   public function saveSubTask(Request $request)
   {
-    //\Carbon\Carbon::parse($request->get('due_date'))->format('Y-m-d');
     // task, task_id, due_date
     $requestData = [
       'task' => $request->get('task'),

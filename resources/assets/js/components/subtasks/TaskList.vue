@@ -14,7 +14,7 @@
 
     data() {
       return {
-        tasksAllFromToday: []
+        tasksAllFromToday: [],
       }
     },
 
