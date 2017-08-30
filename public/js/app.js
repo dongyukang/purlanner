@@ -12360,6 +12360,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -12374,6 +12377,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
+      task_id: '',
+      task: '',
       tasks_data: [],
       subtask: ''
     };
@@ -12381,9 +12386,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
-    addSubTask: function addSubTask() {
-      flash('Subtask Successfully Added!');
-    },
+    addSubTask: function addSubTask() {},
     fetchTasks: function fetchTasks() {
       var _this = this;
 
@@ -12397,7 +12400,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var date = new Date(value.due_date);
           date.setDate(date.getDate() + 1);
 
-          return date.getFullYear() >= _this.year && date.getMonth() + 1 >= _this.month && date.getDate() >= _this.day;
+          var givenDate = new Date(_this.year, _this.month - 1, _this.day);
+
+          return date >= givenDate;
         });
 
         _this.tasks_data = filtered.all();
@@ -16736,7 +16741,7 @@ exports.push([module.i, "\na[data-v-d032084c] {\n  cursor: pointer;\n}\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
 
 /***/ }),
 /* 131 */
@@ -44570,7 +44575,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.course_numbers), function(course_number) {
     return _c('option', [_vm._v(_vm._s(course_number.Number) + " " + _vm._s(course_number.Title))])
   })), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-success",
+    staticClass: "btn btn-success btn-sm",
     attrs: {
       "type": "submit"
     },
@@ -44925,14 +44930,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-xs-3"
   }, [_c('select', {
-    staticClass: "form-control"
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.task_id),
+      expression: "task_id"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.task_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
   }, [_c('option', {
     attrs: {
       "disabled": "",
       "selected": ""
     }
-  }, [_vm._v("Select Your Task")]), _vm._v(" "), _vm._l((_vm.tasks_data), function(task) {
-    return _c('option', [_vm._v(_vm._s(task.title))])
+  }, [_vm._v(" Select Your Task ")]), _vm._v(" "), _vm._l((_vm.tasks_data), function(task) {
+    return _c('option', [_vm._v("\n                " + _vm._s(task.title) + "\n                by " + _vm._s(task.due_date) + "\n              ")])
   })], 2)]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-7"
   }, [_c('input', {

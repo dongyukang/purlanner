@@ -5,9 +5,12 @@
         <form role="form" @submit.prevent="addSubTask()">
           <div class="row">
             <div class="col-xs-3">
-              <select class="form-control">
-                <option disabled selected>Select Your Task</option>
-                <option v-for="task in tasks_data">{{ task.title }}</option>
+              <select class="form-control" v-model="task_id">
+                <option disabled selected> Select Your Task </option>
+                <option v-for="task in tasks_data">
+                  {{ task.title }}
+                  by {{ task.due_date }}
+                </option>
               </select>
             </div>
             <div class="col-xs-7">
@@ -35,7 +38,7 @@
               <td>
                 <subtask-list :day="this.day" :month="this.month" :year="this.year"></subtask-list>
               </td>
-              <td>
+              <td> 
                 <task-list :day="this.day" :month="this.month" :year="this.year"></task-list>
               </td>
             </tr>
@@ -60,6 +63,8 @@
 
     data() {
       return {
+        task_id: '',
+        task: '',
         tasks_data: [],
         subtask: ''
       }
@@ -67,7 +72,7 @@
 
     methods: {
       addSubTask() {
-        flash('Subtask Successfully Added!');
+
       },
 
       fetchTasks() {
@@ -82,7 +87,9 @@
             var date = new Date(value.due_date);
             date.setDate(date.getDate() + 1);
 
-            return (date.getFullYear() >= this.year) && ((date.getMonth() + 1) >= this.month) && (date.getDate() >= this.day);
+            var givenDate = new Date(this.year, this.month - 1, this.day);
+
+            return date >= givenDate;
           });
 
           this.tasks_data = filtered.all();
