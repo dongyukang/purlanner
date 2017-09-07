@@ -31,6 +31,6 @@ class Task extends Model
    */
     public function subtasks()
     {
-        return $this->hasMany('App\SubTask');
+        return $this->hasMany(\App\SubTask::class);
     }
 }

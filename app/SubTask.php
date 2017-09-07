@@ -18,6 +18,6 @@ class SubTask extends Model
    */
     public function tasks()
     {
-        return $this->belongsTo('App\Task');
+        return $this->belongsTo(\App\Task::class);
     }
 }
