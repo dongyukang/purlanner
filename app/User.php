@@ -312,7 +312,7 @@ class User extends Authenticatable
      */
     public function getCourses()
     {
-        $courses = array();
+        $courses = [];
 
         foreach ($this->courses()->orderBy('subject', 'asc')->get() as $course) {
             array_push($courses, [

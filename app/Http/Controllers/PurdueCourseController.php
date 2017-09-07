@@ -31,7 +31,7 @@ class PurdueCourseController extends Controller
    */
     public function getCurrentTermSubjects()
     {
-        $subjects = array();
+        $subjects = [];
 
         foreach (Purdue::subjects() as $subject) {
             array_push($subjects, $subject['Abbreviation']);
@@ -48,7 +48,7 @@ class PurdueCourseController extends Controller
    */
     public function getCourseNumbers($subject)
     {
-        $course_numbers = array();
+        $course_numbers = [];
 
         if ($subject != null) {
             foreach (Purdue::subject($subject)->getSubjectDetails() as $number) {
@@ -76,7 +76,7 @@ class PurdueCourseController extends Controller
         // if there are more than one course, there are several arrays.
         if (Purdue::course($course)->countCourses() > 1) {
             $courseIds = Purdue::course($course)->courseId;
-            $sections = array();
+            $sections = [];
 
             foreach (Purdue::course($course)->title as $t) {
                 $cnt++;
