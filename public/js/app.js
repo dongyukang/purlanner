@@ -12377,8 +12377,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      task_id: '',
-      task: '',
+      task_id: 'none',
       tasks_data: [],
       subtask: ''
     };
@@ -12386,9 +12385,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
-    addSubTask: function addSubTask() {},
-    fetchTasks: function fetchTasks() {
+    addSubTask: function addSubTask() {
       var _this = this;
+
+      axios.post('/sub-task', {
+        'subtask': this.subtask,
+        'task_id': this.task_id,
+        'due_date': new Date(this.year, this.month - 1, this.day)
+      }).then(function (res) {
+        window.events.$emit('incoming-subtask', {
+          'subtask': _this.subtask,
+          'task_id': _this.task_id,
+          'due_date': new Date(_this.year, _this.month - 1, _this.day)
+        });
+        _this.subtask = '';
+        flash('Your subtask has been successfully saved. Wait for seconds for your subtask to be appeared.');
+      });
+    },
+    fetchTasks: function fetchTasks() {
+      var _this2 = this;
 
       axios.get('/tasksFromToday').then(function (res) {
         var tasks = [];
@@ -12400,12 +12415,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var date = new Date(value.due_date);
           date.setDate(date.getDate() + 1);
 
-          var givenDate = new Date(_this.year, _this.month - 1, _this.day);
+          var givenDate = new Date(_this2.year, _this2.month - 1, _this2.day);
 
           return date >= givenDate;
         });
 
-        _this.tasks_data = filtered.all();
+        _this2.tasks_data = filtered.all();
       });
     }
   },
@@ -12471,6 +12486,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   mounted: function mounted() {
     this.fetchSubtasks();
+
+    window.events.$on('incoming-subtask', function (data) {
+      // this.fetchSubtasks();
+    });
   }
 });
 
@@ -16713,7 +16732,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 127 */
@@ -16741,7 +16760,7 @@ exports.push([module.i, "\na[data-v-d032084c] {\n  cursor: pointer;\n}\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
 
 /***/ }),
 /* 131 */
@@ -44951,10 +44970,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('option', {
     attrs: {
       "disabled": "",
-      "selected": ""
+      "selected": "",
+      "value": "none"
     }
   }, [_vm._v(" Select Your Task ")]), _vm._v(" "), _vm._l((_vm.tasks_data), function(task) {
-    return _c('option', [_vm._v("\n                " + _vm._s(task.title) + "\n                by " + _vm._s(task.due_date) + "\n              ")])
+    return _c('option', {
+      domProps: {
+        "value": task.id
+      }
+    }, [_vm._v("\n                " + _vm._s(task.title) + "\n                by " + _vm._s(task.due_date) + "\n              ")])
   })], 2)]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-7"
   }, [_c('input', {

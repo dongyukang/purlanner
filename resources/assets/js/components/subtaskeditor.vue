@@ -6,8 +6,8 @@
           <div class="row">
             <div class="col-xs-3">
               <select class="form-control" v-model="task_id">
-                <option disabled selected> Select Your Task </option>
-                <option v-for="task in tasks_data">
+                <option disabled selected value="none"> Select Your Task </option>
+                <option v-for="task in tasks_data" :value=task.id>
                   {{ task.title }}
                   by {{ task.due_date }}
                 </option>
@@ -63,8 +63,7 @@
 
     data() {
       return {
-        task_id: '',
-        task: '',
+        task_id: 'none',
         tasks_data: [],
         subtask: ''
       }
@@ -72,7 +71,19 @@
 
     methods: {
       addSubTask() {
-
+        axios.post('/sub-task', {
+          'subtask': this.subtask,
+          'task_id': this.task_id,
+          'due_date': new Date(this.year, this.month - 1, this.day)
+        }).then(res => {
+          window.events.$emit('incoming-subtask', {
+            'subtask': this.subtask,
+            'task_id': this.task_id,
+            'due_date': new Date(this.year, this.month - 1, this.day)
+          });
+          this.subtask = '';
+          flash('Your subtask has been successfully saved. Wait for seconds for your subtask to be appeared.');
+        });
       },
 
       fetchTasks() {

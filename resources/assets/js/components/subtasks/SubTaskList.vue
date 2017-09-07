@@ -44,6 +44,12 @@
 
     mounted() {
       this.fetchSubtasks();
+
+      window.events.$on(
+        'incoming-subtask', (data) => {
+          // this.fetchSubtasks();
+        }
+      );
     }
   }
 </script>

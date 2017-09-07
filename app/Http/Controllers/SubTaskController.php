@@ -49,7 +49,7 @@ class SubTaskController extends Controller
   {
     // task, task_id, due_date
     $requestData = [
-      'task' => $request->get('task'),
+      'task' => $request->get('subtask'),
       'task_id' => $request->get('task_id'),
       'due_date' => \Carbon\Carbon::parse($request->get('due_date'))->format('Y-m-d')
     ];
@@ -82,6 +82,10 @@ class SubTaskController extends Controller
    */
   public function getSubTasksFromToday()
   {
-    return auth()->user()->subtasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get();
+    return auth()->user()
+                 ->subtasks()
+                 ->whereDate('due_date', '>=', Carbon::today())
+                 ->orderBy('due_date', 'asc')
+                 ->get();
   }
 }
