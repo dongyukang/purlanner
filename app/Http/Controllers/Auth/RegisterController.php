@@ -70,6 +70,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        if ($user->createDefaultTypes()) return $user;
+        if ($user->createDefaultTypes()) {
+            return $user;
+        }
     }
 }

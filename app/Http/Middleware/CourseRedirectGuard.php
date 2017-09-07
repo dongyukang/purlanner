@@ -15,11 +15,11 @@ class CourseRedirectGuard
      */
     public function handle($request, Closure $next)
     {
-      if (auth()->user()->courses()->count() > 0) {
-        return $next($request);
-      }
+        if (auth()->user()->courses()->count() > 0) {
+            return $next($request);
+        }
 
-      return redirect('/settings')->with('flash', 'You need to have at least one course saved.')
+        return redirect('/settings')->with('flash', 'You need to have at least one course saved.')
                                   ->with('type', 'danger');
     }
 }

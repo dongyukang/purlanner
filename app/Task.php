@@ -6,31 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-  protected $table = 'tasks';
+    protected $table = 'tasks';
 
   /**
    * Fillable Attributes.
    *
    * @var array
    */
-  protected $fillable = [
+    protected $fillable = [
     'due_date', 'course_id', 'note', 'location', 'title', 'type'
-  ];
+    ];
 
   /**
    * Hidden Attributes.
    *
    * @var array
    */
-  protected $hidden = [
+    protected $hidden = [
 
-  ];
+    ];
 
   /**
    * Has many subtasks.
    */
-  public function subtasks()
-  {
-    return $this->hasMany('App\SubTask');
-  }
+    public function subtasks()
+    {
+        return $this->hasMany('App\SubTask');
+    }
 }
