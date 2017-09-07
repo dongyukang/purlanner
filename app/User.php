@@ -37,7 +37,7 @@ class User extends Authenticatable
      */
     public function courses()
     {
-        return $this->belongsToMany('App\Course');
+        return $this->belongsToMany(\App\Course::class);
     }
 
     /**
@@ -45,7 +45,7 @@ class User extends Authenticatable
      */
     public function tasks()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany(\App\Task::class);
     }
 
     /**
@@ -53,7 +53,7 @@ class User extends Authenticatable
      */
     public function types()
     {
-        return $this->hasMany('App\Type');
+        return $this->hasMany(\App\Type::class);
     }
 
     /**
@@ -61,7 +61,7 @@ class User extends Authenticatable
      */
     public function subtasks()
     {
-        return $this->hasMany('App\SubTask');
+        return $this->hasMany(\App\SubTask::class);
     }
 
     /**
