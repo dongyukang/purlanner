@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 // use DongyuKang\PurdueCourse\Facades\Purdue;
 
 class HomeController extends Controller
@@ -13,10 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-      if (auth()->check())
-        return redirect('planner');
+        if (auth()->check()) {
+            return redirect('planner');
+        }
 
-      return view('welcome');
+        return view('welcome');
     }
 
     /**
@@ -24,7 +26,6 @@ class HomeController extends Controller
      */
     public function showApi()
     {
-      return view('api');
+        return view('api');
     }
-
 }

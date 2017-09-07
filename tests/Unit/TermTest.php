@@ -13,10 +13,10 @@ class TermTest extends TestCase
     /** @test */
     public function user_is_created_and_default_types_are_created_default_types_should_be_four()
     {
-      $user = factory(\App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
-      $user->createDefaultTypes();
+        $user->createDefaultTypes();
 
-      $this->assertEquals(4, $user->types()->count());
+        $this->assertEquals(4, $user->types()->count());
     }
 }

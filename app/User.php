@@ -37,7 +37,7 @@ class User extends Authenticatable
      */
     public function courses()
     {
-      return $this->belongsToMany('App\Course');
+        return $this->belongsToMany('App\Course');
     }
 
     /**
@@ -45,7 +45,7 @@ class User extends Authenticatable
      */
     public function tasks()
     {
-      return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task');
     }
 
     /**
@@ -53,7 +53,7 @@ class User extends Authenticatable
      */
     public function types()
     {
-      return $this->hasMany('App\Type');
+        return $this->hasMany('App\Type');
     }
 
     /**
@@ -61,7 +61,7 @@ class User extends Authenticatable
      */
     public function subtasks()
     {
-      return $this->hasMany('App\SubTask');
+        return $this->hasMany('App\SubTask');
     }
 
     /**
@@ -71,9 +71,9 @@ class User extends Authenticatable
      */
     public function getSubTasks()
     {
-      date_default_timezone_set("America/New_York");
+        date_default_timezone_set("America/New_York");
 
-      return $this->subtasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get();
+        return $this->subtasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get();
     }
 
     /**
@@ -81,7 +81,6 @@ class User extends Authenticatable
      */
     public function notifications()
     {
-
     }
 
     /**
@@ -92,16 +91,16 @@ class User extends Authenticatable
      */
     public function assignTask($data)
     {
-      $assignTask = $this->tasks()->create([
+        $assignTask = $this->tasks()->create([
         'title' => $data['title'],
         'type'  => $data['type'],
         'course_id' => $data['course_id'],
         'location' => $data['location'],
         'due_date' => Carbon::parse($data['due_date'])->format('Y-m-d'),
         'note' => $data['note']
-      ]);
+        ]);
 
-      return $assignTask != null ? true : false;
+        return $assignTask != null ? true : false;
     }
 
     /**
@@ -111,9 +110,11 @@ class User extends Authenticatable
      */
     public function isCurrentTermSet()
     {
-      if ($this->getTermId() != 'null' && $this->getTermId() == Term::all()->last()->term_id) return true;
+        if ($this->getTermId() != 'null' && $this->getTermId() == Term::all()->last()->term_id) {
+            return true;
+        }
 
-      return false;
+        return false;
     }
 
     /**
@@ -123,7 +124,7 @@ class User extends Authenticatable
      */
     public function getTermId()
     {
-      return $this->term_id;
+        return $this->term_id;
     }
 
     /**
@@ -138,40 +139,42 @@ class User extends Authenticatable
        *
        * @var $exam
        */
-      $exam = $this->types()->create([
+        $exam = $this->types()->create([
         'type_name' => 'exam'
-      ]);
+        ]);
 
       /**
        * 'Assignment' default type.
        *
        * @var $assignment
        */
-      $assignment = $this->types()->create([
+        $assignment = $this->types()->create([
         'type_name' => 'assignment'
-      ]);
+        ]);
 
       /**
        * 'Paper' default type.
        *
        * @var $paper
        */
-      $paper = $this->types()->create([
+        $paper = $this->types()->create([
         'type_name' => 'paper'
-      ]);
+        ]);
 
       /**
        * 'Project' default type.
        *
        * @var $project
        */
-      $project = $this->types()->create([
+        $project = $this->types()->create([
         'type_name' => 'project'
-      ]);
+        ]);
 
-      if ($exam != null && $assignment != null && $paper != null && $project != null) return true;
+        if ($exam != null && $assignment != null && $paper != null && $project != null) {
+            return true;
+        }
 
-      return false;
+        return false;
     }
 
     /**
@@ -183,18 +186,18 @@ class User extends Authenticatable
      */
     public function countTask($type_name, $course_id = null)
     {
-      date_default_timezone_set("America/New_York");
+        date_default_timezone_set("America/New_York");
 
-      if ($course_id != null) {
-        return $this
+        if ($course_id != null) {
+            return $this
               ->tasks()
               ->where('course_id', $course_id)
               ->where('type', strtolower($type_name))
               ->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))
               ->count();
-      }
+        }
 
-      return $this
+        return $this
             ->tasks()
             ->where('type', strtolower($type_name))
             ->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))
@@ -210,17 +213,17 @@ class User extends Authenticatable
      */
     public function getNoneZeroTypes($course_id = null)
     {
-      date_default_timezone_set("America/New_York");
+        date_default_timezone_set("America/New_York");
 
-      if ($course_id == null) {
-        return collect($this->types()->get())->filter(function ($value, $key) {
-          return $this->countTask($value->type_name) > 0;
+        if ($course_id == null) {
+            return collect($this->types()->get())->filter(function ($value, $key) {
+                return $this->countTask($value->type_name) > 0;
+            })->all();
+        }
+
+        return collect($this->tasks()->where('course_id', $course_id)->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))->pluck('type')->unique()->all())->filter(function ($value, $key) {
+            return $this->countTask($value) > 0;
         })->all();
-      }
-
-      return collect($this->tasks()->where('course_id', $course_id)->whereDate('due_date', '>=', Carbon::parse(date('m/d/Y')))->pluck('type')->unique()->all())->filter(function ($value, $key) {
-        return $this->countTask($value) > 0;
-      })->all();
     }
 
     /**
@@ -231,13 +234,13 @@ class User extends Authenticatable
      */
     public function setTermId($term_id)
     {
-      $this->term_id = $term_id;
+        $this->term_id = $term_id;
 
-      if ($this->save()) {
-        return true;
-      }
+        if ($this->save()) {
+            return true;
+        }
 
-      return false;
+        return false;
     }
 
     /**
@@ -247,9 +250,11 @@ class User extends Authenticatable
      */
     public function isCourseSet()
     {
-      if ($this->courses()->count() > 0 && $this->isCurrentTermSet()) return true;
+        if ($this->courses()->count() > 0 && $this->isCurrentTermSet()) {
+            return true;
+        }
 
-      return false;
+        return false;
     }
 
     /**
@@ -259,7 +264,7 @@ class User extends Authenticatable
      */
     public function isCurrentCourseEmpty()
     {
-      return !$this->isCourseSet();
+        return !$this->isCourseSet();
     }
 
     /**
@@ -270,32 +275,32 @@ class User extends Authenticatable
     public function saveCourse($course_data)
     {
       // check if the course given already exists in the Course model.
-      $exists = \App\Course::where('subject', $course_data['subject'])
+        $exists = \App\Course::where('subject', $course_data['subject'])
                           ->where('course_number', $course_data['course_number'])
                           ->where('course_title', $course_data['course_title'])
                           ->first() != null ? true : false;
 
       // if course does not exist in the Course model, then create it.
-      if (!$exists) {
-        $course = \App\Course::create([
-          'subject'       => $course_data['subject'],
-          'course_number' => $course_data['course_number'],
-          'course_title'  => $course_data['course_title']
-        ]);
-      } else {
-        $course = \App\Course::where('subject', $course_data['subject'])
+        if (!$exists) {
+            $course = \App\Course::create([
+            'subject'       => $course_data['subject'],
+            'course_number' => $course_data['course_number'],
+            'course_title'  => $course_data['course_title']
+            ]);
+        } else {
+            $course = \App\Course::where('subject', $course_data['subject'])
                             ->where('course_number', $course_data['course_number'])
                             ->where('course_title', $course_data['course_title'])
                             ->first();
-      }
+        }
 
       // check if this user already has the course.
       // toggle to indicate that user belongs to the course id.
-      if (!($this->courses()->find($course->id))) {
-        $this->courses()->toggle($course->id);
+        if (!($this->courses()->find($course->id))) {
+            $this->courses()->toggle($course->id);
 
-        // return true;
-      }
+            // return true;
+        }
 
       // return false;
     }
@@ -307,18 +312,18 @@ class User extends Authenticatable
      */
     public function getCourses()
     {
-      $courses = array();
+        $courses = array();
 
-      foreach ($this->courses()->orderBy('subject', 'asc')->get() as $course) {
-        array_push($courses, [
-          'Id'      => $course->id,
-          'Subject' => $course->subject,
-          'Number'  => $course->course_number,
-          'Title'   => $course->course_title
-        ]);
-      }
+        foreach ($this->courses()->orderBy('subject', 'asc')->get() as $course) {
+            array_push($courses, [
+            'Id'      => $course->id,
+            'Subject' => $course->subject,
+            'Number'  => $course->course_number,
+            'Title'   => $course->course_title
+            ]);
+        }
 
-      return $courses;
+        return $courses;
     }
 
     /**
@@ -330,14 +335,14 @@ class User extends Authenticatable
     public function removeCourse($course_id)
     {
       // check if the course data exists in the database 'users' table.
-      $exists = $this->courses()->find($course_id) != null ? true : false;
+        $exists = $this->courses()->find($course_id) != null ? true : false;
 
       // if exists, then detach it.
-      if ($exists) {
-        $this->courses()->toggle($course_id);
+        if ($exists) {
+            $this->courses()->toggle($course_id);
 
-        // return true;
-      }
+            // return true;
+        }
 
       // return false;
     }
@@ -349,7 +354,7 @@ class User extends Authenticatable
      */
     public function takesCourse($course_data)
     {
-      return collect($this->getCourses())
+        return collect($this->getCourses())
                      ->where('Subject', $course_data['subject'])
                      ->where('Number', $course_data['course_number'])
                      ->where('Title', $course_data['course_title'])
@@ -363,7 +368,7 @@ class User extends Authenticatable
      */
     protected function setTimeZone($timezone)
     {
-      date_default_timezone_set($timezone);
+        date_default_timezone_set($timezone);
     }
 
     /**
@@ -373,9 +378,9 @@ class User extends Authenticatable
      */
     public function tasksDueTomorrow()
     {
-      $this->setTimeZone("America/New_York");
+        $this->setTimeZone("America/New_York");
 
-      return $this->tasks()->whereDate('due_date', Carbon::parse(date('m/d/Y'))->addDay(1))->get();
+        return $this->tasks()->whereDate('due_date', Carbon::parse(date('m/d/Y'))->addDay(1))->get();
     }
 
     /**
@@ -385,9 +390,9 @@ class User extends Authenticatable
      */
     public function tasksDueThisWeek()
     {
-      $this->setTimeZone("America/New_York");
+        $this->setTimeZone("America/New_York");
 
-      return $this->tasks()
+        return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y')))
                   ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->endOfWeek())
                   ->orderBy('due_date', 'asc')
@@ -401,9 +406,9 @@ class User extends Authenticatable
      */
     public function tasksDueNextWeek()
     {
-      $this->setTimeZone("America/New_York");
+        $this->setTimeZone("America/New_York");
 
-      return $this->tasks()
+        return $this->tasks()
                   ->whereDate('due_date', '>=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek())
                   ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek()->endOfWeek())
                   ->orderBy('due_date', 'asc')

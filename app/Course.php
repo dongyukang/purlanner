@@ -22,7 +22,7 @@ class Course extends Model
      */
     public function users()
     {
-      return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User');
     }
 
     /**
@@ -35,7 +35,7 @@ class Course extends Model
      */
     public function getCourseId($subject, $course_number, $title)
     {
-      return $this->where('subject', $subject)
+        return $this->where('subject', $subject)
                   ->where('course_number', $course_number)
                   ->where('course_title', $course_title)
                   ->first()
