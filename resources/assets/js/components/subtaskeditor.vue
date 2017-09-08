@@ -9,12 +9,13 @@
                 <option disabled selected value="none"> Select Your Task </option>
                 <option v-for="task in tasks_data" :value=task.id>
                   {{ task.title }}
+                  - {{ task.course }}
                   by {{ task.due_date }}
                 </option>
               </select>
             </div>
             <div class="col-xs-7">
-              <input class="form-control" placeholder="What do you want to accomplish on this day?" v-model="subtask" required>
+              <input class="form-control" placeholder="What do you want to accomplish on this day for your task?" v-model="subtask" required>
             </div>
             <div class="col-xs-2">
               <button type="submit" class="btn btn-danger">Save</button>
@@ -87,7 +88,7 @@
       },
 
       fetchTasks() {
-        axios.get('/tasksFromToday')
+        axios.get('/tasksFromTodayWithCourseNumber')
         .then(res => {
           var tasks = [];
           var today = new Date();

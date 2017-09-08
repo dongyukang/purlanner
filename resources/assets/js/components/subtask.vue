@@ -14,9 +14,9 @@
             </div>
           </div>
         </p>
-        <p style="color: red;">
+        <!-- <p style="color: red;">
           * Click on the day that you wish to write your subtasks.
-        </p>
+        </p> -->
         <div class="panel panel-default">
           <div class="panel-heading" style="text-align: center">
             <i class="fa fa-calendar fa-4x"></i>
@@ -32,7 +32,8 @@
               </thead>
               <tbody>
                 <tr v-for="date in dates">
-                  <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;" @click="changeDayClickStatus(date)">
+                  <!-- @click="changeDayClickStatus(date)" -->
+                  <td style="text-align: center"><a style="cursor: pointer; text-decoration: none;">
                     <button class="btn btn-default btn-sm"><h4>{{ date.getDate() }}</h4> {{ days[date.getDay()] }}</button>
                   </a></td>
                    <!-- @task-clicked="changeDayClickStatus()" -->

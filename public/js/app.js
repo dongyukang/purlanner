@@ -12182,6 +12182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -12363,6 +12364,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -12405,7 +12407,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fetchTasks: function fetchTasks() {
       var _this2 = this;
 
-      axios.get('/tasksFromToday').then(function (res) {
+      axios.get('/tasksFromTodayWithCourseNumber').then(function (res) {
         var tasks = [];
         var today = new Date();
 
@@ -12541,7 +12543,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fetchTasksFromToday: function fetchTasksFromToday() {
       var _this2 = this;
 
-      axios.get('/tasksFromToday').then(function (res) {
+      axios.get('/tasksFromTodayWithCourseNumber').then(function (res) {
         _this2.tasksAllFromToday = res.data;
       });
     }
@@ -16760,7 +16762,7 @@ exports.push([module.i, "\na[data-v-d032084c] {\n  cursor: pointer;\n}\n", ""]);
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /*style=\"background-color: #EDEFF5;*/\n.jumbotron-gradient[data-v-ff36286a] {\n  background: rgba(147,206,222,1);\n  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));\n  background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );\n}\n", ""]);
 
 /***/ }),
 /* 131 */
@@ -44655,7 +44657,11 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((this.tasks), function(task) {
-    return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(task.title) + "\n    ")])])
+    return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(task.title) + " "), _c('span', {
+      staticClass: "label label-success"
+    }, [_vm._v(" " + _vm._s(task.type) + " ")]), _vm._v(" "), _c('span', {
+      staticClass: "label label-danger"
+    }, [_vm._v(" " + _vm._s(task.course) + " ")])])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -44804,11 +44810,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Next Month "), _c('i', {
     staticClass: "fa fa-arrow-right"
-  })])])])])], 1), _vm._v(" "), _c('p'), _vm._v(" "), _c('p', {
-    staticStyle: {
-      "color": "red"
-    }
-  }, [_vm._v("\n        * Click on the day that you wish to write your subtasks.\n      ")]), _vm._v(" "), _c('div', {
+  })])])])])], 1), _vm._v(" "), _c('p'), _vm._v(" "), _c('div', {
     staticClass: "panel panel-default"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
@@ -44823,11 +44825,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticStyle: {
         "cursor": "pointer",
         "text-decoration": "none"
-      },
-      on: {
-        "click": function($event) {
-          _vm.changeDayClickStatus(date)
-        }
       }
     }, [_c('button', {
       staticClass: "btn btn-default btn-sm"
@@ -44978,7 +44975,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "value": task.id
       }
-    }, [_vm._v("\n                " + _vm._s(task.title) + "\n                by " + _vm._s(task.due_date) + "\n              ")])
+    }, [_vm._v("\n                " + _vm._s(task.title) + "\n                - " + _vm._s(task.course) + "\n                by " + _vm._s(task.due_date) + "\n              ")])
   })], 2)]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-7"
   }, [_c('input', {
@@ -44990,7 +44987,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "placeholder": "What do you want to accomplish on this day?",
+      "placeholder": "What do you want to accomplish on this day for your task?",
       "required": ""
     },
     domProps: {

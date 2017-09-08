@@ -2,7 +2,7 @@
   <div>
     <ul v-for="task in this.tasks">
       <li>
-        {{ task.title }}
+        {{ task.title }} <span class="label label-success"> {{ task.type }} </span> <span class="label label-danger"> {{ task.course }} </span>
       </li>
     </ul>
   </div>
@@ -35,7 +35,7 @@
 
     methods: {
       fetchTasksFromToday() {
-        axios.get('/tasksFromToday')
+        axios.get('/tasksFromTodayWithCourseNumber')
         .then(res => {
           this.tasksAllFromToday = res.data;
         });

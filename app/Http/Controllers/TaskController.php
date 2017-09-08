@@ -187,4 +187,42 @@ class TaskController extends Controller
                          ->orderBy('due_date', 'asc')
                          ->get();
     }
+
+    /**
+     * Return tasks with actual related course name.
+     *
+     * @return array
+     */
+    public function getTasksFromTodayWithCourseName()
+    {
+      /*
+        "id": 24,
+        "user_id": 1,
+        "course_id": 6,
+        "title": "Quiz #2",
+        "type": "quiz",
+        "due_date": "2017-09-07",
+        "note": null,
+        "location": null,
+       */
+
+      $tasks = array();
+
+      $tasksOrdered = $this->getTasksFromToday();
+
+      foreach ($tasksOrdered as $task) {
+        array_push($tasks, [
+          'id'          => $task->id,
+          'user_id'     => $task->user_id,
+          'course'      => \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number,
+          'title'       => $task->title,
+          'type'        => $task->type,
+          'due_date'    => $task->due_date,
+          'note'        => $task->note,
+          'location'    => $task->location
+        ]);
+      }
+
+      return $tasks;
+    }
 }
