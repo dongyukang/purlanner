@@ -93,4 +93,35 @@ class SubTaskController extends Controller
                      ->orderBy('due_date', 'asc')
                      ->get();
     }
+
+    /**
+     * Get subtasks from today with actual task name.
+     *
+     * @return array
+     */
+    public function getSubTasksFromTodayWithTask()
+    {
+      // "id": 12,
+      // "user_id": 1,
+      // "task_id": 2,
+      // "completed": 0,
+      // "task": "some test",
+      // "due_date": "2017-09-13",
+
+      $subtasks = array();
+
+      $subtasksOrdered = $this->getSubTasksFromToday();
+
+      foreach ($subtasksOrdered as $subtask) {
+        array_push($subtasks, [
+          'id'          => $subtask->id,
+          'user_id'     => $subtask->user_id,
+          'task_title'  => \App\Task::find($subtask->task_id)->title,
+          'task'        => $subtask->task,
+          'due_date'    => $subtask->due_date
+        ]);
+      }
+
+      return $subtasks;
+    }
 }

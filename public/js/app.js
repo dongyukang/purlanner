@@ -12480,7 +12480,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fetchSubtasks: function fetchSubtasks() {
       var _this2 = this;
 
-      axios.get('/subtasksFromToday').then(function (res) {
+      axios.get('/subtasksFromTodayWithTask').then(function (res) {
         _this2.subtasks = res.data;
       });
     }
@@ -44715,7 +44715,9 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((_vm.todos), function(todo) {
-    return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(todo.task) + "\n    ")])])
+    return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(todo.task) + " "), _c('span', {
+      staticClass: "label label-primary"
+    }, [_vm._v(_vm._s(todo.task_title))])])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true

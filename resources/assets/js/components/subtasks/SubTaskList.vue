@@ -2,7 +2,7 @@
   <div>
     <ul v-for="todo in todos">
       <li>
-        {{ todo.task }}
+        {{ todo.task }} <span class="label label-primary">{{ todo.task_title }}</span>
       </li>
     </ul>
   </div>
@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    props: ['month', 'year' ,'day'],
+    props: ['month', 'year', 'day'],
 
     data() {
       return {
@@ -35,7 +35,7 @@
 
     methods: {
       fetchSubtasks() {
-        axios.get('/subtasksFromToday')
+        axios.get('/subtasksFromTodayWithTask')
         .then(res => {
           this.subtasks = res.data;
         });

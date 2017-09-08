@@ -68,7 +68,9 @@
 
     <hr />
 
-    <div class="container-fluid">
+    <subtask></subtask>
+
+    {{-- <div class="container-fluid">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3>Overview By Month</h3>
@@ -93,7 +95,6 @@
                         {{ $day }}
                      </h4>
                     </td>
-                    {{-- Tasks --}}
                     <td>
                       @foreach(auth()->user()->tasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get() as $task)
                         <ul>
@@ -111,7 +112,6 @@
                         </ul>
                       @endforeach
                     </td>
-                    {{-- SubTasks --}}
                     <td>
                       @foreach(auth()->user()->subtasks()->whereDate('due_date', '>=', \Carbon\Carbon::today())->get() as $subtask)
                         <ul>
@@ -134,7 +134,7 @@
           </table>
         </div>
       </div>
-    </div>
+    </div> --}}
 
   </div>
 @endsection

@@ -44,6 +44,7 @@ Route::get('/tasksFromTodayWithCourseNumber', 'TaskController@getTasksFromTodayW
 
 Route::get('/subtasksByTask/{task_id}', 'SubTaskController@getSubTasksByTask');
 Route::get('/subtasksFromToday', 'SubTaskController@getSubTasksFromToday');
+Route::get('/subtasksFromTodayWithTask', 'SubTaskController@getSubTasksFromTodayWithTask');
 Route::post('/sub-task', 'SubTaskController@saveSubTask')->name('save_sub_task');
 Route::delete('/sub-task/{task_id}', 'SubTaskController@deleteSubTask');
 
