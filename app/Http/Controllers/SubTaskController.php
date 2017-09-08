@@ -88,9 +88,9 @@ class SubTaskController extends Controller
     public function getSubTasksFromToday()
     {
         return auth()->user()
-                 ->subtasks()
-                 ->whereDate('due_date', '>=', Carbon::today())
-                 ->orderBy('due_date', 'asc')
-                 ->get();
+                     ->subtasks()
+                     ->whereDate('due_date', '>=', Carbon::today())
+                     ->orderBy('due_date', 'asc')
+                     ->get();
     }
 }

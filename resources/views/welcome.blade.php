@@ -175,7 +175,7 @@
         <h2>About Purlanner</h2>
       </div>
       <div class="panel-body">
-        <div class="container">
+        <div class="container" style="width: 80%;">
           <div class="row">
             <div class="col-xs-6">
               <h3><strong> <i class="fa fa-pencil"></i> Write Tasks </strong></h3>
@@ -188,7 +188,7 @@
               <h3><strong> <i class="fa fa-list-ol"></i> Write Sub Tasks </strong></h3>
               <p style="font-size: 15px">
                 Even if you are a very unskilled and clumsy procastinator, just knowing your big events may not strong enough to control your 'Instant Gratification Monkey'.
-                Writing sub tasks is kinda like writing more specific processes each day to help you achieving a task. 
+                Writing sub tasks is kinda like writing more specific processes each day to help you achieving a task.
               </p>
             </div>
             {{-- <div class="col-xs-4">
@@ -205,7 +205,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="width: 80%">
       <div class="row" style="margin-top: 25px; margin-bottom: 25px;">
         {{-- <h3><strong> I believe that if you have clear set of lists of what to do today, then it is most likely you will finish the list. </strong></h3> --}}
         <iframe src="https://embed.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator" width="100%" height="450px" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
