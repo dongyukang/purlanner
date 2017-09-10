@@ -21,10 +21,10 @@
       </div>
     </div> --}}
 
-    <div class="container-fluid">
-      <div class="panel panel-success">
+    <div class="container">
+      <div class="panel panel-danger">
         <div class="panel-heading">
-          <h3>Summary</h3>
+          <center> <h3>Summary</h3> </center>
         </div>
         <div class="panel-body">
           <h4>Tasks Due Today</h4>

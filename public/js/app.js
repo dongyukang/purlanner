@@ -12226,20 +12226,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     canPrev: function canPrev() {
       var today = new Date();
 
-      if (this.currentDate.month > today.getMonth() + 1) {
+      if (this.currentDate.month > today.getMonth() + 1 && this.currentDate.year > today.getFullYear() && this.currentDate.day > today.getDate()) {
         return true;
       }
 
       return false;
     },
     canNext: function canNext() {
-      var today = new Date();
-
-      if (this.currentDate.month >= today.getMonth() + 1) {
-        return true;
-      }
-
-      return false;
+      return true;
+      // var today = new Date();
+      //
+      // if (this.currentDate.month >= today.getMonth() + 1) {
+      //   return true;
+      // }
+      //
+      // return false;
     }
   },
 
@@ -12260,7 +12261,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     nextMonth: function nextMonth() {
       if (this.currentDate.month == 12) {
-        this.fetchCalendar(this.currentDate.year, this.currentDate.month = 1);
+        this.fetchCalendar(this.currentDate.year++, this.currentDate.month = 1);
       } else {
         this.currentDate.month++;
         this.fetchCalendar(this.currentDate.year, this.currentDate.month);
@@ -44843,22 +44844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "year": date.getFullYear()
       }
     })], 1)])
-  }))])])])]) : _vm._e(), _vm._v(" "), (_vm.dayClicked) ? _c('div', [_c('subtask-editor', {
-    attrs: {
-      "day": _vm.task.day,
-      "month": _vm.task.month,
-      "year": _vm.task.year
-    }
-  }), _vm._v(" "), _c('center', [_c('button', {
-    staticClass: "btn btn-primary btn btn-block",
-    on: {
-      "click": function($event) {
-        _vm.dayClicked = false
-      }
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-calendar fa-2x"
-  })])])], 1) : _vm._e()])])
+  }))])])])]) : _vm._e()])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "panel-heading",

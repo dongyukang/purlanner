@@ -68,7 +68,7 @@
   <!-- Styles -->
 
   <div class="flex-center title" style="margin-bottom: 10px;">
-    <strong> Let Your 'Rational Decision Maker' Drive The Wheel! </strong>
+    <strong> Let Your 'Rational Decision Maker' Drive The Wheel </strong>
   </div>
   <div class="container" style="text-align: center; margin-bottom: 15px;">
     <div style="width=80%">
@@ -76,7 +76,7 @@
         A perfect tool to help you avoid habit of waiting until the last minute. <br>
         Make time to do the things you should be doing.
       </p>
-      <a class="btn btn-danger" href="{{ route('planner') }}" style="margin-top: 15px; margin-bottom: 15px;" onclick="showPleaseWait()">Begin Using Purlanner</a>
+      <a class="btn btn-danger" href="{{ route('register') }}" style="margin-top: 15px; margin-bottom: 15px;" onclick="showPleaseWait()">Begin Using Purlanner</a>
     </div>
   </div>
   <center>
@@ -172,7 +172,7 @@
   <div class="container" style="text-align: center; width: 80%">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h2>About Purlanner</h2>
+        <h2> Simple Steps </h2>
       </div>
       <div class="panel-body">
         <div class="container" style="width: 80%;">
@@ -180,7 +180,7 @@
             <div class="col-xs-6">
               <h3><strong> <i class="fa fa-pencil"></i> Write Tasks </strong></h3>
               <p style="font-size: 15px;">
-                It is a very first step for your academic journey. Writing Tasks can be described as marking your due dates for your big events like exams, papers, projects and etc. Purlanner will show you when are your important dates as various as possible,
+                Writing Tasks can be described as marking your due dates for your big events like exams, papers, projects and etc. Purlanner will show you when are your important dates as various as possible,
                 like by courses you are taking, by dates and by categories, such as 'exam' or 'assignment'.
               </p>
             </div>

@@ -46,12 +46,12 @@
         </div>
       </div>
 
-      <div v-if="dayClicked">
+      <!-- <div v-if="dayClicked">
         <subtask-editor :day="task.day" :month="task.month" :year="task.year"></subtask-editor>
         <center>
           <button class="btn btn-primary btn btn-block" @click="dayClicked = false"><i class="fa fa-calendar fa-2x"></i></button>
         </center>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -101,7 +101,7 @@
       canPrev() {
         var today = new Date();
 
-        if (this.currentDate.month > today.getMonth() + 1) {
+        if (this.currentDate.month > today.getMonth() + 1 && this.currentDate.year > today.getFullYear() && this.currentDate.day > today.getDate()) {
           return true;
         }
 
@@ -109,13 +109,14 @@
       },
 
       canNext() {
-        var today = new Date();
-
-        if (this.currentDate.month >= today.getMonth() + 1) {
-          return true;
-        }
-
-        return false;
+        return true;
+        // var today = new Date();
+        //
+        // if (this.currentDate.month >= today.getMonth() + 1) {
+        //   return true;
+        // }
+        //
+        // return false;
       }
     },
 
@@ -137,7 +138,7 @@
 
       nextMonth() {
         if (this.currentDate.month == 12) {
-          this.fetchCalendar(this.currentDate.year, this.currentDate.month = 1);
+          this.fetchCalendar(this.currentDate.year++, this.currentDate.month = 1);
         } else {
           this.currentDate.month++;
           this.fetchCalendar(this.currentDate.year, this.currentDate.month);
