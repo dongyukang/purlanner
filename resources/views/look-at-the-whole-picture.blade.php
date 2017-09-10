@@ -22,7 +22,7 @@
     </div> --}}
 
     <div class="container">
-      <div class="panel panel-danger">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <center> <h3>Summary</h3> </center>
         </div>

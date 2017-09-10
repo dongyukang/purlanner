@@ -57,13 +57,13 @@
 </template>
 
 <script>
-  import SubTaskEditor from './subtaskeditor.vue';
+  // import SubTaskEditor from './subtaskeditor.vue';
   import TaskList from './subtasks/TaskList.vue';
   import SubTaskList from './subtasks/SubTaskList.vue';
 
   export default {
     components: {
-      'subtask-editor': SubTaskEditor,
+      // 'subtask-editor': SubTaskEditor,
       'task-list': TaskList,
       'subtask-list': SubTaskList,
     },
@@ -101,9 +101,15 @@
       canPrev() {
         var today = new Date();
 
-        if (this.currentDate.month > today.getMonth() + 1 && this.currentDate.year > today.getFullYear() && this.currentDate.day > today.getDate()) {
+        var currentDate = new Date(this.currentDate.year, this.currentDate.month - 1, this.currentDate.day);
+
+        if (currentDate >= today) {
           return true;
         }
+
+        // if ((this.currentDate.month > (today.getMonth() + 1)) && (this.currentDate.year >= today.getFullYear())) {
+        //   return true;
+        // }
 
         return false;
       },
@@ -147,7 +153,8 @@
 
       prevMonth() {
         if (this.currentDate.month == 1) {
-          this.currentDate.month = 12;
+          // this.currentDate.month = 12;
+          this.fetchCalendar(this.currentDate.year--, this.currentDate.month = 12);
         } else {
           this.currentDate.month--;
           this.fetchCalendar(this.currentDate.year, this.currentDate.month);

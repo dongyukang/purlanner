@@ -44,7 +44,7 @@
 
     <div class="container">
       @if (Route::currentRouteName() == 'task')
-        @if (collect(auth()->user()->getNoneZeroTypes())->count() > 0)
+        @typeExists 
           @include('tasks.tasks', [
             'types' => auth()->user()->getNoneZeroTypes()
           ])
@@ -59,7 +59,7 @@
         </div>
 
       @elseif (Route::currentRouteName() == 'filter_task')
-        @if (collect(auth()->user()->getNoneZeroTypes($course_id))->count() > 0)
+        @typeExists
           @include('tasks.filter', [
             'types' => auth()->user()->getNoneZeroTypes($course_id),
             'course_id' => $course_id
