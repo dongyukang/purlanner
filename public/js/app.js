@@ -12192,21 +12192,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return true;
       }
 
-      // if ((this.currentDate.month > (today.getMonth() + 1)) && (this.currentDate.year >= today.getFullYear())) {
-      //   return true;
-      // }
-
       return false;
-    },
-    canNext: function canNext() {
-      return true;
-      // var today = new Date();
-      //
-      // if (this.currentDate.month >= today.getMonth() + 1) {
-      //   return true;
-      // }
-      //
-      // return false;
     }
   },
 
@@ -44802,12 +44788,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "fa fa-arrow-left"
   }), _vm._v(" Prev Month")])]), _vm._v(" "), _c('li', [_c('a', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.canNext),
-      expression: "canNext"
-    }],
     staticStyle: {
       "cursor": "pointer"
     },

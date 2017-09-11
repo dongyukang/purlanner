@@ -9,7 +9,7 @@
             <div style="margin-top: 40px;">
               <ul class="pager">
                 <li><a style="margin-right: 35px; cursor: pointer;" @click="prevMonth()" v-show="canPrev"><i class="fa fa-arrow-left"></i> Prev Month</a></li>
-                <li><a style="cursor: pointer;" @click="nextMonth()" v-show="canNext">Next Month <i class="fa fa-arrow-right"></i></a></li>
+                <li><a style="cursor: pointer;" @click="nextMonth()">Next Month <i class="fa fa-arrow-right"></i></a></li>
               </ul>
             </div>
           </div>
@@ -107,22 +107,7 @@
           return true;
         }
 
-        // if ((this.currentDate.month > (today.getMonth() + 1)) && (this.currentDate.year >= today.getFullYear())) {
-        //   return true;
-        // }
-
         return false;
-      },
-
-      canNext() {
-        return true;
-        // var today = new Date();
-        //
-        // if (this.currentDate.month >= today.getMonth() + 1) {
-        //   return true;
-        // }
-        //
-        // return false;
       }
     },
 
