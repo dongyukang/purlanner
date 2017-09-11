@@ -2,7 +2,9 @@
   <div>
     <ul v-for="todo in todos">
       <li>
-        {{ todo.task }} <span class="label label-primary">{{ todo.task_title }}</span>
+        {{ todo.task }}
+        <span class="label label-primary">{{ todo.task_title }}</span>
+        <!-- <span class="label label-danger">{{ todo.course }}</span> -->
       </li>
     </ul>
   </div>

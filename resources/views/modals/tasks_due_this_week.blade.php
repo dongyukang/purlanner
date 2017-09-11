@@ -22,7 +22,15 @@
                     <td style="text-align: center">{{ \App\Course::find($task->course_id)->subject . ' ' . \App\Course::find($task->course_id)->course_number }}</td>
                     <td style="text-align: center">{{ ucwords(strtolower($task->type)) }}</td>
                     <td style="text-align: center">{{ $task->title }}</td>
-                    <td style="text-align: center">{{ $task->due_date }}</td>
+                    <td style="text-align: center">
+                      {{ $task->due_date }}
+                      @today ($task->due_date)
+                        <span class="label label-danger">today</span>
+                      @endif
+                      @tomorrow ($task->due_date)
+                        <span class="label label-warning">tomorrow</span>
+                      @endif
+                    </td>
                     <td style="text-align: center">
                       <a class="btn btn-primary" href="/task/view/{{ $task->id }}">View</a>
                       {{-- <a class="btn btn-warning" href="/sub-task/active/{{ $task->id }}">Sub Tasks <span class="badge">{{ auth()->user()->subtasks()->where('task_id', $task->id)->whereDate('due_date', '>=', \Carbon\Carbon::today())->get()->count() }}</span></a> --}}
