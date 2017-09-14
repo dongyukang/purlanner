@@ -23,7 +23,7 @@ Route::post('/removeCourse', 'PurdueCourseController@removeCourse');
 
 Route::get('/', 'HomeController@index')->name('intro');
 Route::get('/planner', 'PlannerController@index')->name('planner');
-Route::get('/sub-task', 'SubTaskController@index')->name('sub-task');
+Route::get('/sub-tasks', 'SubTaskController@index')->name('sub-task');
 Route::get('/sub-task/active/{task_id}', 'SubTaskController@indexActive')->name('sub-task-active');
 Route::get('/settings', 'PlannerController@showSettings')->name('settings');
 
@@ -42,6 +42,7 @@ Route::get('/task/past_due_archives', 'TaskController@showPastArchives')->name('
 Route::get('/tasksFromToday', 'TaskController@getTasksFromToday');
 Route::get('/tasksFromTodayWithCourseNumber', 'TaskController@getTasksFromTodayWithCourseName');
 
+Route::view('/sub-task/create', 'subtask.create_subtask');
 Route::get('/subtasksByTask/{task_id}', 'SubTaskController@getSubTasksByTask');
 Route::get('/subtasksFromToday', 'SubTaskController@getSubTasksFromToday');
 Route::get('/subtasksFromTodayWithTask', 'SubTaskController@getSubTasksFromTodayWithTask');

@@ -44711,7 +44711,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', _vm._l((_vm.todos), function(todo) {
     return _c('ul', [_c('li', [_vm._v("\n      " + _vm._s(todo.task) + "\n      "), _c('span', {
       staticClass: "label label-primary"
-    }, [_vm._v(_vm._s(todo.task_title))])])])
+    }, [_vm._v(_vm._s(todo.task_title))]), _vm._v(" "), _c('span', {
+      staticClass: "label label-danger"
+    }, [_vm._v(_vm._s(todo.course))])])])
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true

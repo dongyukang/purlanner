@@ -116,7 +116,7 @@ class SubTaskController extends Controller
         array_push($subtasks, [
           'id'          => $subtask->id,
           'user_id'     => $subtask->user_id,
-          // 'course'      => $this->findCourse($subtask->task_id),
+          'course'      => $this->findCourse($subtask->task_id),
           'task_title'  => \App\Task::find($subtask->task_id)->title,
           'task'        => $subtask->task,
           'due_date'    => $subtask->due_date
@@ -135,7 +135,7 @@ class SubTaskController extends Controller
     protected function findCourse($task_id)
     {
       $course_id = auth()->user()->tasks()->find($task_id)->course_id;
-      $course_info = auth()->user()->courses()->find($course_id)->subject . ' ' . auth()->user()->course()->find($course_id)->course_number;
+      $course_info = auth()->user()->courses()->find($course_id)->subject . ' ' . auth()->user()->courses()->find($course_id)->course_number;
 
       return $course_info;
     }

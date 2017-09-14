@@ -14,7 +14,7 @@ class TaskController extends Controller
     }
 
   /**
-   * Show main task mage.
+   * Show main task page.
    *
    * @return view
    */
@@ -183,9 +183,9 @@ class TaskController extends Controller
     public function getTasksFromToday()
     {
         return auth()->user()->tasks()
-                         ->whereDate('due_date', '>=', \Carbon\Carbon::today())
-                         ->orderBy('due_date', 'asc')
-                         ->get();
+                             ->whereDate('due_date', '>=', \Carbon\Carbon::today())
+                             ->orderBy('due_date', 'asc')
+                             ->get();
     }
 
     /**
