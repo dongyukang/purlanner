@@ -7,7 +7,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center; background-color: white;">
         <?php date_default_timezone_set("America/New_York"); ?>
-        <h4>Today's Date in Purdue: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }}</h4>
+        <h4>Today's Date in Purdue: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }} (<?php echo date('D'); ?>)</h4>
       </div>
     </div>
 
@@ -23,32 +23,99 @@
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-11">
-              <h4> Task 1 </h4>
-            </div>
-            <div class="col-xs-1">
-              <span style="font-size: 20px;"> <a class="btn btn-success"><i class="fa fa-plus"></i></a> </span>
-            </div>
-          </div>
+          <center>
+            <a class="btn btn-success btn-block btn-lg" href="/sub-task/create">New Todo <i class="fa fa-plus"></i></a>
+          </center>
         </div>
         <div class="panel-body">
-          <span class="label label-danger"> Due 08-29-2017 </span>
+          @todoExists
+            <div class="row">
+              <div class="col-xs-2">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <center>
+                      <h4>August</h4>
+                    </center>
+                  </div>
+                  <div class="panel-body">
+                    <center>
+                      <h4>29 (Mon)</h4>
+                    </center>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-10">
+                <div class="panel panel-primary">
+                  <div class="panel-body">
+                    <ul>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <td>Head</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="row">
+              <div class="col-xs-2">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <center>
+                      <h4>August</h4>
+                    </center>
+                  </div>
+                  <div class="panel-body">
+                    <center>
+                      <h4>30 (Tue)</h4>
+                    </center>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-10">
+                <div class="panel panel-primary">
+                  <div class="panel-body">
+                    <ul>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                      <li>
+                        todo 1
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @else
+            <center> <h4> Nothing To Display </h4> </center>
+          @endif
         </div>
-        </div>
+      </div>
     </div>
 
   </div>

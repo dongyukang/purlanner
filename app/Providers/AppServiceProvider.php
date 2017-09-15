@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
 
         return Carbon::tomorrow() == Carbon::parse($due_date);
       });
+
+      Blade::if('todoExists', function () {
+        return true;
+      });
     }
 
     /**

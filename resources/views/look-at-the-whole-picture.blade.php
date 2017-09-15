@@ -7,7 +7,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" style="text-align: center; background-color: white;">
         <?php date_default_timezone_set("America/New_York"); ?>
-        <h4>Today's Date in Purdue: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }}</h4>
+        <h4>Today's Date in Purdue: {{ \Carbon\Carbon::parse(date("m/d/Y"))->toFormattedDateString() }} (<?php echo date('D'); ?>)</h4>
       </div>
     </div>
 

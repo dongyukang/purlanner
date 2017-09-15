@@ -76,7 +76,7 @@
         A perfect tool to help you avoid habit of waiting until the last minute. <br>
         Make time to do the things you should be doing.
       </p>
-      <a class="btn btn-danger" href="{{ route('register') }}" style="margin-top: 15px; margin-bottom: 15px;" onclick="showPleaseWait()">Begin Using Purlanner</a>
+      <a class="btn btn-danger" href="{{ route('login') }}" style="margin-top: 15px; margin-bottom: 15px;" onclick="showPleaseWait()">Begin Using Purlanner</a>
     </div>
   </div>
   <center>

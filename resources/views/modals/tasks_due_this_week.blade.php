@@ -23,7 +23,7 @@
                     <td style="text-align: center">{{ ucwords(strtolower($task->type)) }}</td>
                     <td style="text-align: center">{{ $task->title }}</td>
                     <td style="text-align: center">
-                      {{ $task->due_date }}
+                      {{ $task->due_date }} (<?php echo date('D', strtotime($task->due_date)); ?>)
                       @today ($task->due_date)
                         <span class="label label-danger">today</span>
                       @endif
