@@ -21,7 +21,7 @@
     </div>
 
     <div class="container">
-      <div class="panel panel-success">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <center>
             <a class="btn btn-success btn-block btn-lg" href="/sub-task/create">New Todo <i class="fa fa-plus"></i></a>
@@ -29,7 +29,6 @@
         </div>
         <div class="panel-body">
           @todoExists
-
           @foreach (auth()->user()->getDatesOfSubTasks() as $date)
             <div class="row">
               <div class="col-xs-2">
@@ -50,8 +49,13 @@
                 <div class="panel panel-primary">
                   <div class="panel-body">
                     <ul>
-                      <li>
-                      </li>
+                      @foreach (auth()->user()->subtasks()->get() as $subtask)
+                        @if ($date == $subtask->due_date)
+                          <li>
+                            {{ $subtask->task }}
+                          </li>
+                        @endif
+                      @endforeach
                     </ul>
                   </div>
                 </div>
