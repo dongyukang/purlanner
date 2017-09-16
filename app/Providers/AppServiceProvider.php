@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
       });
 
       Blade::if('todoExists', function () {
-        return true;
+        return auth()->user()->getDatesOfSubTasks()->count() > 0;
       });
     }
 

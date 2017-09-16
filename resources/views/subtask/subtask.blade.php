@@ -29,12 +29,14 @@
         </div>
         <div class="panel-body">
           @todoExists
+
+          @foreach (auth()->user()->getDatesOfSubTasks() as $date)
             <div class="row">
               <div class="col-xs-2">
                 <div class="panel panel-primary">
                   <div class="panel-heading">
                     <center>
-                      <h4>August</h4>
+                      <h4>{{ \Carbon\Carbon::parse($date)->month }}</h4>
                     </center>
                   </div>
                   <div class="panel-body">
@@ -51,66 +53,12 @@
                       <li>
                         todo 1
                       </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-xs-2">
-                <div class="panel panel-primary">
-                  <div class="panel-heading">
-                    <center>
-                      <h4>August</h4>
-                    </center>
-                  </div>
-                  <div class="panel-body">
-                    <center>
-                      <h4>30 (Tue)</h4>
-                    </center>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-10">
-                <div class="panel panel-primary">
-                  <div class="panel-body">
-                    <ul>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                      <li>
-                        todo 1
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+          @endforeach
           @else
             <center> <h4> Nothing To Display </h4> </center>
           @endif

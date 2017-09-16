@@ -71,7 +71,7 @@ class User extends Authenticatable
      */
     public function getSubTasks()
     {
-        date_default_timezone_set("America/New_York");
+        $this->setTimeZone("America/New_York");
 
         return $this->subtasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get();
     }
@@ -186,7 +186,7 @@ class User extends Authenticatable
      */
     public function countTask($type_name, $course_id = null)
     {
-        date_default_timezone_set("America/New_York");
+        $this->setTimeZone("America/New_York");
 
         if ($course_id != null) {
             return $this
@@ -213,7 +213,7 @@ class User extends Authenticatable
      */
     public function getNoneZeroTypes($course_id = null)
     {
-        date_default_timezone_set("America/New_York");
+        $this->setTimeZone("America/New_York");
 
         if ($course_id == null) {
             return collect($this->types()->get())->filter(function ($value, $key) {
@@ -413,5 +413,17 @@ class User extends Authenticatable
                   ->whereDate('due_date', '<=', Carbon::parse(date('m/d/y'))->addWeek(1)->startOfWeek()->endOfWeek())
                   ->orderBy('due_date', 'asc')
                   ->get();
+    }
+
+    /**
+     * Get dates of subtasks.
+     *
+     * @return array
+     */
+    public function getDatesOfSubTasks()
+    {
+      $this->setTimeZone("America/New_York");
+
+      return collect($this->subtasks()->whereDate('due_date', '>=', Carbon::today())->get())->pluck('due_date');
     }
 }
