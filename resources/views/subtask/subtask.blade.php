@@ -21,7 +21,7 @@
     </div>
 
     <div class="container">
-      <div class="panel panel-default">
+      <div class="panel panel-success">
         <div class="panel-heading">
           <center>
             <a class="btn btn-success btn-block btn-lg" href="/sub-task/create">New Todo <i class="fa fa-plus"></i></a>
@@ -33,15 +33,15 @@
           @foreach (auth()->user()->getDatesOfSubTasks() as $date)
             <div class="row">
               <div class="col-xs-2">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                   <div class="panel-heading">
                     <center>
-                      <h4>{{ \Carbon\Carbon::parse($date)->month }}</h4>
+                      <h4>{{ date('M', strtotime($date)) }}</h4>
                     </center>
                   </div>
                   <div class="panel-body">
                     <center>
-                      <h4>29 (Mon)</h4>
+                      <h4>{{ \Carbon\Carbon::parse($date)->day }} ({{ date('D', strtotime($date)) }})</h4>
                     </center>
                   </div>
                 </div>
@@ -51,13 +51,14 @@
                   <div class="panel-body">
                     <ul>
                       <li>
-                        todo 1
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
+
+            <hr />
           @endforeach
           @else
             <center> <h4> Nothing To Display </h4> </center>

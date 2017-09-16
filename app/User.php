@@ -424,6 +424,7 @@ class User extends Authenticatable
     {
       $this->setTimeZone("America/New_York");
 
-      return collect($this->subtasks()->whereDate('due_date', '>=', Carbon::today())->get())->pluck('due_date');
+      return collect($this->subtasks()->orderBy('due_date', 'asc')->get())->pluck('due_date')->unique(); // for testing purpose
+      // return collect($this->subtasks()->whereDate('due_date', '>=', Carbon::today())->orderBy('due_date', 'asc')->get())->pluck('due_date')->unique();
     }
 }
