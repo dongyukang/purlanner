@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// use DongyuKang\PurdueCourse\Facades\Purdue;
-
 Auth::routes();
 
 Route::get('/currentTermName', 'PurdueCourseController@getCurrentTermName');

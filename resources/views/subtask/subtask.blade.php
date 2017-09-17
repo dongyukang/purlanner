@@ -24,7 +24,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <center>
-            <a class="btn btn-success btn-block btn-lg" href="/sub-task/create">New Todo <i class="fa fa-plus"></i></a>
+            <a class="btn btn-success btn-block btn-lg" href="/sub-task/create">Manage Sub-Tasks</a>
           </center>
         </div>
         <div class="panel-body">
