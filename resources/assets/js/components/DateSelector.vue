@@ -1,7 +1,8 @@
 <template>
   <div>
-    Hi I am a date selector.
-    And you selected {{ selectedTask }}
+    Still coding
+    <!-- Hi I am a date selector.
+    And you selected {{ selectedTask }} -->
   </div>
 </template>
 
