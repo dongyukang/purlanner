@@ -108,7 +108,7 @@
           <center><h4 style="color: #a4a6a8">Purlanner</h4></center>
         </div>
         <div class="row">
-          <span style="font-size: 15px;">Developed By <a href="https://www.facebook.com/dongyu.kang.39" target="_blank">Dongyu Kang</a>.</span>
+          {{-- <span style="font-size: 15px;">Developed By <a href="https://www.facebook.com/dongyu.kang.39" target="_blank">Dongyu Kang</a>.</span> --}}
         </div>
       </center>
     </div>
